@@ -1,0 +1,14 @@
+globala: Mald*Mobj (ezkerretik)
+glMatrixMode(GL_MODELVIEW)
+glLoadIdentity()
+glTraslade/glRotate/glScale
+glModelMatrix(_selected_object->Mptr->M)
+glGetDoublev(GL_MODELVIEW_MATRIX,lgptr->M);
+
+lokala: Mobj*Mald (eskubitik)
+glMatrixMode(...)
+glLoadMatrix(_selected_object->Mptr->M)
+glAldaketa(...)
+glGetDoublev(...)
+
+
