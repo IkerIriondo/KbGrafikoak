@@ -532,8 +532,6 @@ void tekla_berezien_arretarako_funtzioa(int key, int x, int y){
                             lortu_traslazio_matrizea(&(Mald[0]), 0.0, 0.0, -1.0);
                             break;
                         case 'r':
-                            char *text = "Biratu";
-                            drawText(text, sizeof(text), 0, 0);
                             lortu_biratu_matrizea(&(Mald[0]), 0.0, 0.0, 1.0);
                             break;
                         case 'e':
