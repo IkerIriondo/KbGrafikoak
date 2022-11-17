@@ -86,10 +86,13 @@ void lortu_eskalatu_matrizea(double *mptr, double p, double q, double r){
 
 void lortu_biratu_matrizea(double *mptr, double x, double y, double z){
 
-    mptr[0] = cos(0.3) + x*x*(1.0-cos(0.3));     mptr[4] = x*y*(1.0 - cos(0.3)) - z*sin(0.3);  mptr[8] = x*z*(1.0 - cos(0.3)) + y*sin(0.3);  mptr[12] = 0;
-    mptr[1] = x*y*(1.0 - cos(0.3)) + z*sin(0.3); mptr[5] = cos(0.3) + y*y*(1.0-cos(0.3));      mptr[9] = y*z*(1.0 - cos(0.3)) - x*sin(0.3);  mptr[13] = 0;
-    mptr[2] = x*z*(1.0 - cos(0.3)) - y*sin(0.3); mptr[6] = y*z*(1.0 - cos(0.3)) + x*sin(0.3);  mptr[10] = cos(0.3) + z*z*(1-cos(0.3));       mptr[14] = 0;
-    mptr[3] = 0;                                 mptr[7] = 0;                                  mptr[11] = 0;                                 mptr[15] = 1;
+    double theta;
+    theta = 0.3;
+
+    mptr[0] = cos(theta) + x*x*(1.0-cos(theta));     mptr[4] = x*y*(1.0 - cos(theta)) - z*sin(theta);  mptr[8] = x*z*(1.0 - cos(theta)) + y*sin(theta);  mptr[12] = 0;
+    mptr[1] = x*y*(1.0 - cos(theta)) + z*sin(theta); mptr[5] = cos(theta) + y*y*(1.0-cos(theta));      mptr[9] = y*z*(1.0 - cos(theta)) - x*sin(theta);  mptr[13] = 0;
+    mptr[2] = x*z*(1.0 - cos(theta)) - y*sin(theta); mptr[6] = y*z*(1.0 - cos(theta)) + x*sin(theta);  mptr[10] = cos(theta) + z*z*(1-cos(theta));       mptr[14] = 0;
+    mptr[3] = 0;                                     mptr[7] = 0;                                      mptr[11] = 0;                                     mptr[15] = 1;
 
 }
 
@@ -568,10 +571,10 @@ void tekla_berezien_arretarako_funtzioa(int key, int x, int y){
         matberria->next = _selected_object->mzptr;
         _selected_object->mzptr = matberria;
         //printf("Erreferentzi sistema: %c, Zer aldatu: %c, Aldaketa mota: %c\n", erreferentzi_sistema, zer_aldatu, aldaketa_mota);
-        printf("%f, %f, %f, %f\n", matberria->matrize[0], matberria->matrize[4], matberria->matrize[8], matberria->matrize[12]);
+        /*printf("%f, %f, %f, %f\n", matberria->matrize[0], matberria->matrize[4], matberria->matrize[8], matberria->matrize[12]);
         printf("%f, %f, %f, %f\n", matberria->matrize[1], matberria->matrize[5], matberria->matrize[9], matberria->matrize[13]);
         printf("%f, %f, %f, %f\n", matberria->matrize[2], matberria->matrize[6], matberria->matrize[10], matberria->matrize[14]);
-        printf("%f, %f, %f, %f\n\n\n", matberria->matrize[3], matberria->matrize[7], matberria->matrize[11], matberria->matrize[15]);
+        printf("%f, %f, %f, %f\n\n\n", matberria->matrize[3], matberria->matrize[7], matberria->matrize[11], matberria->matrize[15]);*/
         glutPostRedisplay();
     }
 
