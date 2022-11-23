@@ -3,6 +3,7 @@
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include <string.h>
+#include <stdio.h>
 
 /** EXTERNAL VARIABLES **/
 
@@ -13,6 +14,15 @@ extern GLdouble _ortho_z_min,_ortho_z_max;
 
 extern object3d *_first_object;
 extern object3d *_selected_object;
+
+void esam_lortu_objektuaren_matrizetik(double *esamptr, double *mptr){ //mptr zutabetan dagoena errenkadetan jarri
+
+    esamptr[0] = mptr[0];  esamptr[4] = mptr[1];  esamptr[8] = mptr[2];   esamptr[12] = -(mptr[0]*mptr[12] + mptr[4]*mptr[13] + mptr[8]*mptr[14]);
+    esamptr[1] = mptr[4];  esamptr[5] = mptr[5];  esamptr[9] = mptr[6];   esamptr[13] = -(mptr[1]*mptr[12] + mptr[5]*mptr[13] + mptr[9]*mptr[14]);
+    esamptr[2] = mptr[8];  esamptr[6] = mptr[9];  esamptr[10] = mptr[10]; esamptr[14] = -(mptr[2]*mptr[12] + mptr[6]*mptr[13] + mptr[10]*mptr[14]);
+    esamptr[3] = 0;        esamptr[7] = 0;        esamptr[11] = 0;        esamptr[15] = 1;
+    
+}
 
 /**
  * @brief Function to draw the axes
@@ -85,6 +95,7 @@ void reshape(int width, int height) {
  * @brief Callback display function
  */
 void display(void) {
+    double ESAM[16];
     GLint v_index, v, f;
     object3d *aux_obj = _first_object;
 
@@ -130,9 +141,12 @@ void display(void) {
         }else{
             glColor3f(KG_COL_NONSELECTED_R,KG_COL_NONSELECTED_G,KG_COL_NONSELECTED_B);
         }
+        esam_lortu_objektuaren_matrizetik(&(ESAM[0]),_selected_object->mzptr->matrize);
+        glLoadMatrixd(ESAM);
 
         /* Draw the object; for each face create a new polygon with the corresponding vertices */
-        glLoadMatrixd(aux_obj->mzptr->matrize);
+        glMultMatrixd(aux_obj->mzptr->matrize); //behekoagatik aldatu
+        //glLoadMatrixd(aux_obj->mzptr->matrize);
         for (f = 0; f < aux_obj->num_faces; f++) {
             glBegin(GL_POLYGON);
             for (v = 0; v < aux_obj->face_table[f].num_vertices; v++) {
@@ -140,7 +154,6 @@ void display(void) {
                 glVertex3d(aux_obj->vertex_table[v_index].coord.x,
                         aux_obj->vertex_table[v_index].coord.y,
                         aux_obj->vertex_table[v_index].coord.z);
-
             }
             glEnd();
         }

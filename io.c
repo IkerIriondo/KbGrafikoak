@@ -44,8 +44,8 @@ void print_help(){
     printf("<L>\t\t Aldaketak argiei\n");
     printf("<Z>\t\t Aldaketak desegin\n");
     printf("<GORA>\t\t Mugitu +Y | Txikitu Y | Biratu -X\n");
-    printf("<BEHERA>\t\t Mugitu -Y | Handitu Y | Biratu +X\n");
-    printf("<ESKUIN>\t\t Mugitu +X | Txikitu X | Biratu +Y\n");
+    printf("<BEHERA>\t Mugitu -Y | Handitu Y | Biratu +X\n");
+    printf("<ESKUIN>\t Mugitu +X | Txikitu X | Biratu +Y\n");
     printf("<EZKER>\t\t Mugitu -X | Handitu X | Biratu -Y\n");
     printf("<AVPAG>\t\t Mugitu -Z | Txikitu Z | Biratu +Z\n");
     printf("<REPAG>\t\t Mugitu +Z | Handitu Z | Biratu -Z\n");
@@ -557,8 +557,6 @@ void tekla_berezien_arretarako_funtzioa(int key, int x, int y){
             printf("Ez dago objekturik zerrendan\n");
         }
         break;
-    default:
-        break;
     }
     if(_selected_object != 0){
         if(erreferentzi_sistema == 'g') {/*Globala*/
@@ -570,11 +568,10 @@ void tekla_berezien_arretarako_funtzioa(int key, int x, int y){
         for(i = 0; i<16; i++) matberria->matrize[i] = Mberria[i];
         matberria->next = _selected_object->mzptr;
         _selected_object->mzptr = matberria;
-        //printf("Erreferentzi sistema: %c, Zer aldatu: %c, Aldaketa mota: %c\n", erreferentzi_sistema, zer_aldatu, aldaketa_mota);
-        /*printf("%f, %f, %f, %f\n", matberria->matrize[0], matberria->matrize[4], matberria->matrize[8], matberria->matrize[12]);
+        printf("%f, %f, %f, %f\n", matberria->matrize[0], matberria->matrize[4], matberria->matrize[8], matberria->matrize[12]);
         printf("%f, %f, %f, %f\n", matberria->matrize[1], matberria->matrize[5], matberria->matrize[9], matberria->matrize[13]);
         printf("%f, %f, %f, %f\n", matberria->matrize[2], matberria->matrize[6], matberria->matrize[10], matberria->matrize[14]);
-        printf("%f, %f, %f, %f\n\n\n", matberria->matrize[3], matberria->matrize[7], matberria->matrize[11], matberria->matrize[15]);*/
+        printf("%f, %f, %f, %f\n\n\n", matberria->matrize[3], matberria->matrize[7], matberria->matrize[11], matberria->matrize[15]);
         glutPostRedisplay();
     }
 
