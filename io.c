@@ -96,6 +96,15 @@ void lortu_biratu_matrizea(double *mptr, double x, double y, double z){
 
 }
 
+void lortu_islapen_matrizea(double *mptr, double x, double y, double z){
+
+    mptr[0] = x; mptr[4] = 0; mptr[8] = 0;  mptr[12] = 0;
+    mptr[1] = 0; mptr[5] = y; mptr[9] = 0;  mptr[13] = 0;
+    mptr[2] = 0; mptr[6] = 0; mptr[10] = z; mptr[14] = 0;
+    mptr[3] = 0; mptr[7] = 0; mptr[11] = 0; mptr[15] = 1;
+
+}
+
 void eskuinetik_biderkatu(double *Mberria, double *Mald, double *Mobj){
 
     Mberria[0] =  Mobj[0]*Mald[0] + Mobj[1]*Mald[4] + Mobj[2]*Mald[8] + Mobj[3]*Mald[12]; 
@@ -328,6 +337,11 @@ void keyboard(unsigned char key, int x, int y) {
         aldaketa_mota = 'e';
         printf("Erreferentzi sistema: %c, Zer aldatu: %c, Aldaketa mota: %c\n", erreferentzi_sistema, zer_aldatu, aldaketa_mota);
         break;
+    case 'S':
+    case 's':
+        aldaketa_mota = 's';
+        printf("Erreferentzi sistema: %c, Zer aldatu: %c, Aldaketa mota: %c\n", erreferentzi_sistema, zer_aldatu, aldaketa_mota);
+        break;
     /*Erreferentzi sistemak*/
     case 'G':
     case 'g':
@@ -396,19 +410,20 @@ void tekla_berezien_arretarako_funtzioa(int key, int x, int y){
                     switch(aldaketa_mota){
                         case 't':
                             lortu_traslazio_matrizea(&(Mald[0]), 0.0, 1.0, 0.0);
-                            aldatu_obj(&(Mberria[0]),&(Mald[0]));
                             break;
                         case 'r':
                             lortu_biratu_matrizea(&(Mald[0]), -1.0, 0.0, 0.0);
-                            aldatu_obj(&(Mberria[0]),&(Mald[0]));
                             break;
                         case 'e':
                             lortu_eskalatu_matrizea(&(Mald[0]), 1.0, 0.75, 1.0);
-                            aldatu_obj(&(Mberria[0]),&(Mald[0]));
+                            break;
+                        case 's':
+                            lortu_islapen_matrizea(&(Mald[0]),1.0,-1.0,1.0);
                             break;
                         default:
                             break;
                     }
+                    aldatu_obj(&(Mberria[0]),&(Mald[0]));
                     break;
                 case 'k':
 
@@ -430,19 +445,20 @@ void tekla_berezien_arretarako_funtzioa(int key, int x, int y){
                     switch(aldaketa_mota){
                         case 't':
                             lortu_traslazio_matrizea(&(Mald[0]), 0.0, -1.0, 0.0);
-                            aldatu_obj(&(Mberria[0]),&(Mald[0]));
                             break;
                         case 'r':
                             lortu_biratu_matrizea(&(Mald[0]), 1.0, 0.0, 0.0);
-                            aldatu_obj(&(Mberria[0]),&(Mald[0]));
                             break;
                         case 'e':
                             lortu_eskalatu_matrizea(&(Mald[0]), 1.0, 1.333333, 1.0);
-                            aldatu_obj(&(Mberria[0]),&(Mald[0]));
+                            break;
+                        case 's':
+                            lortu_islapen_matrizea(&(Mald[0]),-1.0,1.0,-1.0);
                             break;
                         default:
                             break;
                     }
+                    aldatu_obj(&(Mberria[0]),&(Mald[0]));
                     break;
                 case 'k':
 
@@ -464,19 +480,20 @@ void tekla_berezien_arretarako_funtzioa(int key, int x, int y){
                     switch(aldaketa_mota){
                         case 't':
                             lortu_traslazio_matrizea(&(Mald[0]), 1.0, 0.0, 0.0);
-                            aldatu_obj(&(Mberria[0]),&(Mald[0]));
                             break;
                         case 'r':
                             lortu_biratu_matrizea(&(Mald[0]), 0.0, 1.0, 0.0);
-                            aldatu_obj(&(Mberria[0]),&(Mald[0]));
                             break;
                         case 'e':
                             lortu_eskalatu_matrizea(&(Mald[0]), 0.75, 1.0, 1.0);
-                            aldatu_obj(&(Mberria[0]),&(Mald[0]));
+                            break;
+                        case 's':
+                            lortu_islapen_matrizea(&(Mald[0]),-1.0,1.0,1.0);
                             break;
                         default:
                             break;
                     }
+                    aldatu_obj(&(Mberria[0]),&(Mald[0]));
                     break;
                 case 'k':
 
@@ -498,19 +515,20 @@ void tekla_berezien_arretarako_funtzioa(int key, int x, int y){
                     switch(aldaketa_mota){
                         case 't':
                             lortu_traslazio_matrizea(&(Mald[0]), -1.0, 0.0, 0.0);
-                            aldatu_obj(&(Mberria[0]),&(Mald[0]));
                             break;
                         case 'r':
                             lortu_biratu_matrizea(&(Mald[0]), 0.0, -1.0, 0.0);
-                            aldatu_obj(&(Mberria[0]),&(Mald[0]));
                             break;
                         case 'e':
                             lortu_eskalatu_matrizea(&(Mald[0]), 1.333333, 1.0, 1.0);
-                            aldatu_obj(&(Mberria[0]),&(Mald[0]));
+                            break;
+                        case 's':
+                            lortu_islapen_matrizea(&(Mald[0]),1.0,-1.0,-1.0);
                             break;
                         default:
                             break;
                     }
+                    aldatu_obj(&(Mberria[0]),&(Mald[0]));
                     break;
                 case 'k':
 
@@ -532,19 +550,20 @@ void tekla_berezien_arretarako_funtzioa(int key, int x, int y){
                     switch(aldaketa_mota){
                         case 't':
                             lortu_traslazio_matrizea(&(Mald[0]), 0.0, 0.0, 1.0);
-                            aldatu_obj(&(Mberria[0]),&(Mald[0]));
                             break;
                         case 'r':
                             lortu_biratu_matrizea(&(Mald[0]), 0.0, 0.0, -1.0);
-                            aldatu_obj(&(Mberria[0]),&(Mald[0]));
                             break;
                         case 'e':
                             lortu_eskalatu_matrizea(&(Mald[0]), 1.0, 1.0, 1.333333);
-                            aldatu_obj(&(Mberria[0]),&(Mald[0]));
+                            break;
+                        case 's':
+                            lortu_islapen_matrizea(&(Mald[0]),1.0,1.0,-1.0);
                             break;
                         default:
                             break;
                     }
+                    aldatu_obj(&(Mberria[0]),&(Mald[0]));
                     break;
                 case 'k':
 
@@ -566,19 +585,20 @@ void tekla_berezien_arretarako_funtzioa(int key, int x, int y){
                     switch(aldaketa_mota){
                         case 't':
                             lortu_traslazio_matrizea(&(Mald[0]), 0.0, 0.0, -1.0);
-                            aldatu_obj(&(Mberria[0]),&(Mald[0]));
                             break;
                         case 'r':
                             lortu_biratu_matrizea(&(Mald[0]), 0.0, 0.0, 1.0);
-                            aldatu_obj(&(Mberria[0]),&(Mald[0]));
                             break;
                         case 'e':
                             lortu_eskalatu_matrizea(&(Mald[0]), 1.0, 1.0, 0.75);
-                            aldatu_obj(&(Mberria[0]),&(Mald[0]));
+                            break;
+                        case 's':
+                            lortu_islapen_matrizea(&(Mald[0]),-1.0,-1.0,1.0);
                             break;
                         default:
                             break;
                     }
+                    aldatu_obj(&(Mberria[0]),&(Mald[0]));
                     break;
                 case 'k':
 
