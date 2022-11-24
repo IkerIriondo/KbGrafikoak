@@ -45,6 +45,7 @@ void print_help(){
     printf("<C>\t\t Aldaketak kamerari\n");
     printf("<L>\t\t Aldaketak argiei\n");
     printf("<Z>\t\t Aldaketak desegin\n");
+    printf("<B>\t\t Aldaketak berregin\n");
     printf("<GORA>\t\t Mugitu +Y | Txikitu Y | Biratu -X\n");
     printf("<BEHERA>\t Mugitu -Y | Handitu Y | Biratu +X\n");
     printf("<ESKUIN>\t Mugitu +X | Txikitu X | Biratu +Y\n");
@@ -64,6 +65,10 @@ void free_object(object3d *obptr){
     /*TODO Matrizeekin zer gertatzen da?*/
     for(auxptr = obptr->mzptr; auxptr != 0; auxptr = obptr->mzptr){
         obptr->mzptr = obptr->mzptr->next;
+        free(auxptr);
+    }
+    for(auxptr = obptr->mzptr2; auxptr != 0; auxptr = obptr->mzptr2){
+        obptr->mzptr2 = obptr->mzptr->next;
         free(auxptr);
     }
 }
@@ -109,12 +114,13 @@ void lortu_islapen_matrizea(double *mptr, double x, double y, double z){
 
 void lortu_zizailaketa_matrizea(double *mptr, double x, double y, double z){
 
-    double shx, shy, shz; shx = 0.5; shy = 0.5; shz = 0.5;
+    double sh;
+    sh = 0.5;
 
-    mptr[0] = 1;     mptr[4] = y*shx; mptr[8] = z*shx;  mptr[12] = 0;
-    mptr[1] = x*shy; mptr[5] = 1;     mptr[9] = z*shy;  mptr[13] = 0;
-    mptr[2] = x*shz; mptr[6] = y*shz; mptr[10] = 1;     mptr[14] = 0;
-    mptr[3] = 0;     mptr[7] = 0;     mptr[11] = 0;     mptr[15] = 1;
+    mptr[0] = 1;    mptr[4] = y*sh; mptr[8] = z*sh;  mptr[12] = 0;
+    mptr[1] = x*sh; mptr[5] = 1;    mptr[9] = z*sh;  mptr[13] = 0;
+    mptr[2] = x*sh; mptr[6] = y*sh; mptr[10] = 1;    mptr[14] = 0;
+    mptr[3] = 0;    mptr[7] = 0;    mptr[11] = 0;    mptr[15] = 1;
 
 }
 
@@ -167,7 +173,7 @@ void ezkerretik_biderkatu(double *Mberria, double *Mald, double *Mobj){
 }
 
 void aldatu_obj(double *Mberria, double *Mald){
-        mz *matberria;
+    mz *matberria;
     int i;
 
     if(erreferentzi_sistema == 'g') {//Globala
@@ -231,6 +237,15 @@ void keyboard(unsigned char key, int x, int y) {
             auxiliar_object->mzptr->matrize[5] = 1.0;
             auxiliar_object->mzptr->matrize[10] = 1.0;
             auxiliar_object->mzptr->matrize[15] = 1.0;
+
+            auxiliar_object->mzptr2 = (mz *)malloc(sizeof(mz));
+            auxiliar_object->mzptr2->next = 0;
+            for(int i = 0; i<16;i++) auxiliar_object->mzptr2->matrize[i] = 0.0;
+            auxiliar_object->mzptr2->matrize[0] = 1.0;
+            auxiliar_object->mzptr2->matrize[5] = 1.0;
+            auxiliar_object->mzptr2->matrize[10] = 1.0;
+            auxiliar_object->mzptr2->matrize[15] = 1.0;
+
             auxiliar_object->next = _first_object;
             _first_object = auxiliar_object;
             _selected_object = _first_object;
@@ -393,9 +408,26 @@ void keyboard(unsigned char key, int x, int y) {
             if(_selected_object->mzptr->next != 0){
                 mzptr2 = _selected_object->mzptr;
                 _selected_object->mzptr = mzptr2->next;
-                free(mzptr2);
+                mzptr2->next = _selected_object->mzptr2;
+                _selected_object->mzptr2 = mzptr2;
             }else{
                 printf("Ez dago desegiteko aldaketarik\n");
+            }
+        }else{
+            printf("Ez dago objekturik kargatuta\n");
+        }
+        break;
+    case 'B':
+    case 'b':
+        //TODO
+        if(_selected_object != 0){
+            if(_selected_object->mzptr2->next != 0){
+                mzptr2 = _selected_object->mzptr2;
+                _selected_object->mzptr2 = mzptr2->next;
+                mzptr2->next = _selected_object->mzptr;
+                _selected_object->mzptr = mzptr2;
+            }else{
+                printf("Ez dago berregiteko aldaketarik\n");
             }
         }else{
             printf("Ez dago objekturik kargatuta\n");
