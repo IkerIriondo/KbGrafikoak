@@ -15,6 +15,10 @@ extern GLdouble _ortho_z_min,_ortho_z_max;
 extern object3d *_first_object;
 extern object3d *_selected_object;
 
+extern char aldaketa_mota;
+extern char zer_aldatu;
+extern char erreferentzi_sistema;
+
 void esam_lortu_objektuaren_matrizetik(double *esamptr, double *mptr){ //mptr zutabetan dagoena errenkadetan jarri
 
     esamptr[0] = mptr[0];  esamptr[4] = mptr[1];  esamptr[8] = mptr[2];   esamptr[12] = -(mptr[0]*mptr[12] + mptr[4]*mptr[13] + mptr[8]*mptr[14]);
@@ -62,9 +66,8 @@ void drawText(const char *text, int length, int x, int y){
     glPushMatrix();
     glLoadIdentity();
     glRasterPos2i(x,y);
-    for(i = 0; i < length; i++){
+    for(i = 0; i < length; i++) 
         glutBitmapCharacter(GLUT_BITMAP_9_BY_15, (int)text[i]);
-    }
     glPopMatrix();
     glMatrixMode(GL_PROJECTION);
     glLoadMatrixd(matrix);
@@ -141,28 +144,32 @@ void display(void) {
         }else{
             glColor3f(KG_COL_NONSELECTED_R,KG_COL_NONSELECTED_G,KG_COL_NONSELECTED_B);
         }
-        esam_lortu_objektuaren_matrizetik(&(ESAM[0]),_selected_object->mzptr->matrize);
-        glLoadMatrixd(ESAM);
+        //esam_lortu_objektuaren_matrizetik(&(ESAM[0]),_selected_object->mzptr->matrize);
+        //glLoadMatrixd(ESAM);
 
         /* Draw the object; for each face create a new polygon with the corresponding vertices */
-        glMultMatrixd(aux_obj->mzptr->matrize); //behekoagatik aldatu
-        //glLoadMatrixd(aux_obj->mzptr->matrize);
+        //glMultMatrixd(aux_obj->mzptr->matrize); //behekoagatik aldatu
+        glLoadMatrixd(aux_obj->mzptr->matrize);
         for (f = 0; f < aux_obj->num_faces; f++) {
             glBegin(GL_POLYGON);
             for (v = 0; v < aux_obj->face_table[f].num_vertices; v++) {
                 v_index = aux_obj->face_table[f].vertex_table[v];
                 glVertex3d(aux_obj->vertex_table[v_index].coord.x,
-                        aux_obj->vertex_table[v_index].coord.y,
-                        aux_obj->vertex_table[v_index].coord.z);
+                           aux_obj->vertex_table[v_index].coord.y,
+                           aux_obj->vertex_table[v_index].coord.z);
             }
             glEnd();
         }
         aux_obj = aux_obj->next;
     }
     
+    /*char *text1;
 
-    /*char *text = "Kaixo";
-    drawText(text, sizeof(text), 190, 100);*/
+    strcpy(text1, "Erreferentzi-sistema: ");
+    strncat(text1, (const char *)&erreferentzi_sistema, 1);
+
+    drawText(text1, strlen(text1), 190, 100);*/
+
     /*Do the actual drawing*/
     glFlush();
 }

@@ -39,9 +39,9 @@ void initialization (){
     /*Definition of the method to draw the objects*/
     glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
-    aldaketa_mota = 't';
     erreferentzi_sistema = 'g';
     zer_aldatu = 'o';
+    aldaketa_mota = 't';
     printf("Erreferentzi sistema: %c, Zer aldatu: %c, Aldaketa mota: %c\n", erreferentzi_sistema, zer_aldatu, aldaketa_mota);
 }
 
