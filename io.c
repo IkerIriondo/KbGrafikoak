@@ -37,6 +37,8 @@ void print_help(){
     printf("<T>\t\t Traslazioa aktibatu\n");
     printf("<R>\t\t Biraketa aktibatu\n");
     printf("<E>\t\t Eskalaketa aktibatu\n");
+    printf("<S>\t\t Islapena aktibatu\n");
+    printf("<P>\t\t Zizailaketa aktibatu\n");
     printf("<G>\t\t Aldaketak munduaren erreferentzi sisteman\n");
     printf("<L>\t\t Aldaketak lokalak\n");
     printf("<O>\t\t Aldaketak objektuen gainean\n");
