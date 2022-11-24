@@ -58,7 +58,7 @@ void print_help(){
 /*objektu baten barne memoria liberatzen duen funtzioa*/
 void free_object(object3d *obptr){
     int i;
-    mz *auxptr;
+    mz *auxptr, *auxptr2;
     for(i = 0; i<obptr->num_faces; i++) free(obptr->face_table[i].vertex_table);
     free(obptr->vertex_table);
     free(obptr->face_table);
@@ -67,9 +67,9 @@ void free_object(object3d *obptr){
         obptr->mzptr = obptr->mzptr->next;
         free(auxptr);
     }
-    for(auxptr = obptr->mzptr2; auxptr != 0; auxptr = obptr->mzptr2){
-        obptr->mzptr2 = obptr->mzptr->next;
-        free(auxptr);
+    for(auxptr2 = obptr->mzptr2; auxptr2 != 0; auxptr2 = obptr->mzptr2){
+        obptr->mzptr2 = obptr->mzptr2->next;
+        free(auxptr2);
     }
 }
 
