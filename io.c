@@ -105,6 +105,17 @@ void lortu_islapen_matrizea(double *mptr, double x, double y, double z){
 
 }
 
+void lortu_zizailaketa_matrizea(double *mptr, double x, double y, double z){
+
+    double shx, shy, shz; shx = 0.5; shy = 0.5; shz = 0.5;
+
+    mptr[0] = 1;     mptr[4] = y*shx; mptr[8] = z*shx;  mptr[12] = 0;
+    mptr[1] = x*shy; mptr[5] = 1;     mptr[9] = z*shy;  mptr[13] = 0;
+    mptr[2] = x*shz; mptr[6] = y*shz; mptr[10] = 1;     mptr[14] = 0;
+    mptr[3] = 0;     mptr[7] = 0;     mptr[11] = 0;     mptr[15] = 1;
+
+}
+
 void eskuinetik_biderkatu(double *Mberria, double *Mald, double *Mobj){
 
     Mberria[0] =  Mobj[0]*Mald[0] + Mobj[1]*Mald[4] + Mobj[2]*Mald[8] + Mobj[3]*Mald[12]; 
@@ -342,6 +353,11 @@ void keyboard(unsigned char key, int x, int y) {
         aldaketa_mota = 's';
         printf("Erreferentzi sistema: %c, Zer aldatu: %c, Aldaketa mota: %c\n", erreferentzi_sistema, zer_aldatu, aldaketa_mota);
         break;
+    case 'p':
+    case 'P':
+        aldaketa_mota = 'z';
+        printf("Erreferentzi sistema: %c, Zer aldatu: %c, Aldaketa mota: %c\n", erreferentzi_sistema, zer_aldatu, aldaketa_mota);
+        break;
     /*Erreferentzi sistemak*/
     case 'G':
     case 'g':
@@ -418,7 +434,10 @@ void tekla_berezien_arretarako_funtzioa(int key, int x, int y){
                             lortu_eskalatu_matrizea(&(Mald[0]), 1.0, 0.75, 1.0);
                             break;
                         case 's':
-                            lortu_islapen_matrizea(&(Mald[0]),1.0,-1.0,1.0);
+                            lortu_islapen_matrizea(&(Mald[0]), 1.0, -1.0, 1.0);
+                            break;
+                        case 'z':
+                            lortu_zizailaketa_matrizea(&(Mald[0]), 0.0, 1.0, 0.0);
                             break;
                         default:
                             break;
@@ -453,7 +472,10 @@ void tekla_berezien_arretarako_funtzioa(int key, int x, int y){
                             lortu_eskalatu_matrizea(&(Mald[0]), 1.0, 1.333333, 1.0);
                             break;
                         case 's':
-                            lortu_islapen_matrizea(&(Mald[0]),-1.0,1.0,-1.0);
+                            lortu_islapen_matrizea(&(Mald[0]), -1.0, 1.0, -1.0);
+                            break;
+                        case 'z':
+                            lortu_zizailaketa_matrizea(&(Mald[0]), 0.0, -1.0, 0.0);
                             break;
                         default:
                             break;
@@ -488,7 +510,10 @@ void tekla_berezien_arretarako_funtzioa(int key, int x, int y){
                             lortu_eskalatu_matrizea(&(Mald[0]), 0.75, 1.0, 1.0);
                             break;
                         case 's':
-                            lortu_islapen_matrizea(&(Mald[0]),-1.0,1.0,1.0);
+                            lortu_islapen_matrizea(&(Mald[0]), -1.0, 1.0, 1.0);
+                            break;
+                        case 'z':
+                            lortu_zizailaketa_matrizea(&(Mald[0]), 1.0, 0.0, 0.0);
                             break;
                         default:
                             break;
@@ -523,7 +548,10 @@ void tekla_berezien_arretarako_funtzioa(int key, int x, int y){
                             lortu_eskalatu_matrizea(&(Mald[0]), 1.333333, 1.0, 1.0);
                             break;
                         case 's':
-                            lortu_islapen_matrizea(&(Mald[0]),1.0,-1.0,-1.0);
+                            lortu_islapen_matrizea(&(Mald[0]), 1.0, -1.0, -1.0);
+                            break;
+                        case 'z':
+                            lortu_zizailaketa_matrizea(&(Mald[0]), -1.0, 0.0, 0.0);
                             break;
                         default:
                             break;
@@ -558,7 +586,10 @@ void tekla_berezien_arretarako_funtzioa(int key, int x, int y){
                             lortu_eskalatu_matrizea(&(Mald[0]), 1.0, 1.0, 1.333333);
                             break;
                         case 's':
-                            lortu_islapen_matrizea(&(Mald[0]),1.0,1.0,-1.0);
+                            lortu_islapen_matrizea(&(Mald[0]), 1.0, 1.0, -1.0);
+                            break;
+                        case 'z':
+                            lortu_zizailaketa_matrizea(&(Mald[0]), 0.0, 0.0, 1.0);
                             break;
                         default:
                             break;
@@ -593,7 +624,10 @@ void tekla_berezien_arretarako_funtzioa(int key, int x, int y){
                             lortu_eskalatu_matrizea(&(Mald[0]), 1.0, 1.0, 0.75);
                             break;
                         case 's':
-                            lortu_islapen_matrizea(&(Mald[0]),-1.0,-1.0,1.0);
+                            lortu_islapen_matrizea(&(Mald[0]), -1.0, -1.0, 1.0);
+                            break;
+                        case 'z':
+                            lortu_zizailaketa_matrizea(&(Mald[0]), 0.0, 0.0, -1.0);
                             break;
                         default:
                             break;
