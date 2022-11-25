@@ -46,12 +46,12 @@ void print_help(){
     printf("<L>\t\t Aldaketak argiei\n");
     printf("<Z>\t\t Aldaketak desegin\n");
     printf("<B>\t\t Aldaketak berregin\n");
-    printf("<GORA>\t\t Mugitu +Y | Txikitu Y | Biratu -X\n");
-    printf("<BEHERA>\t Mugitu -Y | Handitu Y | Biratu +X\n");
-    printf("<ESKUIN>\t Mugitu +X | Txikitu X | Biratu +Y\n");
-    printf("<EZKER>\t\t Mugitu -X | Handitu X | Biratu -Y\n");
-    printf("<AVPAG>\t\t Mugitu -Z | Txikitu Z | Biratu +Z\n");
-    printf("<REPAG>\t\t Mugitu +Z | Handitu Z | Biratu -Z\n");
+    printf("<GORA>\t\t Mugitu +Y | Txikitu Y | Biratu -X | Islapena XZ | Zizailatu +Y\n");
+    printf("<BEHERA>\t Mugitu -Y | Handitu Y | Biratu +X | Islapena XZ | Zizailatu -Y\n");
+    printf("<ESKUIN>\t Mugitu +X | Txikitu X | Biratu +Y | Islapena YZ | Zizailatu +X\n");
+    printf("<EZKER>\t\t Mugitu -X | Handitu X | Biratu -Y | Islapena YZ | Zizailatu -X\n");
+    printf("<AVPAG>\t\t Mugitu -Z | Txikitu Z | Biratu +Z | Islapena XY | Zizailatu +Z\n");
+    printf("<REPAG>\t\t Mugitu +Z | Handitu Z | Biratu -Z | Islapena XY | Zizailatu -Z\n");
     printf("\n\n");
 }
 
@@ -419,7 +419,6 @@ void keyboard(unsigned char key, int x, int y) {
         break;
     case 'B':
     case 'b':
-        //TODO
         if(_selected_object != 0){
             if(_selected_object->mzptr2->next != 0){
                 mzptr2 = _selected_object->mzptr2;
@@ -506,7 +505,7 @@ void tekla_berezien_arretarako_funtzioa(int key, int x, int y){
                             lortu_eskalatu_matrizea(&(Mald[0]), 1.0, 1.333333, 1.0);
                             break;
                         case 's':
-                            lortu_islapen_matrizea(&(Mald[0]), -1.0, 1.0, -1.0);
+                            lortu_islapen_matrizea(&(Mald[0]), 1.0, -1.0, 1.0);
                             break;
                         case 'z':
                             lortu_zizailaketa_matrizea(&(Mald[0]), 0.0, -1.0, 0.0);
@@ -582,7 +581,7 @@ void tekla_berezien_arretarako_funtzioa(int key, int x, int y){
                             lortu_eskalatu_matrizea(&(Mald[0]), 1.333333, 1.0, 1.0);
                             break;
                         case 's':
-                            lortu_islapen_matrizea(&(Mald[0]), 1.0, -1.0, -1.0);
+                            lortu_islapen_matrizea(&(Mald[0]), -1.0, 1.0, 1.0);
                             break;
                         case 'z':
                             lortu_zizailaketa_matrizea(&(Mald[0]), -1.0, 0.0, 0.0);
@@ -658,7 +657,7 @@ void tekla_berezien_arretarako_funtzioa(int key, int x, int y){
                             lortu_eskalatu_matrizea(&(Mald[0]), 1.0, 1.0, 0.75);
                             break;
                         case 's':
-                            lortu_islapen_matrizea(&(Mald[0]), -1.0, -1.0, 1.0);
+                            lortu_islapen_matrizea(&(Mald[0]), 1.0, 1.0, -1.0);
                             break;
                         case 'z':
                             lortu_zizailaketa_matrizea(&(Mald[0]), 0.0, 0.0, -1.0);
