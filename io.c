@@ -43,7 +43,7 @@ void print_help(){
     printf("<L>\t\t Aldaketak lokalak\n");
     printf("<O>\t\t Aldaketak objektuen gainean\n");
     printf("<C>\t\t Aldaketak kamerari\n");
-    printf("<L>\t\t Aldaketak argiei\n");
+    printf("<A>\t\t Aldaketak argiei\n");
     printf("<Z>\t\t Aldaketak desegin\n");
     printf("<B>\t\t Aldaketak berregin\n");
     printf("<GORA>\t\t Mugitu +Y | Txikitu Y | Biratu -X | Islapena XZ | Zizailatu +Y\n");
@@ -174,12 +174,12 @@ void ezkerretik_biderkatu(double *Mberria, double *Mald, double *Mobj){
 
 void aldatu_obj(double *Mberria, double *Mald){
     mz *matberria;
-    int i;
+    int i; 
 
     if(erreferentzi_sistema == 'g') {//Globala
-            ezkerretik_biderkatu(&(Mberria[0]),&(Mald[0]),_selected_object->mzptr->matrize);
-        }else{//Lokala
             eskuinetik_biderkatu(&(Mberria[0]),&(Mald[0]),_selected_object->mzptr->matrize);
+        }else{//Lokala
+            ezkerretik_biderkatu(&(Mberria[0]),&(Mald[0]),_selected_object->mzptr->matrize);
         }
         matberria = (mz *)malloc(sizeof(mz));
         for(i = 0; i<16; i++) matberria->matrize[i] = Mberria[i];
@@ -206,6 +206,8 @@ void keyboard(unsigned char key, int x, int y) {
     GLdouble wd,he,midx,midy;
 
     mz *mzptr2;
+    double Mald[16];
+    double Mberria[16];
 
     switch (key) {
     case 'f':
@@ -301,16 +303,30 @@ void keyboard(unsigned char key, int x, int y) {
             // with or without pressing CTRL key 
             }
             
-            wd=(_ortho_x_max-_ortho_x_min)*KG_STEP_ZOOM;
-            he=(_ortho_y_max-_ortho_y_min)*KG_STEP_ZOOM;
-            /*In order to avoid moving the center of the plane, we get its coordinates*/
-            midx = (_ortho_x_max+_ortho_x_min)/2;
-            midy = (_ortho_y_max+_ortho_y_min)/2;
-            /*The the new limits are set, keeping the center of the plane*/
-            _ortho_x_max = midx + wd/2;
-            _ortho_x_min = midx - wd/2;
-            _ortho_y_max = midy + he/2;
-            _ortho_y_min = midy - he/2;
+            switch(zer_aldatu){
+                case 'k':
+                    wd=(_ortho_x_max-_ortho_x_min)*KG_STEP_ZOOM;
+                    he=(_ortho_y_max-_ortho_y_min)*KG_STEP_ZOOM;
+                    /*In order to avoid moving the center of the plane, we get its coordinates*/
+                    midx = (_ortho_x_max+_ortho_x_min)/2;
+                    midy = (_ortho_y_max+_ortho_y_min)/2;
+                    /*The the new limits are set, keeping the center of the plane*/
+                    _ortho_x_max = midx + wd/2;
+                    _ortho_x_min = midx - wd/2;
+                    _ortho_y_max = midy + he/2;
+                    _ortho_y_min = midy - he/2;
+                    break;
+                case 'o':
+                    if(_selected_object != 0){
+                        lortu_eskalatu_matrizea(&(Mald[0]), 0.75, 0.75, 0.75);
+                        aldatu_obj(&(Mberria[0]), &(Mald[0]));
+                    }else{
+                        printf("Ez dago objekturik kargatuta\n");
+                    }
+                    break;
+                default:
+                    break;
+            }
         
         break;
 
@@ -319,17 +335,31 @@ void keyboard(unsigned char key, int x, int y) {
         if (glutGetModifiers() == GLUT_ACTIVE_CTRL){ 
             // with or without pressing CTRL key 
             }
+            switch(zer_aldatu){
+                case 'k':
+                    wd=(_ortho_x_max-_ortho_x_min)/KG_STEP_ZOOM;
+                    he=(_ortho_y_max-_ortho_y_min)/KG_STEP_ZOOM;
+                    /*In order to avoid moving the center of the plane, we get its coordinates*/
+                    midx = (_ortho_x_max+_ortho_x_min)*2;
+                    midy = (_ortho_y_max+_ortho_y_min)*2;
+                    /*The the new limits are set, keeping the center of the plane*/
+                    _ortho_x_max = midx + wd*2;
+                    _ortho_x_min = midx - wd*2;
+                    _ortho_y_max = midy + he*2;
+                    _ortho_y_min = midy - he*2;
+                    break;
+                case 'o':
+                    if(_selected_object != 0){
+                        lortu_eskalatu_matrizea(&(Mald[0]), 1.33333, 1.33333, 1.33333);
+                        aldatu_obj(&(Mberria[0]), &(Mald[0]));
+                    }else{
+                        printf("Ez dago objekturik kargatuta\n");
+                    }
+                    break;
+                default:
+                    break;
+            }
             
-            wd=(_ortho_x_max-_ortho_x_min)/KG_STEP_ZOOM;
-            he=(_ortho_y_max-_ortho_y_min)/KG_STEP_ZOOM;
-            /*In order to avoid moving the center of the plane, we get its coordinates*/
-            midx = (_ortho_x_max+_ortho_x_min)*2;
-            midy = (_ortho_y_max+_ortho_y_min)*2;
-            /*The the new limits are set, keeping the center of the plane*/
-            _ortho_x_max = midx + wd*2;
-            _ortho_x_min = midx - wd*2;
-            _ortho_y_max = midy + he*2;
-            _ortho_y_min = midy - he*2;
         break;
 
     case '?':
@@ -383,15 +413,9 @@ void keyboard(unsigned char key, int x, int y) {
         break;
     case 'L':
     case 'l':
-        if(erreferentzi_sistema == 'l'){
-            zer_aldatu = 'a';
-            printf("Erreferentzi sistema: %c, Zer aldatu: %c, Aldaketa mota: %c\n", erreferentzi_sistema, zer_aldatu, aldaketa_mota);
-        }else{
-            erreferentzi_sistema = 'l';
-            printf("Erreferentzi sistema: %c, Zer aldatu: %c, Aldaketa mota: %c\n", erreferentzi_sistema, zer_aldatu, aldaketa_mota);
-        }
+        erreferentzi_sistema = 'l';
+        printf("Erreferentzi sistema: %c, Zer aldatu: %c, Aldaketa mota: %c\n", erreferentzi_sistema, zer_aldatu, aldaketa_mota);
         break;
-
     case 'O':
     case 'o':
         zer_aldatu = 'o';
@@ -400,6 +424,11 @@ void keyboard(unsigned char key, int x, int y) {
     case 'C':
     case 'c':
         zer_aldatu = 'k';
+        printf("Erreferentzi sistema: %c, Zer aldatu: %c, Aldaketa mota: %c\n", erreferentzi_sistema, zer_aldatu, aldaketa_mota);
+        break;
+    case 'A':
+    case 'a':
+        zer_aldatu = 'a';
         printf("Erreferentzi sistema: %c, Zer aldatu: %c, Aldaketa mota: %c\n", erreferentzi_sistema, zer_aldatu, aldaketa_mota);
         break;
     case 'Z':
@@ -435,6 +464,7 @@ void keyboard(unsigned char key, int x, int y) {
     default:
         /*In the default case we just print the code of the key. This is usefull to define new cases*/
         printf("%d %c\n", key, key);
+        break;
     }
     /*In case we have do any modification affecting the displaying of the object, we redraw them*/
     glutPostRedisplay();
