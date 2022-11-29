@@ -16,6 +16,10 @@ GLdouble _ortho_z_min,_ortho_z_max;         /*Variables for the control of the o
 
 object3d * _first_object= 0;                /*List of objects*/
 object3d * _selected_object = 0;            /*Object currently selected*/
+
+kamera *_first_kamera = 0;
+kamera *_selected_kamera = 0;
+
 char aldaketa_mota; 
 char erreferentzi_sistema;
 char zer_aldatu;

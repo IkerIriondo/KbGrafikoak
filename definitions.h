@@ -125,4 +125,18 @@ struct object3d{
 
 typedef struct object3d object3d;
 
+struct kamera{
+    double ezker;
+    double eskuin;
+    double behekoa;
+    double goikoa;
+    double near;
+    double far;
+    mz *mzptr;
+    char nola;
+    struct kamera *next;
+};
+
+typedef struct kamera kamera;
+
 #endif // DEFINITIONS_H

@@ -1,4 +1,5 @@
 #include "definitions.h"
+#include "io.h"
 #include <GL/glut.h>
 #include <GL/gl.h>
 #include <GL/glu.h>
@@ -14,6 +15,9 @@ extern GLdouble _ortho_z_min,_ortho_z_max;
 
 extern object3d *_first_object;
 extern object3d *_selected_object;
+
+extern kamera *_first_kamera;
+extern kamera *_selected_kamera;
 
 extern char aldaketa_mota;
 extern char zer_aldatu;
@@ -102,6 +106,15 @@ void display(void) {
     GLint v_index, v, f;
     object3d *aux_obj = _first_object;
 
+    double ezker,eskuin,behekoa,goikoa,near,far;
+
+    ezker = -0.1;
+    eskuin = 0.1;
+    behekoa = -0.1; 
+    goikoa = 0.1;
+    near = 0.1;
+    far = 1000;
+
     /* Clear the screen */
     glClear(GL_COLOR_BUFFER_BIT);
 
@@ -125,9 +138,10 @@ void display(void) {
         /*Definition of the projection* /
         glOrtho(_ortho_x_min, _ortho_x_max, midpt - (he / 2), midpt + (he / 2), _ortho_z_min, _ortho_z_max);
     }*/
-    
-    glOrtho(_ortho_x_min, _ortho_x_max, _ortho_y_min, _ortho_y_max, _ortho_z_min, _ortho_z_max);
-
+    //glOrtho(ezker,eskubi,behekoa, goikoa, near, far)
+    //glOrtho(_ortho_x_min, _ortho_x_max, _ortho_y_min, _ortho_y_max, _ortho_z_min, _ortho_z_max);
+    //glFrustum(ezker(-x),eskubi(+x),behekoa(-y), goikoa(+y), near(-z), far(+z))
+    glFrustum(ezker, eskuin, behekoa, goikoa, near, far);
     /* Now we start drawing the object */
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
@@ -144,12 +158,13 @@ void display(void) {
         }else{
             glColor3f(KG_COL_NONSELECTED_R,KG_COL_NONSELECTED_G,KG_COL_NONSELECTED_B);
         }
-        //esam_lortu_objektuaren_matrizetik(&(ESAM[0]),_selected_object->mzptr->matrize);
-        //glLoadMatrixd(ESAM);
+        esam_lortu_objektuaren_matrizetik(&(ESAM[0]),_selected_object->mzptr->matrize);
+        glLoadMatrixd(ESAM);
 
         /* Draw the object; for each face create a new polygon with the corresponding vertices */
-        //glMultMatrixd(aux_obj->mzptr->matrize); //behekoagatik aldatu
-        glLoadMatrixd(aux_obj->mzptr->matrize);
+        glMultMatrixd(aux_obj->mzptr->matrize); //behekoagatik aldatu
+        //glLoadMatrixd(aux_obj->mzptr->matrize);
+
         for (f = 0; f < aux_obj->num_faces; f++) {
             glBegin(GL_POLYGON);
             for (v = 0; v < aux_obj->face_table[f].num_vertices; v++) {
@@ -162,13 +177,6 @@ void display(void) {
         }
         aux_obj = aux_obj->next;
     }
-    
-    /*char *text1;
-
-    strcpy(text1, "Erreferentzi-sistema: ");
-    strncat(text1, (const char *)&erreferentzi_sistema, 1);
-
-    drawText(text1, strlen(text1), 190, 100);*/
 
     /*Do the actual drawing*/
     glFlush();

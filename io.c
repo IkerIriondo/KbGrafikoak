@@ -180,16 +180,16 @@ void aldatu_obj(double *Mberria, double *Mald){
             eskuinetik_biderkatu(&(Mberria[0]),&(Mald[0]),_selected_object->mzptr->matrize);
         }else{//Lokala
             ezkerretik_biderkatu(&(Mberria[0]),&(Mald[0]),_selected_object->mzptr->matrize);
-        }
-        matberria = (mz *)malloc(sizeof(mz));
-        for(i = 0; i<16; i++) matberria->matrize[i] = Mberria[i];
-        matberria->next = _selected_object->mzptr;
-        _selected_object->mzptr = matberria;
-        /*printf("%f, %f, %f, %f\n", matberria->matrize[0], matberria->matrize[4], matberria->matrize[8], matberria->matrize[12]);
-        printf("%f, %f, %f, %f\n", matberria->matrize[1], matberria->matrize[5], matberria->matrize[9], matberria->matrize[13]);
-        printf("%f, %f, %f, %f\n", matberria->matrize[2], matberria->matrize[6], matberria->matrize[10], matberria->matrize[14]);
-        printf("%f, %f, %f, %f\n\n\n", matberria->matrize[3], matberria->matrize[7], matberria->matrize[11], matberria->matrize[15]);*/
-        glutPostRedisplay();
+    }
+    matberria = (mz *)malloc(sizeof(mz));
+    for(i = 0; i<16; i++) matberria->matrize[i] = Mberria[i];
+    matberria->next = _selected_object->mzptr;
+    _selected_object->mzptr = matberria;
+    /*printf("%f, %f, %f, %f\n", matberria->matrize[0], matberria->matrize[4], matberria->matrize[8], matberria->matrize[12]);
+    printf("%f, %f, %f, %f\n", matberria->matrize[1], matberria->matrize[5], matberria->matrize[9], matberria->matrize[13]);
+    printf("%f, %f, %f, %f\n", matberria->matrize[2], matberria->matrize[6], matberria->matrize[10], matberria->matrize[14]);
+    printf("%f, %f, %f, %f\n\n\n", matberria->matrize[3], matberria->matrize[7], matberria->matrize[11], matberria->matrize[15]);*/
+    glutPostRedisplay();
 }
 
 /**
