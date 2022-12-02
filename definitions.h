@@ -120,23 +120,10 @@ struct object3d{
     point3 max;                         /* coordinates' bigger bounds */
     mz *mzptr;                          /*Aldaketen matrizeen zerrenda*/
     mz *mzptr2;                         /*Aldaketak berregiteko matrizeen zerrenda*/
+    char mota;                          /*Kamera mota adierazten du*/
     struct object3d *next;              /* next element in the pile of objects */
 };
 
 typedef struct object3d object3d;
-
-struct kamera{
-    double ezker;
-    double eskuin;
-    double behekoa;
-    double goikoa;
-    double near;
-    double far;
-    mz *mzptr;
-    char nola;
-    struct kamera *next;
-};
-
-typedef struct kamera kamera;
 
 #endif // DEFINITIONS_H

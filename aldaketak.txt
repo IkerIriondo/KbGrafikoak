@@ -16,3 +16,4 @@ Kamera:
 paraleloan:   glOrtho( )   6 parametro
 perspektiba:  glFrustum( ) 6 parametro
 
+https://www.mathematik.uni-marburg.de/~thormae/lectures/graphics1/graphics_6_1_eng_web.html#13

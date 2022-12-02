@@ -5,6 +5,7 @@
 #include <GL/glu.h>
 #include <string.h>
 #include <stdio.h>
+#include <stdbool.h>
 
 /** EXTERNAL VARIABLES **/
 
@@ -16,14 +17,17 @@ extern GLdouble _ortho_z_min,_ortho_z_max;
 extern object3d *_first_object;
 extern object3d *_selected_object;
 
-extern kamera *_first_kamera;
-extern kamera *_selected_kamera;
+extern object3d *_first_kamera;
+extern object3d *_selected_kamera;
 
 extern char aldaketa_mota;
 extern char zer_aldatu;
 extern char erreferentzi_sistema;
 
-void esam_lortu_objektuaren_matrizetik(double *esamptr, double *mptr){ //mptr zutabetan dagoena errenkadetan jarri
+extern double ezker,eskuin,behekoa,goikoa,near,far;
+extern bool obj_ikuspegia;
+
+void esam_matrizea_lortu(double *esamptr, double *mptr){ //mptr zutabetan dagoena errenkadetan jarri
 
     esamptr[0] = mptr[0];  esamptr[4] = mptr[1];  esamptr[8] = mptr[2];   esamptr[12] = -(mptr[0]*mptr[12] + mptr[4]*mptr[13] + mptr[8]*mptr[14]);
     esamptr[1] = mptr[4];  esamptr[5] = mptr[5];  esamptr[9] = mptr[6];   esamptr[13] = -(mptr[1]*mptr[12] + mptr[5]*mptr[13] + mptr[9]*mptr[14]);
@@ -106,15 +110,6 @@ void display(void) {
     GLint v_index, v, f;
     object3d *aux_obj = _first_object;
 
-    double ezker,eskuin,behekoa,goikoa,near,far;
-
-    ezker = -0.1;
-    eskuin = 0.1;
-    behekoa = -0.1; 
-    goikoa = 0.1;
-    near = 0.1;
-    far = 1000;
-
     /* Clear the screen */
     glClear(GL_COLOR_BUFFER_BIT);
 
@@ -138,10 +133,10 @@ void display(void) {
         /*Definition of the projection* /
         glOrtho(_ortho_x_min, _ortho_x_max, midpt - (he / 2), midpt + (he / 2), _ortho_z_min, _ortho_z_max);
     }*/
-    //glOrtho(ezker,eskubi,behekoa, goikoa, near, far)
-    //glOrtho(_ortho_x_min, _ortho_x_max, _ortho_y_min, _ortho_y_max, _ortho_z_min, _ortho_z_max);
+    //glOrtho(ezker,eskuin,behekoa, goikoa, near, far);
+    glOrtho(_ortho_x_min, _ortho_x_max, _ortho_y_min, _ortho_y_max, _ortho_z_min, _ortho_z_max);
     //glFrustum(ezker(-x),eskubi(+x),behekoa(-y), goikoa(+y), near(-z), far(+z))
-    glFrustum(ezker, eskuin, behekoa, goikoa, near, far);
+    //glFrustum(ezker, eskuin, behekoa, goikoa, near, far);
     /* Now we start drawing the object */
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
@@ -158,11 +153,20 @@ void display(void) {
         }else{
             glColor3f(KG_COL_NONSELECTED_R,KG_COL_NONSELECTED_G,KG_COL_NONSELECTED_B);
         }
-        esam_lortu_objektuaren_matrizetik(&(ESAM[0]),_selected_object->mzptr->matrize);
-        glLoadMatrixd(ESAM);
+
+        if(_selected_kamera->mota == 'o'){
+            //glFrustum(ezker, eskuin, behekoa, goikoa, near, far);
+            esam_matrizea_lortu(&(ESAM[0]),_selected_object->mzptr->matrize);
+            glLoadMatrixd(ESAM);
+        }else{
+            //glOrtho(ezker, eskuin, behekoa, goikoa, near, far);
+            esam_matrizea_lortu(&(ESAM[0]),_selected_kamera->mzptr->matrize);
+            glLoadMatrixd(ESAM);
+        }
+        glMultMatrixd(aux_obj->mzptr->matrize);
 
         /* Draw the object; for each face create a new polygon with the corresponding vertices */
-        glMultMatrixd(aux_obj->mzptr->matrize); //behekoagatik aldatu
+        //glMultMatrixd(aux_obj->mzptr->matrize); //behekoagatik aldatu
         //glLoadMatrixd(aux_obj->mzptr->matrize);
 
         for (f = 0; f < aux_obj->num_faces; f++) {
