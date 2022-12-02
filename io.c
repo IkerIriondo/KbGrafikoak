@@ -467,12 +467,14 @@ void keyboard(unsigned char key, int x, int y) {
     case 'z':
         if (glutGetModifiers() == GLUT_ACTIVE_CTRL){
             if(_selected_kamera->mzptr->next != 0){
-                    mzptr2 = _selected_kamera->mzptr;
-                    _selected_kamera->mzptr = mzptr2->next;
-                    free(mzptr2);
-                }else{
-                    printf("Ez dago desegiteko aldaketarik\n");
-                }
+                mzptr2 = _selected_kamera->mzptr;
+                _selected_kamera->mzptr = mzptr2->next;
+                mzptr2->next = _selected_kamera->mzptr2;
+                _selected_kamera->mzptr2 = mzptr2;
+            }else{
+                printf("Ez dago desegiteko aldaketarik\n");
+            }
+            printf("Kamera desegin\n");
         }else{
             if(_selected_object != 0){
                 if(_selected_object->mzptr->next != 0){
@@ -488,19 +490,54 @@ void keyboard(unsigned char key, int x, int y) {
             }
         }
         break;
+    case 26:
+        if (glutGetModifiers() == GLUT_ACTIVE_CTRL){
+            if(_selected_kamera->mzptr->next != 0){
+                mzptr2 = _selected_kamera->mzptr;
+                _selected_kamera->mzptr = mzptr2->next;
+                mzptr2->next = _selected_kamera->mzptr2;
+                _selected_kamera->mzptr2 = mzptr2;
+            }else{
+                printf("Ez dago desegiteko aldaketarik\n");
+            }
+        }
+        break;
     case 'B':
     case 'b':
-        if(_selected_object != 0){
-            if(_selected_object->mzptr2->next != 0){
-                mzptr2 = _selected_object->mzptr2;
-                _selected_object->mzptr2 = mzptr2->next;
-                mzptr2->next = _selected_object->mzptr;
-                _selected_object->mzptr = mzptr2;
+        if (glutGetModifiers() == GLUT_ACTIVE_CTRL){
+            if(_selected_kamera->mzptr2->next != 0){
+                mzptr2 = _selected_kamera->mzptr2;
+                _selected_kamera->mzptr2 = mzptr2->next;
+                mzptr2->next = _selected_kamera->mzptr;
+                _selected_kamera->mzptr = mzptr2;
             }else{
                 printf("Ez dago berregiteko aldaketarik\n");
             }
         }else{
-            printf("Ez dago objekturik kargatuta\n");
+            if(_selected_object != 0){
+                if(_selected_object->mzptr2->next != 0){
+                    mzptr2 = _selected_object->mzptr2;
+                    _selected_object->mzptr2 = mzptr2->next;
+                    mzptr2->next = _selected_object->mzptr;
+                    _selected_object->mzptr = mzptr2;
+                }else{
+                    printf("Ez dago berregiteko aldaketarik\n");
+                }
+            }else{
+                printf("Ez dago objekturik kargatuta\n");
+            }
+        }
+        break;
+    case 2:
+        if (glutGetModifiers() == GLUT_ACTIVE_CTRL){
+            if(_selected_kamera->mzptr2->next != 0){
+                mzptr2 = _selected_kamera->mzptr2;
+                _selected_kamera->mzptr2 = mzptr2->next;
+                mzptr2->next = _selected_kamera->mzptr;
+                _selected_kamera->mzptr = mzptr2;
+            }else{
+                printf("Ez dago berregiteko aldaketarik\n");
+            }
         }
         break;
     default:
@@ -551,25 +588,13 @@ void tekla_berezien_arretarako_funtzioa(int key, int x, int y){
                     break;
                 case 'k':
                     switch(aldaketa_mota){
-                        case 't':
-                            lortu_traslazio_matrizea(&(Mald[0]), 0.0, 1.0, 0.0);
-                            break;
                         case 'r':
                             lortu_biratu_matrizea(&(Mald[0]), -1.0, 0.0, 0.0);
-                            break;
-                        case 'e':
-                            lortu_eskalatu_matrizea(&(Mald[0]), 1.0, 0.75, 1.0);
-                            break;
-                        case 's':
-                            lortu_islapen_matrizea(&(Mald[0]), 1.0, -1.0, 1.0);
-                            break;
-                        case 'z':
-                            lortu_zizailaketa_matrizea(&(Mald[0]), 0.0, 1.0, 0.0);
+                            aldatu_kam(&(Mberria[0]),&(Mald[0]));
                             break;
                         default:
                             break;
                     }
-                    aldatu_kam(&(Mberria[0]),&(Mald[0]));
                     break;
                 case 'a':
 
@@ -607,7 +632,14 @@ void tekla_berezien_arretarako_funtzioa(int key, int x, int y){
                     aldatu_obj(&(Mberria[0]),&(Mald[0]));
                     break;
                 case 'k':
-
+                    switch(aldaketa_mota){
+                        case 'r':
+                            lortu_biratu_matrizea(&(Mald[0]), 1.0, 0.0, 0.0);
+                            aldatu_kam(&(Mberria[0]),&(Mald[0]));
+                            break;
+                        default:
+                            break;
+                    }
                     break;
                 case 'a':
 
@@ -645,7 +677,14 @@ void tekla_berezien_arretarako_funtzioa(int key, int x, int y){
                     aldatu_obj(&(Mberria[0]),&(Mald[0]));
                     break;
                 case 'k':
-
+                    switch(aldaketa_mota){
+                        case 'r':
+                            lortu_biratu_matrizea(&(Mald[0]), 0.0, 1.0, 0.0);
+                            aldatu_kam(&(Mberria[0]),&(Mald[0]));
+                            break;
+                        default:
+                            break;
+                    }
                     break;
                 case 'a':
 
@@ -683,7 +722,14 @@ void tekla_berezien_arretarako_funtzioa(int key, int x, int y){
                     aldatu_obj(&(Mberria[0]),&(Mald[0]));
                     break;
                 case 'k':
-
+                    switch(aldaketa_mota){
+                        case 'r':
+                            lortu_biratu_matrizea(&(Mald[0]), 0.0, -1.0, 0.0);
+                            aldatu_kam(&(Mberria[0]),&(Mald[0]));
+                            break;
+                        default:
+                            break;
+                    }
                     break;
                 case 'a':
 
@@ -721,7 +767,18 @@ void tekla_berezien_arretarako_funtzioa(int key, int x, int y){
                     aldatu_obj(&(Mberria[0]),&(Mald[0]));
                     break;
                 case 'k':
-
+                    switch(aldaketa_mota){
+                        case 'r':
+                            lortu_biratu_matrizea(&(Mald[0]), 0.0, 0.0, 1.0);
+                            aldatu_kam(&(Mberria[0]),&(Mald[0]));
+                            break;
+                        case 't':
+                            lortu_traslazio_matrizea(&(Mald[0]), 1.0, 0.0, 0.0);
+                            aldatu_kam(&(Mberria[0]),&(Mald[0]));
+                            break;
+                        default:
+                            break;
+                    }
                     break;
                 case 'a':
 
@@ -759,7 +816,18 @@ void tekla_berezien_arretarako_funtzioa(int key, int x, int y){
                     aldatu_obj(&(Mberria[0]),&(Mald[0]));
                     break;
                 case 'k':
-
+                    switch(aldaketa_mota){
+                        case 'r':
+                            lortu_biratu_matrizea(&(Mald[0]), 0.0, 0.0, -1.0);
+                            aldatu_kam(&(Mberria[0]),&(Mald[0]));
+                            break;
+                        case 't':
+                            lortu_traslazio_matrizea(&(Mald[0]), -1.0, 0.0, 0.0);
+                            aldatu_kam(&(Mberria[0]),&(Mald[0]));
+                            break;
+                        default:
+                            break;
+                    }
                     break;
                 case 'a':
 
