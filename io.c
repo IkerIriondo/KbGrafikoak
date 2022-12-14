@@ -356,16 +356,6 @@ void keyboard(unsigned char key, int x, int y) {
                     _selected_kamera->max.y = midy + wd/2;
                     _selected_kamera->min.y = midy - wd/2;
 
-                    /*wd=(_ortho_x_max-_ortho_x_min)*KG_STEP_ZOOM;
-                    he=(_ortho_y_max-_ortho_y_min)*KG_STEP_ZOOM;
-                    //In order to avoid moving the center of the plane, we get its coordinates
-                    midx = (_ortho_x_max+_ortho_x_min)/2;
-                    midy = (_ortho_y_max+_ortho_y_min)/2;
-                    //The the new limits are set, keeping the center of the plane
-                    _ortho_x_max = midx + wd/2;
-                    _ortho_x_min = midx - wd/2;
-                    _ortho_y_max = midy + he/2;
-                    _ortho_y_min = midy - he/2;*/
                     break;
                 case 'o':
                     if(_selected_object != 0){
@@ -392,24 +382,14 @@ void keyboard(unsigned char key, int x, int y) {
                     wd = (_selected_kamera->max.x - _selected_kamera->min.x)/KG_STEP_ZOOM;
                     he = (_selected_kamera->max.y - _selected_kamera->min.y)/KG_STEP_ZOOM;
 
-                    midx = (_selected_kamera->max.x + _selected_kamera->min.x)*2;
-                    midy = (_selected_kamera->max.y + _selected_kamera->min.y)*2;
+                    midx = (_selected_kamera->max.x + _selected_kamera->min.x)/2;
+                    midy = (_selected_kamera->max.y + _selected_kamera->min.y)/2;
 
-                    _selected_kamera->max.x = midx + wd*2;
-                    _selected_kamera->min.x = midx - wd*2;
-                    _selected_kamera->max.y = midy + wd*2;
-                    _selected_kamera->min.y = midy - wd*2;
+                    _selected_kamera->max.x = midx + wd/2;
+                    _selected_kamera->min.x = midx - wd/2;
+                    _selected_kamera->max.y = midy + wd/2;
+                    _selected_kamera->min.y = midy - wd/2;
 
-                    /*wd=(_ortho_x_max-_ortho_x_min)/KG_STEP_ZOOM;
-                    he=(_ortho_y_max-_ortho_y_min)/KG_STEP_ZOOM;
-                    //In order to avoid moving the center of the plane, we get its coordinates
-                    midx = (_ortho_x_max+_ortho_x_min)*2;
-                    midy = (_ortho_y_max+_ortho_y_min)*2;
-                    //The the new limits are set, keeping the center of the plane
-                    _ortho_x_max = midx + wd*2;
-                    _ortho_x_min = midx - wd*2;
-                    _ortho_y_max = midy + he*2;
-                    _ortho_y_min = midy - he*2;*/
                     break;
                 case 'o':
                     if(_selected_object != 0){
