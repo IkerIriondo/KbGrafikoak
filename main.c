@@ -24,6 +24,7 @@ object3d *_selected_kamera = 0;
 char aldaketa_mota; 
 char erreferentzi_sistema;
 char zer_aldatu;
+char kam_mota;
 
 double ezker,eskuin,behekoa,goikoa,near,far;
 bool obj_ikuspegia;
@@ -53,6 +54,7 @@ void initialization (){
     goikoa = 0.1;
     near = 0.1;
     far = 1000;
+    kam_mota = 'o';
 
     /*Initialization of all the variables with the default values*/
     _ortho_x_min = KG_ORTHO_X_MIN_INIT;
@@ -73,7 +75,6 @@ void initialization (){
     erreferentzi_sistema = 'g';
     zer_aldatu = 'o';
     aldaketa_mota = 't';
-    printf("Erreferentzi sistema: %c, Zer aldatu: %c, Aldaketa mota: %c\n", erreferentzi_sistema, zer_aldatu, aldaketa_mota);
 
     //(5, 5, 5) posiziotik (0, 0, 0)-ra begira
 
@@ -130,11 +131,11 @@ void initialization (){
     aux_kamera->max.y = goikoa;
     aux_kamera->min.z = near;
     aux_kamera->max.z = far;
-    aux_kamera->mota = 'o';
+    aux_kamera->mota = 'l';
 
     mat[0] = 1;  mat[4] = 0; mat[8] = 0;  mat[12] = 0;
     mat[1] = 0;  mat[5] = 0; mat[9] = 1;  mat[13] = 5;
-    mat[2] = -1; mat[6] = -1;mat[10] = 0; mat[14] = 0;
+    mat[2] = 0;  mat[6] = -1;mat[10] = 0; mat[14] = 0;
     mat[3] = 0;  mat[7] = 0; mat[11] = 0; mat[15] = 1;
 
     aux_kamera->mzptr =(mz *)malloc(sizeof(mz));
@@ -144,6 +145,7 @@ void initialization (){
     _first_kamera = aux_kamera;
     _selected_kamera = aux_kamera;
 
+    printf("Erreferentzi sistema: %c, Zer aldatu: %c, Aldaketa mota: %c, Kamera mota: %c\n", erreferentzi_sistema, zer_aldatu, aldaketa_mota, _selected_kamera->mota);
 }
 
 

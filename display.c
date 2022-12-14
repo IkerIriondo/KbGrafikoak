@@ -23,15 +23,16 @@ extern object3d *_selected_kamera;
 extern char aldaketa_mota;
 extern char zer_aldatu;
 extern char erreferentzi_sistema;
+extern char kam_mota;
 
 extern double ezker,eskuin,behekoa,goikoa,near,far;
 extern bool obj_ikuspegia;
 
 void esam_matrizea_lortu(double *esamptr, double *mptr){ //mptr zutabetan dagoena errenkadetan jarri
 
-    esamptr[0] = mptr[0];  esamptr[4] = mptr[1];  esamptr[8] = mptr[2];   esamptr[12] = -(mptr[0]*mptr[12] + mptr[4]*mptr[13] + mptr[8]*mptr[14]);
-    esamptr[1] = mptr[4];  esamptr[5] = mptr[5];  esamptr[9] = mptr[6];   esamptr[13] = -(mptr[1]*mptr[12] + mptr[5]*mptr[13] + mptr[9]*mptr[14]);
-    esamptr[2] = mptr[8];  esamptr[6] = mptr[9];  esamptr[10] = mptr[10]; esamptr[14] = -(mptr[2]*mptr[12] + mptr[6]*mptr[13] + mptr[10]*mptr[14]);
+    esamptr[0] = mptr[0];  esamptr[4] = mptr[1];  esamptr[8] = mptr[2];   esamptr[12] = -(mptr[0]*mptr[12] + mptr[1]*mptr[13] + mptr[2]*mptr[14]);
+    esamptr[1] = mptr[4];  esamptr[5] = mptr[5];  esamptr[9] = mptr[6];   esamptr[13] = -(mptr[4]*mptr[12] + mptr[5]*mptr[13] + mptr[6]*mptr[14]);
+    esamptr[2] = mptr[8];  esamptr[6] = mptr[9];  esamptr[10] = mptr[10]; esamptr[14] = -(mptr[8]*mptr[12] + mptr[9]*mptr[13] + mptr[10]*mptr[14]);
     esamptr[3] = 0;        esamptr[7] = 0;        esamptr[11] = 0;        esamptr[15] = 1;
     
 }
@@ -133,13 +134,19 @@ void display(void) {
         /*Definition of the projection* /
         glOrtho(_ortho_x_min, _ortho_x_max, midpt - (he / 2), midpt + (he / 2), _ortho_z_min, _ortho_z_max);
     }*/
-    //glOrtho(ezker,eskuin,behekoa, goikoa, near, far);
-    glOrtho(_ortho_x_min, _ortho_x_max, _ortho_y_min, _ortho_y_max, _ortho_z_min, _ortho_z_max);
+    //glOrtho(_selected_kamera->min.x, _selected_kamera->max.x, _selected_kamera->min.y, _selected_kamera->max.y, _selected_kamera->min.z, _selected_kamera->max.z);
+    //glOrtho(_ortho_x_min, _ortho_x_max, _ortho_y_min, _ortho_y_max, _ortho_z_min, _ortho_z_max);
     //glFrustum(ezker(-x),eskubi(+x),behekoa(-y), goikoa(+y), near(-z), far(+z))
-    //glFrustum(ezker, eskuin, behekoa, goikoa, near, far);
-    /* Now we start drawing the object */
-    glMatrixMode(GL_MODELVIEW);
+    glMatrixMode(GL_PROJECTION_MATRIX);
     glLoadIdentity();
+    //glFrustum(-0.1, 0.1, -0.1, 0.1, 0.1, 1000.0);
+    glFrustum(_selected_kamera->min.x, _selected_kamera->max.x, _selected_kamera->min.y, _selected_kamera->max.y, _selected_kamera->min.z, _selected_kamera->max.z);
+
+    //glFrustum(_selected_kamera->min.x, _selected_kamera->max.x, _selected_kamera->min.y, _selected_kamera->max.y, _selected_kamera->min.z, _selected_kamera->max.z);
+    /* Now we start drawing the object */
+
+    glMatrixMode(GL_MODELVIEW);
+    //glLoadIdentity();
 
     /*First, we draw the axes*/
     draw_axes();
@@ -154,15 +161,18 @@ void display(void) {
             glColor3f(KG_COL_NONSELECTED_R,KG_COL_NONSELECTED_G,KG_COL_NONSELECTED_B);
         }
 
-        if(_selected_kamera->mota == 'o'){
-            //glFrustum(ezker, eskuin, behekoa, goikoa, near, far);
+        if(kam_mota == 'o'){
             esam_matrizea_lortu(&(ESAM[0]),_selected_object->mzptr->matrize);
             glLoadMatrixd(ESAM);
         }else{
-            //glOrtho(ezker, eskuin, behekoa, goikoa, near, far);
             esam_matrizea_lortu(&(ESAM[0]),_selected_kamera->mzptr->matrize);
             glLoadMatrixd(ESAM);
         }
+        /* esam_matrizea_lortu(&(ESAM[0]),_selected_kamera->mzptr->matrize);
+            glLoadMatrixd(ESAM);
+            glLoadIdentity();
+            esam_matrizea_lortu(&(ESAM[0]),_selected_object->mzptr->matrize);
+            glLoadMatrixd(ESAM);*/
         glMultMatrixd(aux_obj->mzptr->matrize);
 
         /* Draw the object; for each face create a new polygon with the corresponding vertices */

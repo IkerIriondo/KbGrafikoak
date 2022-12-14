@@ -19,6 +19,7 @@ extern GLdouble _ortho_z_min,_ortho_z_max;
 extern char aldaketa_mota;
 extern char erreferentzi_sistema;
 extern char zer_aldatu;
+extern char kam_mota;
 
 /**
  * @brief This function just prints information about the use
@@ -180,18 +181,18 @@ void aldatu_obj(double *Mberria, double *Mald){
     int i; 
 
     if(erreferentzi_sistema == 'g') {//Globala
-            eskuinetik_biderkatu(&(Mberria[0]),&(Mald[0]),_selected_object->mzptr->matrize);
-        }else{//Lokala
-            ezkerretik_biderkatu(&(Mberria[0]),&(Mald[0]),_selected_object->mzptr->matrize);
+        eskuinetik_biderkatu(&(Mberria[0]),&(Mald[0]),_selected_object->mzptr->matrize);
+    }else{//Lokala
+        ezkerretik_biderkatu(&(Mberria[0]),&(Mald[0]),_selected_object->mzptr->matrize);
     }
     matberria = (mz *)malloc(sizeof(mz));
     for(i = 0; i<16; i++) matberria->matrize[i] = Mberria[i];
     matberria->next = _selected_object->mzptr;
     _selected_object->mzptr = matberria;
-    printf("%f, %f, %f, %f\n", matberria->matrize[0], matberria->matrize[4], matberria->matrize[8], matberria->matrize[12]);
+    /*printf("%f, %f, %f, %f\n", matberria->matrize[0], matberria->matrize[4], matberria->matrize[8], matberria->matrize[12]);
     printf("%f, %f, %f, %f\n", matberria->matrize[1], matberria->matrize[5], matberria->matrize[9], matberria->matrize[13]);
     printf("%f, %f, %f, %f\n", matberria->matrize[2], matberria->matrize[6], matberria->matrize[10], matberria->matrize[14]);
-    printf("%f, %f, %f, %f\n\n\n", matberria->matrize[3], matberria->matrize[7], matberria->matrize[11], matberria->matrize[15]);
+    printf("%f, %f, %f, %f\n\n\n", matberria->matrize[3], matberria->matrize[7], matberria->matrize[11], matberria->matrize[15]);*/
     glutPostRedisplay();
 }
 
@@ -199,22 +200,16 @@ void aldatu_kam(double *Mberria, double *Mald){
 
     mz *matberria;
     int i; 
-
-    if(erreferentzi_sistema == 'g') {//Globala
-        eskuinetik_biderkatu(&(Mberria[0]),&(Mald[0]),_selected_kamera->mzptr->matrize);
-    }else{//Lokala
-        ezkerretik_biderkatu(&(Mberria[0]),&(Mald[0]),_selected_kamera->mzptr->matrize);
-    }
-    matberria = (mz *)malloc(sizeof(mz));
-    for(i = 0; i<16; i++) matberria->matrize[i] = Mberria[i];
-    matberria->next = _selected_kamera->mzptr;
-    _selected_kamera->mzptr = matberria;
-    printf("%f, %f, %f, %f\n", matberria->matrize[0], matberria->matrize[4], matberria->matrize[8], matberria->matrize[12]);
-    printf("%f, %f, %f, %f\n", matberria->matrize[1], matberria->matrize[5], matberria->matrize[9], matberria->matrize[13]);
-    printf("%f, %f, %f, %f\n", matberria->matrize[2], matberria->matrize[6], matberria->matrize[10], matberria->matrize[14]);
-    printf("%f, %f, %f, %f\n\n\n", matberria->matrize[3], matberria->matrize[7], matberria->matrize[11], matberria->matrize[15]);
-    glutPostRedisplay();
-
+        eskuinetik_biderkatu(&(Mberria[0]), &(Mald[0]), _selected_kamera->mzptr->matrize);
+        matberria = (mz *)malloc(sizeof(mz));
+        for(i = 0; i<16; i++) matberria->matrize[i] = Mberria[i];
+        matberria->next = _selected_kamera->mzptr;
+        _selected_kamera->mzptr = matberria;
+        /*printf("%f, %f, %f, %f\n", matberria->matrize[0], matberria->matrize[4], matberria->matrize[8], matberria->matrize[12]);
+        printf("%f, %f, %f, %f\n", matberria->matrize[1], matberria->matrize[5], matberria->matrize[9], matberria->matrize[13]);
+        printf("%f, %f, %f, %f\n", matberria->matrize[2], matberria->matrize[6], matberria->matrize[10], matberria->matrize[14]);
+        printf("%f, %f, %f, %f\n\n\n", matberria->matrize[3], matberria->matrize[7], matberria->matrize[11], matberria->matrize[15]);*/
+        glutPostRedisplay();
 }
 
 /**
@@ -273,6 +268,18 @@ void keyboard(unsigned char key, int x, int y) {
             auxiliar_object->mzptr2->matrize[10] = 1.0;
             auxiliar_object->mzptr2->matrize[15] = 1.0;
 
+            /*erpin bakoitzean n = (0,0,0)
+            poligono bakoitzeko{
+                n kalkulatu
+                bere erpin bakoitzari n gehitu
+            }
+            erpin bakoitzari{
+                l = norma(bektore_normala)
+                bektore_normala = bektore_normala/l
+            }*/
+
+
+
             auxiliar_object->next = _first_object;
             _first_object = auxiliar_object;
             _selected_object = _first_object;
@@ -285,6 +292,8 @@ void keyboard(unsigned char key, int x, int y) {
             _selected_kamera = _selected_kamera->next;
             /*The selection is circular, thus if we move out of the list we go back to the first element*/
             if (_selected_kamera == 0) _selected_kamera = _first_kamera;
+            printf("Erreferentzi sistema: %c, Zer aldatu: %c, Aldaketa mota: %c, Kamera mota: %c\n", erreferentzi_sistema, zer_aldatu, aldaketa_mota, _selected_kamera->mota);
+
         }else{
             if(_selected_object != 0){
                 _selected_object = _selected_object->next;
@@ -294,8 +303,6 @@ void keyboard(unsigned char key, int x, int y) {
                 printf("Ez dakagu objekturik, beraz ezin da hurrengo objektua aukeratu\n\n");
             }
         }
-        
-        
         break;
 
     case 127: /* <SUPR> */
@@ -337,16 +344,28 @@ void keyboard(unsigned char key, int x, int y) {
             
             switch(zer_aldatu){
                 case 'k':
-                    wd=(_ortho_x_max-_ortho_x_min)*KG_STEP_ZOOM;
+
+                    wd = (_selected_kamera->max.x - _selected_kamera->min.x)*KG_STEP_ZOOM;
+                    he = (_selected_kamera->max.y - _selected_kamera->min.y)*KG_STEP_ZOOM;
+
+                    midx = (_selected_kamera->max.x + _selected_kamera->min.x)/2;
+                    midy = (_selected_kamera->max.y + _selected_kamera->min.y)/2;
+
+                    _selected_kamera->max.x = midx + wd/2;
+                    _selected_kamera->min.x = midx - wd/2;
+                    _selected_kamera->max.y = midy + wd/2;
+                    _selected_kamera->min.y = midy - wd/2;
+
+                    /*wd=(_ortho_x_max-_ortho_x_min)*KG_STEP_ZOOM;
                     he=(_ortho_y_max-_ortho_y_min)*KG_STEP_ZOOM;
-                    /*In order to avoid moving the center of the plane, we get its coordinates*/
+                    //In order to avoid moving the center of the plane, we get its coordinates
                     midx = (_ortho_x_max+_ortho_x_min)/2;
                     midy = (_ortho_y_max+_ortho_y_min)/2;
-                    /*The the new limits are set, keeping the center of the plane*/
+                    //The the new limits are set, keeping the center of the plane
                     _ortho_x_max = midx + wd/2;
                     _ortho_x_min = midx - wd/2;
                     _ortho_y_max = midy + he/2;
-                    _ortho_y_min = midy - he/2;
+                    _ortho_y_min = midy - he/2;*/
                     break;
                 case 'o':
                     if(_selected_object != 0){
@@ -369,20 +388,32 @@ void keyboard(unsigned char key, int x, int y) {
             }
             switch(zer_aldatu){
                 case 'k':
-                    wd=(_ortho_x_max-_ortho_x_min)/KG_STEP_ZOOM;
+
+                    wd = (_selected_kamera->max.x - _selected_kamera->min.x)/KG_STEP_ZOOM;
+                    he = (_selected_kamera->max.y - _selected_kamera->min.y)/KG_STEP_ZOOM;
+
+                    midx = (_selected_kamera->max.x + _selected_kamera->min.x)*2;
+                    midy = (_selected_kamera->max.y + _selected_kamera->min.y)*2;
+
+                    _selected_kamera->max.x = midx + wd*2;
+                    _selected_kamera->min.x = midx - wd*2;
+                    _selected_kamera->max.y = midy + wd*2;
+                    _selected_kamera->min.y = midy - wd*2;
+
+                    /*wd=(_ortho_x_max-_ortho_x_min)/KG_STEP_ZOOM;
                     he=(_ortho_y_max-_ortho_y_min)/KG_STEP_ZOOM;
-                    /*In order to avoid moving the center of the plane, we get its coordinates*/
+                    //In order to avoid moving the center of the plane, we get its coordinates
                     midx = (_ortho_x_max+_ortho_x_min)*2;
                     midy = (_ortho_y_max+_ortho_y_min)*2;
-                    /*The the new limits are set, keeping the center of the plane*/
+                    //The the new limits are set, keeping the center of the plane
                     _ortho_x_max = midx + wd*2;
                     _ortho_x_min = midx - wd*2;
                     _ortho_y_max = midy + he*2;
-                    _ortho_y_min = midy - he*2;
+                    _ortho_y_min = midy - he*2;*/
                     break;
                 case 'o':
                     if(_selected_object != 0){
-                        lortu_eskalatu_matrizea(&(Mald[0]), 1.33333, 1.33333, 1.33333);
+                        lortu_eskalatu_matrizea(&(Mald[0]), 1.333333, 1.333333, 1.333333);
                         aldatu_obj(&(Mberria[0]), &(Mald[0]));
                     }else{
                         printf("Ez dago objekturik kargatuta\n");
@@ -463,6 +494,13 @@ void keyboard(unsigned char key, int x, int y) {
         zer_aldatu = 'a';
         printf("Erreferentzi sistema: %c, Zer aldatu: %c, Aldaketa mota: %c\n", erreferentzi_sistema, zer_aldatu, aldaketa_mota);
         break;
+    case 'K':
+        if(kam_mota == 'o'){
+            kam_mota = 'l';
+        }else{
+            kam_mota = 'o';
+        }
+        break;
     case 'Z':
     case 'z':
         if (glutGetModifiers() == GLUT_ACTIVE_CTRL){
@@ -490,7 +528,7 @@ void keyboard(unsigned char key, int x, int y) {
             }
         }
         break;
-    case 26:
+    case 26: //Z
         if (glutGetModifiers() == GLUT_ACTIVE_CTRL){
             if(_selected_kamera->mzptr->next != 0){
                 mzptr2 = _selected_kamera->mzptr;
@@ -528,7 +566,7 @@ void keyboard(unsigned char key, int x, int y) {
             }
         }
         break;
-    case 2:
+    case 2: //B
         if (glutGetModifiers() == GLUT_ACTIVE_CTRL){
             if(_selected_kamera->mzptr2->next != 0){
                 mzptr2 = _selected_kamera->mzptr2;
@@ -773,7 +811,7 @@ void tekla_berezien_arretarako_funtzioa(int key, int x, int y){
                             aldatu_kam(&(Mberria[0]),&(Mald[0]));
                             break;
                         case 't':
-                            lortu_traslazio_matrizea(&(Mald[0]), 1.0, 0.0, 0.0);
+                            lortu_traslazio_matrizea(&(Mald[0]), 0.0, 0.0, 1.0);
                             aldatu_kam(&(Mberria[0]),&(Mald[0]));
                             break;
                         default:
@@ -822,7 +860,7 @@ void tekla_berezien_arretarako_funtzioa(int key, int x, int y){
                             aldatu_kam(&(Mberria[0]),&(Mald[0]));
                             break;
                         case 't':
-                            lortu_traslazio_matrizea(&(Mald[0]), -1.0, 0.0, 0.0);
+                            lortu_traslazio_matrizea(&(Mald[0]), 0.0, 0.0, -1.0);
                             aldatu_kam(&(Mberria[0]),&(Mald[0]));
                             break;
                         default:

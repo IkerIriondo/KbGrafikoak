@@ -118,9 +118,9 @@ struct object3d{
     face *face_table;                   /* table of faces */
     point3 min;                         /* coordinates' lower bounds */
     point3 max;                         /* coordinates' bigger bounds */
-    mz *mzptr;                          /*Aldaketen matrizeen zerrenda*/
-    mz *mzptr2;                         /*Aldaketak berregiteko matrizeen zerrenda*/
-    char mota;                          /*Kamera mota adierazten du*/
+    mz *mzptr;                          /* Aldaketen matrizeen zerrenda*/
+    mz *mzptr2;                         /* Aldaketak berregiteko matrizeen zerrenda*/
+    char mota;                          /* Kamera mota adierazten du*/
     struct object3d *next;              /* next element in the pile of objects */
 };
 
