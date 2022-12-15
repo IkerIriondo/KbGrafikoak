@@ -40,7 +40,7 @@ void initialization (){
     goikoa = 0.1;
     near = 0.1;
     far = 1000;
-    kam_mota = 'l';
+    kam_mota = 'o';
 
     /*Initialization of all the variables with the default values*/
     _ortho_x_min = KG_ORTHO_X_MIN_INIT;
@@ -84,6 +84,33 @@ void initialization (){
     _first_kamera = aux_kamera;
     _selected_kamera = aux_kamera;
 
+    //Goikoa 
+
+    aux_kamera = (object3d *)malloc(sizeof(object3d));
+    aux_kamera->min.x = ezker;
+    aux_kamera->max.x = eskuin;
+    aux_kamera->min.y = behekoa;
+    aux_kamera->max.y = goikoa;
+    aux_kamera->min.z = near;
+    aux_kamera->max.z = far;
+
+    /*mat[0] = 1;  mat[4] = 0; mat[8] = 0;  mat[12] = 0;
+    mat[1] = 0;  mat[5] = 0; mat[9] = 1;  mat[13] = 5;
+    mat[2] = 0;  mat[6] = -1;mat[10] = 0; mat[14] = 0;
+    mat[3] = 0;  mat[7] = 0; mat[11] = 0; mat[15] = 1;*/
+
+    mat[0] = sqrt(26)/26;  mat[4] = 0;     mat[8] = 0;           mat[12] = 0;
+    mat[1] = 0;            mat[5] = 1/26;  mat[9] = 5/sqrt(26);  mat[13] = 5;
+    mat[2] = 0;            mat[6] = -5/26; mat[10] = 1/sqrt(26); mat[14] = 1;
+    mat[3] = 0;            mat[7] = 0;     mat[11] = 0;          mat[15] = 1;
+
+    aux_kamera->mzptr =(mz *)malloc(sizeof(mz));
+    for(i = 0; i<16; i++) aux_kamera->mzptr->matrize[i] = mat[i];
+    aux_kamera->next = _first_kamera;
+
+    _first_kamera = aux_kamera;
+    _selected_kamera = aux_kamera;
+
     //Albokoa 
 
     aux_kamera = (object3d *)malloc(sizeof(object3d));
@@ -97,28 +124,6 @@ void initialization (){
     mat[0] = 0;  mat[4] = 0; mat[8] = 1;  mat[12] = 5;
     mat[1] = 0;  mat[5] = 1; mat[9] = 0;  mat[13] = 0;
     mat[2] = -1; mat[6] = 0; mat[10] = 0; mat[14] = 0;
-    mat[3] = 0;  mat[7] = 0; mat[11] = 0; mat[15] = 1;
-
-    aux_kamera->mzptr =(mz *)malloc(sizeof(mz));
-    for(i = 0; i<16; i++) aux_kamera->mzptr->matrize[i] = mat[i];
-    aux_kamera->next = _first_kamera;
-
-    _first_kamera = aux_kamera;
-    _selected_kamera = aux_kamera;
-
-    //Goikoa 
-
-    aux_kamera = (object3d *)malloc(sizeof(object3d));
-    aux_kamera->min.x = ezker;
-    aux_kamera->max.x = eskuin;
-    aux_kamera->min.y = behekoa;
-    aux_kamera->max.y = goikoa;
-    aux_kamera->min.z = near;
-    aux_kamera->max.z = far;
-
-    mat[0] = 1;  mat[4] = 0; mat[8] = 0;  mat[12] = 0;
-    mat[1] = 0;  mat[5] = 0; mat[9] = 1;  mat[13] = 5;
-    mat[2] = 0;  mat[6] = -1;mat[10] = 0; mat[14] = 0;
     mat[3] = 0;  mat[7] = 0; mat[11] = 0; mat[15] = 1;
 
     aux_kamera->mzptr =(mz *)malloc(sizeof(mz));

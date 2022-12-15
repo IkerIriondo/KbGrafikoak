@@ -87,11 +87,11 @@ void kam_objri_begira(){
     mat[2] = x[2]; mat[6] = y[2]; mat[10] = z[2]; mat[14] = kam_non[2];
     mat[3] = 0;    mat[7] = 0;    mat[11] = 0;    mat[15] = 1;
 
-    mz *mzpt;
-    mzpt = (mz *)malloc(sizeof(mz));
-    for(i = 0; i<16; i++) mzpt->matrize[i] = mat[i];
-    mzpt->next = _selected_kamera->mzptr;
-    _selected_kamera->mzptr = mzpt;
+    mz *matberria;
+    matberria = (mz *)malloc(sizeof(mz));
+    for(i = 0; i<16; i++) matberria->matrize[i] = mat[i];
+    matberria->next = _selected_kamera->mzptr;
+    _selected_kamera->mzptr = matberria;
 
 }
 
@@ -206,7 +206,8 @@ void display(void) {
     /*First, we draw the axes*/
     draw_axes();
 
-    //if(erreferentzi_sistema == 'g') kam_objri_begira();
+    if(erreferentzi_sistema == 'g' && kam_mota != 'o') kam_objri_begira();
+    
     /*Now each of the objects in the list*/
     while (aux_obj != 0) {
 
@@ -237,7 +238,6 @@ void display(void) {
         }
         aux_obj = aux_obj->next;
     }
-
     /*Do the actual drawing*/
     glFlush();
 }
