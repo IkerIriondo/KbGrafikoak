@@ -134,15 +134,12 @@ void display(void) {
         /*Definition of the projection* /
         glOrtho(_ortho_x_min, _ortho_x_max, midpt - (he / 2), midpt + (he / 2), _ortho_z_min, _ortho_z_max);
     }*/
-    //glOrtho(_selected_kamera->min.x, _selected_kamera->max.x, _selected_kamera->min.y, _selected_kamera->max.y, _selected_kamera->min.z, _selected_kamera->max.z);
-    //glOrtho(_ortho_x_min, _ortho_x_max, _ortho_y_min, _ortho_y_max, _ortho_z_min, _ortho_z_max);
-    //glFrustum(ezker(-x),eskubi(+x),behekoa(-y), goikoa(+y), near(-z), far(+z))
-    glMatrixMode(GL_PROJECTION_MATRIX);
+
+    glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    //glFrustum(-0.1, 0.1, -0.1, 0.1, 0.1, 1000.0);
+
     glFrustum(_selected_kamera->min.x, _selected_kamera->max.x, _selected_kamera->min.y, _selected_kamera->max.y, _selected_kamera->min.z, _selected_kamera->max.z);
 
-    //glFrustum(_selected_kamera->min.x, _selected_kamera->max.x, _selected_kamera->min.y, _selected_kamera->max.y, _selected_kamera->min.z, _selected_kamera->max.z);
     /* Now we start drawing the object */
 
     glMatrixMode(GL_MODELVIEW);
@@ -168,16 +165,7 @@ void display(void) {
             esam_matrizea_lortu(&(ESAM[0]),_selected_kamera->mzptr->matrize);
             glLoadMatrixd(ESAM);
         }
-        /* esam_matrizea_lortu(&(ESAM[0]),_selected_kamera->mzptr->matrize);
-            glLoadMatrixd(ESAM);
-            glLoadIdentity();
-            esam_matrizea_lortu(&(ESAM[0]),_selected_object->mzptr->matrize);
-            glLoadMatrixd(ESAM);*/
         glMultMatrixd(aux_obj->mzptr->matrize);
-
-        /* Draw the object; for each face create a new polygon with the corresponding vertices */
-        //glMultMatrixd(aux_obj->mzptr->matrize); //behekoagatik aldatu
-        //glLoadMatrixd(aux_obj->mzptr->matrize);
 
         for (f = 0; f < aux_obj->num_faces; f++) {
             glBegin(GL_POLYGON);

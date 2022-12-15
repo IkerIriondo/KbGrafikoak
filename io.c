@@ -128,7 +128,7 @@ void lortu_zizailaketa_matrizea(double *mptr, double x, double y, double z){
 
 }
 
-void eskuinetik_biderkatu(double *Mberria, double *Mald, double *Mobj){
+void ezkerretik_biderkatu(double *Mberria, double *Mald, double *Mobj){
 
     Mberria[0] =  Mobj[0]*Mald[0] + Mobj[1]*Mald[4] + Mobj[2]*Mald[8] + Mobj[3]*Mald[12]; 
     Mberria[1] =  Mobj[0]*Mald[1] + Mobj[1]*Mald[5] + Mobj[2]*Mald[9] + Mobj[3]*Mald[13]; 
@@ -152,7 +152,7 @@ void eskuinetik_biderkatu(double *Mberria, double *Mald, double *Mobj){
 
 }
 
-void ezkerretik_biderkatu(double *Mberria, double *Mald, double *Mobj){
+void eskuinetik_biderkatu(double *Mberria, double *Mald, double *Mobj){
 
     Mberria[0] =  Mald[0]*Mobj[0] + Mald[1]*Mobj[4] + Mald[2]*Mobj[8] + Mald[3]*Mobj[12]; 
     Mberria[1] =  Mald[0]*Mobj[1] + Mald[1]*Mobj[5] + Mald[2]*Mobj[9] + Mald[3]*Mobj[13]; 
@@ -181,9 +181,9 @@ void aldatu_obj(double *Mberria, double *Mald){
     int i; 
 
     if(erreferentzi_sistema == 'g') {//Globala
-        eskuinetik_biderkatu(&(Mberria[0]),&(Mald[0]),_selected_object->mzptr->matrize);
-    }else{//Lokala
         ezkerretik_biderkatu(&(Mberria[0]),&(Mald[0]),_selected_object->mzptr->matrize);
+    }else{//Lokala
+        eskuinetik_biderkatu(&(Mberria[0]),&(Mald[0]),_selected_object->mzptr->matrize);
     }
     matberria = (mz *)malloc(sizeof(mz));
     for(i = 0; i<16; i++) matberria->matrize[i] = Mberria[i];
@@ -205,10 +205,10 @@ void aldatu_kam(double *Mberria, double *Mald){
         for(i = 0; i<16; i++) matberria->matrize[i] = Mberria[i];
         matberria->next = _selected_kamera->mzptr;
         _selected_kamera->mzptr = matberria;
-        /*printf("%f, %f, %f, %f\n", matberria->matrize[0], matberria->matrize[4], matberria->matrize[8], matberria->matrize[12]);
+        printf("%f, %f, %f, %f\n", matberria->matrize[0], matberria->matrize[4], matberria->matrize[8], matberria->matrize[12]);
         printf("%f, %f, %f, %f\n", matberria->matrize[1], matberria->matrize[5], matberria->matrize[9], matberria->matrize[13]);
         printf("%f, %f, %f, %f\n", matberria->matrize[2], matberria->matrize[6], matberria->matrize[10], matberria->matrize[14]);
-        printf("%f, %f, %f, %f\n\n\n", matberria->matrize[3], matberria->matrize[7], matberria->matrize[11], matberria->matrize[15]);*/
+        printf("%f, %f, %f, %f\n\n\n", matberria->matrize[3], matberria->matrize[7], matberria->matrize[11], matberria->matrize[15]);
         glutPostRedisplay();
 }
 
@@ -607,7 +607,7 @@ void tekla_berezien_arretarako_funtzioa(int key, int x, int y){
                 case 'k':
                     switch(aldaketa_mota){
                         case 'r':
-                            lortu_biratu_matrizea(&(Mald[0]), -1.0, 0.0, 0.0);
+                            lortu_biratu_matrizea(&(Mald[0]), 1.0, 0.0, 0.0);
                             aldatu_kam(&(Mberria[0]),&(Mald[0]));
                             break;
                         default:
@@ -652,7 +652,7 @@ void tekla_berezien_arretarako_funtzioa(int key, int x, int y){
                 case 'k':
                     switch(aldaketa_mota){
                         case 'r':
-                            lortu_biratu_matrizea(&(Mald[0]), 1.0, 0.0, 0.0);
+                            lortu_biratu_matrizea(&(Mald[0]), -1.0, 0.0, 0.0);
                             aldatu_kam(&(Mberria[0]),&(Mald[0]));
                             break;
                         default:
@@ -697,7 +697,7 @@ void tekla_berezien_arretarako_funtzioa(int key, int x, int y){
                 case 'k':
                     switch(aldaketa_mota){
                         case 'r':
-                            lortu_biratu_matrizea(&(Mald[0]), 0.0, 1.0, 0.0);
+                            lortu_biratu_matrizea(&(Mald[0]), 0.0, -1.0, 0.0);
                             aldatu_kam(&(Mberria[0]),&(Mald[0]));
                             break;
                         default:
@@ -742,7 +742,7 @@ void tekla_berezien_arretarako_funtzioa(int key, int x, int y){
                 case 'k':
                     switch(aldaketa_mota){
                         case 'r':
-                            lortu_biratu_matrizea(&(Mald[0]), 0.0, -1.0, 0.0);
+                            lortu_biratu_matrizea(&(Mald[0]), 0.0, 1.0, 0.0);
                             aldatu_kam(&(Mberria[0]),&(Mald[0]));
                             break;
                         default:
@@ -787,11 +787,11 @@ void tekla_berezien_arretarako_funtzioa(int key, int x, int y){
                 case 'k':
                     switch(aldaketa_mota){
                         case 'r':
-                            lortu_biratu_matrizea(&(Mald[0]), 0.0, 0.0, 1.0);
+                            lortu_biratu_matrizea(&(Mald[0]), 0.0, 0.0, -1.0);
                             aldatu_kam(&(Mberria[0]),&(Mald[0]));
                             break;
                         case 't':
-                            lortu_traslazio_matrizea(&(Mald[0]), 0.0, 0.0, 1.0);
+                            lortu_traslazio_matrizea(&(Mald[0]), 0.0, 0.0, -1.0);
                             aldatu_kam(&(Mberria[0]),&(Mald[0]));
                             break;
                         default:
@@ -836,11 +836,11 @@ void tekla_berezien_arretarako_funtzioa(int key, int x, int y){
                 case 'k':
                     switch(aldaketa_mota){
                         case 'r':
-                            lortu_biratu_matrizea(&(Mald[0]), 0.0, 0.0, -1.0);
+                            lortu_biratu_matrizea(&(Mald[0]), 0.0, 0.0, 1.0);
                             aldatu_kam(&(Mberria[0]),&(Mald[0]));
                             break;
                         case 't':
-                            lortu_traslazio_matrizea(&(Mald[0]), 0.0, 0.0, -1.0);
+                            lortu_traslazio_matrizea(&(Mald[0]), 0.0, 0.0, 1.0);
                             aldatu_kam(&(Mberria[0]),&(Mald[0]));
                             break;
                         default:
