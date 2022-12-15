@@ -5,7 +5,7 @@
 #include <GL/glu.h>
 #include <string.h>
 #include <stdio.h>
-#include <stdbool.h>
+#include <math.h>
 
 /** EXTERNAL VARIABLES **/
 
@@ -26,7 +26,6 @@ extern char erreferentzi_sistema;
 extern char kam_mota;
 
 extern double ezker,eskuin,behekoa,goikoa,near,far;
-extern bool obj_ikuspegia;
 
 void esam_matrizea_lortu(double *esamptr, double *mptr){ //mptr zutabetan dagoena errenkadetan jarri
 
@@ -35,6 +34,65 @@ void esam_matrizea_lortu(double *esamptr, double *mptr){ //mptr zutabetan dagoen
     esamptr[2] = mptr[8];  esamptr[6] = mptr[9];  esamptr[10] = mptr[10]; esamptr[14] = -(mptr[8]*mptr[12] + mptr[9]*mptr[13] + mptr[10]*mptr[14]);
     esamptr[3] = 0;        esamptr[7] = 0;        esamptr[11] = 0;        esamptr[15] = 1;
     
+}
+
+
+void kam_objri_begira(){
+
+    int i;
+    double kam_non[3];
+    double kam_nora[3];
+    
+    kam_non[0] = _selected_kamera->mzptr->matrize[12];
+    kam_non[1] = _selected_kamera->mzptr->matrize[13];
+    kam_non[2] = _selected_kamera->mzptr->matrize[14];
+
+
+    if(_selected_object != 0){
+        kam_nora[0] = _selected_object->mzptr->matrize[12];
+        kam_nora[1] = _selected_object->mzptr->matrize[13];
+        kam_nora[2] = _selected_object->mzptr->matrize[14];
+    }else{
+        kam_nora[0] = 0.0; kam_nora[1] = 0.0; kam_nora[2] = 0.0;
+    }
+
+
+    double x[3];
+    double y[3];
+    double z[3];
+
+    double ken[3];
+    double norma;
+    ken[0] = kam_non[0] - kam_nora[0]; ken[1] = kam_non[1] - kam_nora[1]; ken[2] = kam_non[2] - kam_nora[2];
+
+    norma = sqrt(ken[0]*ken[0] + ken[1]*ken[1] + ken[2]*ken[2]);
+
+    z[0] = ken[0]/norma; z[1] = ken[1]/norma; z[2] = ken[2]/norma;
+
+    double bider_bek[3];
+    double vup[3];
+    vup[0] = 0.0; vup[1] = 1.0; vup[2] = 0.0;
+
+    bider_bek[0] = vup[1]*z[2] - vup[2]*z[1]; bider_bek[1] = vup[2]*z[0] - vup[0]*z[2]; bider_bek[2] = vup[0]*z[1] - vup[1]*z[0];
+    norma = sqrt(bider_bek[0]*bider_bek[0] + bider_bek[1]*bider_bek[1] + bider_bek[2]*bider_bek[2]);
+    
+    x[0] = bider_bek[0]/norma; x[1] = bider_bek[1]/norma; x[2] = bider_bek[2]/norma;
+
+    y[0] =  z[1]*x[2] - z[2]*x[1]; y[1] = z[2]*x[0] - z[0]*x[2]; y[2] = z[0]*x[1] - z[1]*x[0];
+
+    double mat[16];
+
+    mat[0] = x[0]; mat[4] = y[0]; mat[8] = z[0];  mat[12] = kam_non[0];
+    mat[1] = x[1]; mat[5] = y[1]; mat[9] = z[1];  mat[13] = kam_non[1];
+    mat[2] = x[2]; mat[6] = y[2]; mat[10] = z[2]; mat[14] = kam_non[2];
+    mat[3] = 0;    mat[7] = 0;    mat[11] = 0;    mat[15] = 1;
+
+    mz *mzpt;
+    mzpt = (mz *)malloc(sizeof(mz));
+    for(i = 0; i<16; i++) mzpt->matrize[i] = mat[i];
+    mzpt->next = _selected_kamera->mzptr;
+    _selected_kamera->mzptr = mzpt;
+
 }
 
 /**
@@ -148,6 +206,7 @@ void display(void) {
     /*First, we draw the axes*/
     draw_axes();
 
+    //if(erreferentzi_sistema == 'g') kam_objri_begira();
     /*Now each of the objects in the list*/
     while (aux_obj != 0) {
 
@@ -160,11 +219,10 @@ void display(void) {
 
         if(kam_mota == 'o'){
             esam_matrizea_lortu(&(ESAM[0]),_selected_object->mzptr->matrize);
-            glLoadMatrixd(ESAM);
         }else{
             esam_matrizea_lortu(&(ESAM[0]),_selected_kamera->mzptr->matrize);
-            glLoadMatrixd(ESAM);
         }
+        glLoadMatrixd(ESAM);
         glMultMatrixd(aux_obj->mzptr->matrize);
 
         for (f = 0; f < aux_obj->num_faces; f++) {

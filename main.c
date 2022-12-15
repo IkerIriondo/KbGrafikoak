@@ -27,26 +27,12 @@ char zer_aldatu;
 char kam_mota;
 
 double ezker,eskuin,behekoa,goikoa,near,far;
-bool obj_ikuspegia;
-
-void kam_matrizea_lortu(double *mptr, double x, double y, double z){
-
-    double a;
-    a = sqrt(2)/2;
-
-    mptr[0] = 1;   mptr[4] = y*a; mptr[8] = z*a;  mptr[12] = 0;
-    mptr[1] = x*a; mptr[5] = 1;   mptr[9] = z*a;  mptr[13] = 0;
-    mptr[2] = x*a; mptr[6] = y*a; mptr[10] = 1;   mptr[14] = 0;
-    mptr[3] = 0;   mptr[7] = 0;   mptr[11] = 0;   mptr[15] = 1;
-
-}
 
 /** GENERAL INITIALIZATION **/
 void initialization (){
     double mat[16];
     int i;
     object3d *aux_kamera;
-    obj_ikuspegia = true;
 
     ezker = -0.1;
     eskuin = 0.1;
@@ -54,7 +40,7 @@ void initialization (){
     goikoa = 0.1;
     near = 0.1;
     far = 1000;
-    kam_mota = 'o';
+    kam_mota = 'l';
 
     /*Initialization of all the variables with the default values*/
     _ortho_x_min = KG_ORTHO_X_MIN_INIT;
@@ -85,7 +71,6 @@ void initialization (){
     aux_kamera->max.y = goikoa;
     aux_kamera->min.z = near;
     aux_kamera->max.z = far;
-    aux_kamera->mota = 'o';
 
     mat[0] = sqrt(2)/2;  mat[4] = -sqrt(2)/(2*sqrt(3)); mat[8] = 1/sqrt(3);  mat[12] = 5;
     mat[1] = 0;          mat[5] = sqrt(2)/sqrt(3);      mat[9] = 1/sqrt(3);  mat[13] = 5;
@@ -108,7 +93,6 @@ void initialization (){
     aux_kamera->max.y = goikoa;
     aux_kamera->min.z = near;
     aux_kamera->max.z = far;
-    aux_kamera->mota = 'l';
 
     mat[0] = 0;  mat[4] = 0; mat[8] = 1;  mat[12] = 5;
     mat[1] = 0;  mat[5] = 1; mat[9] = 0;  mat[13] = 0;
@@ -131,7 +115,6 @@ void initialization (){
     aux_kamera->max.y = goikoa;
     aux_kamera->min.z = near;
     aux_kamera->max.z = far;
-    aux_kamera->mota = 'l';
 
     mat[0] = 1;  mat[4] = 0; mat[8] = 0;  mat[12] = 0;
     mat[1] = 0;  mat[5] = 0; mat[9] = 1;  mat[13] = 5;
@@ -145,7 +128,7 @@ void initialization (){
     _first_kamera = aux_kamera;
     _selected_kamera = aux_kamera;
 
-    printf("Erreferentzi sistema: %c, Zer aldatu: %c, Aldaketa mota: %c, Kamera mota: %c\n", erreferentzi_sistema, zer_aldatu, aldaketa_mota, _selected_kamera->mota);
+    printf("Erreferentzi sistema: %c, Zer aldatu: %c, Aldaketa mota: %c\n", erreferentzi_sistema, zer_aldatu, aldaketa_mota);
 }
 
 

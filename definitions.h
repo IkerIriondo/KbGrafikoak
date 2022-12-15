@@ -120,7 +120,6 @@ struct object3d{
     point3 max;                         /* coordinates' bigger bounds */
     mz *mzptr;                          /* Aldaketen matrizeen zerrenda*/
     mz *mzptr2;                         /* Aldaketak berregiteko matrizeen zerrenda*/
-    char mota;                          /* Kamera mota adierazten du*/
     struct object3d *next;              /* next element in the pile of objects */
 };
 
