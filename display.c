@@ -95,6 +95,33 @@ void kam_objri_begira(){
 
 }
 
+void kamera_esferan_biratu(double *v){
+
+    double at[3];
+    double mat[16];
+
+    int i;
+    mz *mzpt;
+    at[0] = _selected_object->mzptr->matrize[12];
+    at[1] = _selected_object->mzptr->matrize[13];
+    at[2] = _selected_object->mzptr->matrize[14];
+
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+    glTranslated(at[0], at[1], at[2]);
+    glRotated(10, v[0], v[1], v[2]);
+    glTranslated(-at[0], -at[1], -at[2]);
+    glMultMatrixd(_selected_kamera->mzptr->matrize);
+    glGetDoublev(GL_MODELVIEW_MATRIX, mat);
+
+    mzpt = (mz *)malloc(sizeof(mz));
+
+    for(i = 0; i<16;i++) mzpt->matrize[i] = mat[i];
+    mzpt->next = _selected_kamera->mzptr;
+    _selected_kamera->mzptr = mzpt;
+
+}
+
 /**
  * @brief Function to draw the axes
  */
@@ -206,7 +233,7 @@ void display(void) {
     /*First, we draw the axes*/
     draw_axes();
 
-    if(erreferentzi_sistema == 'g' && kam_mota != 'o') kam_objri_begira();
+    //if(erreferentzi_sistema == 'g' && kam_mota != 'o') kam_objri_begira();
     
     /*Now each of the objects in the list*/
     while (aux_obj != 0) {
@@ -222,6 +249,7 @@ void display(void) {
             esam_matrizea_lortu(&(ESAM[0]),_selected_object->mzptr->matrize);
         }else{
             esam_matrizea_lortu(&(ESAM[0]),_selected_kamera->mzptr->matrize);
+            printf("Kameraren matrizearekin\n");
         }
         glLoadMatrixd(ESAM);
         glMultMatrixd(aux_obj->mzptr->matrize);

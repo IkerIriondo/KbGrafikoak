@@ -200,20 +200,16 @@ void aldatu_kam(double *Mberria, double *Mald){
 
     mz *matberria;
     int i; 
-    if(erreferentzi_sistema == 'g'){
-
-    }else{
-        eskuinetik_biderkatu(&(Mberria[0]), &(Mald[0]), _selected_kamera->mzptr->matrize);
-        matberria = (mz *)malloc(sizeof(mz));
-        for(i = 0; i<16; i++) matberria->matrize[i] = Mberria[i];
-        matberria->next = _selected_kamera->mzptr;
-        _selected_kamera->mzptr = matberria;
-        /*printf("%f, %f, %f, %f\n", matberria->matrize[0], matberria->matrize[4], matberria->matrize[8], matberria->matrize[12]);
-        printf("%f, %f, %f, %f\n", matberria->matrize[1], matberria->matrize[5], matberria->matrize[9], matberria->matrize[13]);
-        printf("%f, %f, %f, %f\n", matberria->matrize[2], matberria->matrize[6], matberria->matrize[10], matberria->matrize[14]);
-        printf("%f, %f, %f, %f\n\n\n", matberria->matrize[3], matberria->matrize[7], matberria->matrize[11], matberria->matrize[15]);*/
-        glutPostRedisplay();
-    }
+    eskuinetik_biderkatu(&(Mberria[0]), &(Mald[0]), _selected_kamera->mzptr->matrize);
+    matberria = (mz *)malloc(sizeof(mz));
+    for(i = 0; i<16; i++) matberria->matrize[i] = Mberria[i];
+    matberria->next = _selected_kamera->mzptr;
+    _selected_kamera->mzptr = matberria;
+    /*printf("%f, %f, %f, %f\n", matberria->matrize[0], matberria->matrize[4], matberria->matrize[8], matberria->matrize[12]);
+    printf("%f, %f, %f, %f\n", matberria->matrize[1], matberria->matrize[5], matberria->matrize[9], matberria->matrize[13]);
+    printf("%f, %f, %f, %f\n", matberria->matrize[2], matberria->matrize[6], matberria->matrize[10], matberria->matrize[14]);
+    printf("%f, %f, %f, %f\n\n\n", matberria->matrize[3], matberria->matrize[7], matberria->matrize[11], matberria->matrize[15]);*/
+    glutPostRedisplay();
 }
 
 /**
@@ -457,6 +453,7 @@ void keyboard(unsigned char key, int x, int y) {
     case 'g':
         erreferentzi_sistema = 'g';
         printf("Erreferentzi sistema: %c, Zer aldatu: %c, Aldaketa mota: %c\n", erreferentzi_sistema, zer_aldatu, aldaketa_mota);
+        if(zer_aldatu == 'k') kam_objri_begira();
         break;
     case 'L':
     case 'l':
@@ -611,8 +608,28 @@ void tekla_berezien_arretarako_funtzioa(int key, int x, int y){
                 case 'k':
                     switch(aldaketa_mota){
                         case 'r':
-                            lortu_biratu_matrizea(&(Mald[0]), 1.0, 0.0, 0.0);
-                            aldatu_kam(&(Mberria[0]),&(Mald[0]));
+                            if(erreferentzi_sistema != 'g'){
+                                lortu_biratu_matrizea(&(Mald[0]), 1.0, 0.0, 0.0);
+                                aldatu_kam(&(Mberria[0]),&(Mald[0]));
+                            }else{
+                                double v[3];
+                                v[0] = _selected_kamera->mzptr->matrize[0];
+                                v[1] = _selected_kamera->mzptr->matrize[1];
+                                v[2] = _selected_kamera->mzptr->matrize[2];
+                                kamera_esferan_biratu(&(v[0]));
+                            }
+                            break;
+                        case 't':
+                            if(erreferentzi_sistema != 'g'){
+                                lortu_biratu_matrizea(&(Mald[0]), 1.0, 0.0, 0.0);
+                                aldatu_kam(&(Mberria[0]),&(Mald[0]));
+                            }else{
+                                double v[3];
+                                v[0] = _selected_kamera->mzptr->matrize[0];
+                                v[1] = _selected_kamera->mzptr->matrize[1];
+                                v[2] = _selected_kamera->mzptr->matrize[2];
+                                kamera_esferan_biratu(&(v[0]));
+                            }
                             break;
                         default:
                             break;
@@ -656,8 +673,28 @@ void tekla_berezien_arretarako_funtzioa(int key, int x, int y){
                 case 'k':
                     switch(aldaketa_mota){
                         case 'r':
-                            lortu_biratu_matrizea(&(Mald[0]), -1.0, 0.0, 0.0);
-                            aldatu_kam(&(Mberria[0]),&(Mald[0]));
+                            if(erreferentzi_sistema != 'g'){
+                                lortu_biratu_matrizea(&(Mald[0]), -1.0, 0.0, 0.0);
+                                aldatu_kam(&(Mberria[0]),&(Mald[0]));
+                            }else{
+                                double v[3];
+                                v[0] = - _selected_kamera->mzptr->matrize[0];
+                                v[1] = - _selected_kamera->mzptr->matrize[1];
+                                v[2] = - _selected_kamera->mzptr->matrize[2];
+                                kamera_esferan_biratu(&(v[0]));
+                            }
+                            break;
+                        case 't':
+                            if(erreferentzi_sistema != 'g'){
+                                lortu_biratu_matrizea(&(Mald[0]), -1.0, 0.0, 0.0);
+                                aldatu_kam(&(Mberria[0]),&(Mald[0]));
+                            }else{
+                                double v[3];
+                                v[0] = - _selected_kamera->mzptr->matrize[0];
+                                v[1] = - _selected_kamera->mzptr->matrize[1];
+                                v[2] = - _selected_kamera->mzptr->matrize[2];
+                                kamera_esferan_biratu(&(v[0]));
+                            }
                             break;
                         default:
                             break;
@@ -701,8 +738,28 @@ void tekla_berezien_arretarako_funtzioa(int key, int x, int y){
                 case 'k':
                     switch(aldaketa_mota){
                         case 'r':
-                            lortu_biratu_matrizea(&(Mald[0]), 0.0, -1.0, 0.0);
-                            aldatu_kam(&(Mberria[0]),&(Mald[0]));
+                            if(erreferentzi_sistema != 'g'){
+                                lortu_biratu_matrizea(&(Mald[0]), 0.0, -1.0, 0.0);
+                                aldatu_kam(&(Mberria[0]),&(Mald[0]));
+                            }else{
+                                double v[3];
+                                v[0] = _selected_kamera->mzptr->matrize[4];
+                                v[1] = _selected_kamera->mzptr->matrize[5];
+                                v[2] = _selected_kamera->mzptr->matrize[6];
+                                kamera_esferan_biratu(&(v[0]));
+                            }
+                            break;
+                        case 't':
+                            if(erreferentzi_sistema != 'g'){
+                                lortu_biratu_matrizea(&(Mald[0]), 0.0, -1.0, 0.0);
+                                aldatu_kam(&(Mberria[0]),&(Mald[0]));
+                            }else{
+                                double v[3];
+                                v[0] = _selected_kamera->mzptr->matrize[4];
+                                v[1] = _selected_kamera->mzptr->matrize[5];
+                                v[2] = _selected_kamera->mzptr->matrize[6];
+                                kamera_esferan_biratu(&(v[0]));
+                            }
                             break;
                         default:
                             break;
@@ -746,8 +803,28 @@ void tekla_berezien_arretarako_funtzioa(int key, int x, int y){
                 case 'k':
                     switch(aldaketa_mota){
                         case 'r':
-                            lortu_biratu_matrizea(&(Mald[0]), 0.0, 1.0, 0.0);
-                            aldatu_kam(&(Mberria[0]),&(Mald[0]));
+                            if(erreferentzi_sistema != 'g'){
+                                lortu_biratu_matrizea(&(Mald[0]), 0.0, 1.0, 0.0);
+                                aldatu_kam(&(Mberria[0]),&(Mald[0]));
+                            }else{
+                                double v[3];
+                                v[0] = - _selected_kamera->mzptr->matrize[4];
+                                v[1] = - _selected_kamera->mzptr->matrize[5];
+                                v[2] = - _selected_kamera->mzptr->matrize[6];
+                                kamera_esferan_biratu(&(v[0]));
+                            }
+                            break;
+                        case 't':
+                            if(erreferentzi_sistema != 'g'){
+                                lortu_biratu_matrizea(&(Mald[0]), 0.0, 1.0, 0.0);
+                                aldatu_kam(&(Mberria[0]),&(Mald[0]));
+                            }else{
+                                double v[3];
+                                v[0] = - _selected_kamera->mzptr->matrize[4];
+                                v[1] = - _selected_kamera->mzptr->matrize[5];
+                                v[2] = - _selected_kamera->mzptr->matrize[6];
+                                kamera_esferan_biratu(&(v[0]));
+                            }
                             break;
                         default:
                             break;
@@ -791,11 +868,19 @@ void tekla_berezien_arretarako_funtzioa(int key, int x, int y){
                 case 'k':
                     switch(aldaketa_mota){
                         case 'r':
-                            lortu_biratu_matrizea(&(Mald[0]), 0.0, 0.0, -1.0);
-                            aldatu_kam(&(Mberria[0]),&(Mald[0]));
+                            if(erreferentzi_sistema != 'g'){
+                                lortu_biratu_matrizea(&(Mald[0]), 0.0, 0.0, 1.0);
+                                aldatu_kam(&(Mberria[0]),&(Mald[0]));
+                            }else{
+                                double v[3];
+                                v[0] = _selected_kamera->mzptr->matrize[8];
+                                v[1] = _selected_kamera->mzptr->matrize[9];
+                                v[2] = _selected_kamera->mzptr->matrize[10];
+                                kamera_esferan_biratu(&(v[0]));
+                            }
                             break;
                         case 't':
-                            lortu_traslazio_matrizea(&(Mald[0]), 0.0, 0.0, -1.0);
+                            lortu_traslazio_matrizea(&(Mald[0]), 0.0, 0.0, 1.0);
                             aldatu_kam(&(Mberria[0]),&(Mald[0]));
                             break;
                         default:
@@ -840,11 +925,19 @@ void tekla_berezien_arretarako_funtzioa(int key, int x, int y){
                 case 'k':
                     switch(aldaketa_mota){
                         case 'r':
-                            lortu_biratu_matrizea(&(Mald[0]), 0.0, 0.0, 1.0);
-                            aldatu_kam(&(Mberria[0]),&(Mald[0]));
+                            if(erreferentzi_sistema != 'g'){
+                                lortu_biratu_matrizea(&(Mald[0]), 0.0, 0.0, -1.0);
+                                aldatu_kam(&(Mberria[0]),&(Mald[0]));
+                            }else{
+                                double v[3];
+                                v[0] = - _selected_kamera->mzptr->matrize[8];
+                                v[1] = - _selected_kamera->mzptr->matrize[9];
+                                v[2] = - _selected_kamera->mzptr->matrize[10];
+                                kamera_esferan_biratu(&(v[0]));
+                            }
                             break;
                         case 't':
-                            lortu_traslazio_matrizea(&(Mald[0]), 0.0, 0.0, 1.0);
+                            lortu_traslazio_matrizea(&(Mald[0]), 0.0, 0.0, -1.0);
                             aldatu_kam(&(Mberria[0]),&(Mald[0]));
                             break;
                         default:
@@ -862,5 +955,6 @@ void tekla_berezien_arretarako_funtzioa(int key, int x, int y){
         }
         break;
     }
+    glutPostRedisplay();
 }
 
