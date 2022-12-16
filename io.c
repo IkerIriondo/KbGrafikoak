@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <math.h>
 #include <string.h>
+#include <stdbool.h>
 
 extern object3d * _first_object;
 extern object3d * _selected_object;
@@ -212,6 +213,32 @@ void aldatu_kam(double *Mberria, double *Mald){
     glutPostRedisplay();
 }
 
+bool ahal_da_aurrera(){
+
+    double kamx, kamy, kamz;
+    double objx, objy, objz;
+
+    kamx = _selected_kamera->mzptr->matrize[12];
+    kamy = _selected_kamera->mzptr->matrize[13];
+    kamz = _selected_kamera->mzptr->matrize[14];
+
+    objx = _selected_object->mzptr->matrize[12];
+    objy = _selected_object->mzptr->matrize[13];
+    objz = _selected_object->mzptr->matrize[14];
+
+    double distx, disty, distz;
+
+    distx = kamx - objx;
+    disty = kamy - objy;
+    distz = kamz - objz;
+
+    double norma;
+    norma = sqrt(distx*distx + disty*disty + distz*distz);
+
+    return norma<=KG_STEP_MOVE;
+
+}
+
 /**
  * @brief Callback function to control the basic keys
  * @param key Key that has been pressed
@@ -288,23 +315,15 @@ void keyboard(unsigned char key, int x, int y) {
         }
         break;
     case 9: /* <TAB> */
-        if (glutGetModifiers() == GLUT_ACTIVE_CTRL){ 
-            _selected_kamera = _selected_kamera->next;
+        if(_selected_object != 0){
+            _selected_object = _selected_object->next;
             /*The selection is circular, thus if we move out of the list we go back to the first element*/
-            if (_selected_kamera == 0) _selected_kamera = _first_kamera;
-            printf("Erreferentzi sistema: %c, Zer aldatu: %c, Aldaketa mota: %c\n", erreferentzi_sistema, zer_aldatu, aldaketa_mota);
-
+            if (_selected_object == 0) _selected_object = _first_object;
         }else{
-            if(_selected_object != 0){
-                _selected_object = _selected_object->next;
-                /*The selection is circular, thus if we move out of the list we go back to the first element*/
-                if (_selected_object == 0) _selected_object = _first_object;
-            }else{
-                printf("Ez dakagu objekturik, beraz ezin da hurrengo objektua aukeratu\n\n");
-            }
+            printf("Ez dakagu objekturik, beraz ezin da hurrengo objektua aukeratu\n\n");
         }
+        if(zer_aldatu == 'k') kam_objri_begira();
         break;
-
     case 127: /* <SUPR> */
         // TODO if there is not any object in the object list we should not try to free any memory!!!
         if(_selected_object != 0){
@@ -482,9 +501,15 @@ void keyboard(unsigned char key, int x, int y) {
             kam_mota = 'o';
         }
         break;
+    case 'k':
+        _selected_kamera = _selected_kamera->next;
+        /*The selection is circular, thus if we move out of the list we go back to the first element*/
+        if (_selected_kamera == 0) _selected_kamera = _first_kamera;
+        //printf("Erreferentzi sistema: %c, Zer aldatu: %c, Aldaketa mota: %c\n", erreferentzi_sistema, zer_aldatu, aldaketa_mota);
+        break;
     case 'Z':
     case 'z':
-        if (glutGetModifiers() == GLUT_ACTIVE_CTRL){
+        if (zer_aldatu == 'k'){
             if(_selected_kamera->mzptr->next != 0){
                 mzptr2 = _selected_kamera->mzptr;
                 _selected_kamera->mzptr = mzptr2->next;
@@ -494,7 +519,7 @@ void keyboard(unsigned char key, int x, int y) {
                 printf("Ez dago desegiteko aldaketarik\n");
             }
             printf("Kamera desegin\n");
-        }else{
+        }else if(zer_aldatu == 'o'){
             if(_selected_object != 0){
                 if(_selected_object->mzptr->next != 0){
                     mzptr2 = _selected_object->mzptr;
@@ -880,8 +905,17 @@ void tekla_berezien_arretarako_funtzioa(int key, int x, int y){
                             }
                             break;
                         case 't':
-                            lortu_traslazio_matrizea(&(Mald[0]), 0.0, 0.0, 1.0);
-                            aldatu_kam(&(Mberria[0]),&(Mald[0]));
+                            if(erreferentzi_sistema == 'g'){
+                                if(!ahal_da_aurrera()){
+                                    lortu_traslazio_matrizea(&(Mald[0]), 0.0, 0.0, -1.0);
+                                    aldatu_kam(&(Mberria[0]),&(Mald[0]));
+                                }else{
+                                    printf("Ezin da aurrerago mugitu\n");
+                                }
+                            }else{
+                                lortu_traslazio_matrizea(&(Mald[0]), 0.0, 0.0, -1.0);
+                                aldatu_kam(&(Mberria[0]),&(Mald[0]));
+                            }
                             break;
                         default:
                             break;
@@ -926,7 +960,7 @@ void tekla_berezien_arretarako_funtzioa(int key, int x, int y){
                     switch(aldaketa_mota){
                         case 'r':
                             if(erreferentzi_sistema != 'g'){
-                                lortu_biratu_matrizea(&(Mald[0]), 0.0, 0.0, -1.0);
+                                lortu_biratu_matrizea(&(Mald[0]), 0.0, 0.0, 1.0);
                                 aldatu_kam(&(Mberria[0]),&(Mald[0]));
                             }else{
                                 double v[3];
@@ -937,7 +971,7 @@ void tekla_berezien_arretarako_funtzioa(int key, int x, int y){
                             }
                             break;
                         case 't':
-                            lortu_traslazio_matrizea(&(Mald[0]), 0.0, 0.0, -1.0);
+                            lortu_traslazio_matrizea(&(Mald[0]), 0.0, 0.0, 1.0);
                             aldatu_kam(&(Mberria[0]),&(Mald[0]));
                             break;
                         default:

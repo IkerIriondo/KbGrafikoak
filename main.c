@@ -40,7 +40,7 @@ void initialization (){
     goikoa = 0.1;
     near = 0.1;
     far = 1000;
-    kam_mota = 'o';
+    kam_mota = 'l';
 
     /*Initialization of all the variables with the default values*/
     _ortho_x_min = KG_ORTHO_X_MIN_INIT;
@@ -94,15 +94,10 @@ void initialization (){
     aux_kamera->min.z = near;
     aux_kamera->max.z = far;
 
-    /*mat[0] = 1;  mat[4] = 0; mat[8] = 0;  mat[12] = 0;
+    mat[0] = 1;  mat[4] = 0; mat[8] = 0;  mat[12] = 0;
     mat[1] = 0;  mat[5] = 0; mat[9] = 1;  mat[13] = 5;
     mat[2] = 0;  mat[6] = -1;mat[10] = 0; mat[14] = 0;
-    mat[3] = 0;  mat[7] = 0; mat[11] = 0; mat[15] = 1;*/
-
-    mat[0] = sqrt(26)/26;  mat[4] = 0;     mat[8] = 0;           mat[12] = 0;
-    mat[1] = 0;            mat[5] = 1/26;  mat[9] = 5/sqrt(26);  mat[13] = 5;
-    mat[2] = 0;            mat[6] = -5/26; mat[10] = 1/sqrt(26); mat[14] = 1;
-    mat[3] = 0;            mat[7] = 0;     mat[11] = 0;          mat[15] = 1;
+    mat[3] = 0;  mat[7] = 0; mat[11] = 0; mat[15] = 1;
 
     aux_kamera->mzptr =(mz *)malloc(sizeof(mz));
     for(i = 0; i<16; i++) aux_kamera->mzptr->matrize[i] = mat[i];

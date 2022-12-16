@@ -249,7 +249,6 @@ void display(void) {
             esam_matrizea_lortu(&(ESAM[0]),_selected_object->mzptr->matrize);
         }else{
             esam_matrizea_lortu(&(ESAM[0]),_selected_kamera->mzptr->matrize);
-            printf("Kameraren matrizearekin\n");
         }
         glLoadMatrixd(ESAM);
         glMultMatrixd(aux_obj->mzptr->matrize);
