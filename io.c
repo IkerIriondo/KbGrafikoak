@@ -351,6 +351,7 @@ void keyboard(unsigned char key, int x, int y) {
                 /*and update the selection. It is the previous to the deleted one. */
                 _selected_object = auxiliar_object;
             }
+            if(zer_aldatu == 'k' && erreferentzi_sistema == 'g') kam_objri_begira();
         }else{
             printf("Ezin da objekturik ezabatu ez badago objekturik kargatuta\n\n");
         }
@@ -894,7 +895,7 @@ void tekla_berezien_arretarako_funtzioa(int key, int x, int y){
                     switch(aldaketa_mota){
                         case 'r':
                             if(erreferentzi_sistema != 'g'){
-                                lortu_biratu_matrizea(&(Mald[0]), 0.0, 0.0, 1.0);
+                                lortu_biratu_matrizea(&(Mald[0]), 0.0, 0.0, -1.0);
                                 aldatu_kam(&(Mberria[0]),&(Mald[0]));
                             }else{
                                 double v[3];
