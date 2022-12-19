@@ -295,6 +295,8 @@ void keyboard(unsigned char key, int x, int y) {
             auxiliar_object->mzptr2->matrize[10] = 1.0;
             auxiliar_object->mzptr2->matrize[15] = 1.0;
 
+
+            //ARGIAK
             /*erpin bakoitzean n = (0,0,0)
             poligono bakoitzeko{
                 n kalkulatu
@@ -304,8 +306,6 @@ void keyboard(unsigned char key, int x, int y) {
                 l = norma(bektore_normala)
                 bektore_normala = bektore_normala/l
             }*/
-
-
 
             auxiliar_object->next = _first_object;
             _first_object = auxiliar_object;
@@ -361,7 +361,6 @@ void keyboard(unsigned char key, int x, int y) {
         if (glutGetModifiers() == GLUT_ACTIVE_CTRL){ 
             // with or without pressing CTRL key 
             }
-            
             switch(zer_aldatu){
                 case 'k':
 
@@ -390,7 +389,6 @@ void keyboard(unsigned char key, int x, int y) {
             }
         
         break;
-
     case '+':
         //INPLEMENTA EZAZU + FUNTZIOANLITATEA
         if (glutGetModifiers() == GLUT_ACTIVE_CTRL){ 
