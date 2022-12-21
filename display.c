@@ -197,7 +197,8 @@ void display(void) {
     object3d *aux_obj = _first_object;
 
     /* Clear the screen */
-    glClear(GL_COLOR_BUFFER_BIT);
+    //glClear(GL_COLOR_BUFFER_BIT);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     /* Define the projection */
     glMatrixMode(GL_PROJECTION);
@@ -246,8 +247,11 @@ void display(void) {
         }
 
         if(kam_mota == 'o'){
+            //glFrustum(_selected_kamera->min.x, _selected_kamera->max.x, _selected_kamera->min.y, _selected_kamera->max.y, _selected_kamera->min.z, _selected_kamera->max.z);
             esam_matrizea_lortu(&(ESAM[0]),_selected_object->mzptr->matrize);
         }else{
+            //if kamera paralelo ortho
+            //perspektiba frustum
             esam_matrizea_lortu(&(ESAM[0]),_selected_kamera->mzptr->matrize);
         }
         glLoadMatrixd(ESAM);
@@ -263,9 +267,20 @@ void display(void) {
             }
             glEnd();
         }
+        for(f = 0; f < aux_obj->num_vertices; f++){
+            glBegin(GL_LINES);
+            glVertex3d(aux_obj->vertex_table[f].coord.x,
+                       aux_obj->vertex_table[f].coord.y,
+                       aux_obj->vertex_table[f].coord.z);
+            glVertex3d(aux_obj->vertex_table[f].coord.x + aux_obj->vertex_table[f].bektore_normala[0],
+                       aux_obj->vertex_table[f].coord.y + aux_obj->vertex_table[f].bektore_normala[1],
+                       aux_obj->vertex_table[f].coord.z + aux_obj->vertex_table[f].bektore_normala[2]);
+            glEnd();
+        }
         aux_obj = aux_obj->next;
     }
     /*Do the actual drawing*/
+    glutSwapBuffers();  // Buffer bikoitza erabili dugunez bata besteagatik trukatu
     glFlush();
 }
 

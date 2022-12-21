@@ -89,6 +89,7 @@ typedef struct {
 typedef struct {
     point3 coord;                       /* coordinates,x, y, z */
     GLint num_faces;                    /* number of faces that share this vertex */
+    double bektore_normala[3];
 } vertex;
 
 /****************************
@@ -99,6 +100,7 @@ typedef struct {
 typedef struct {
     GLint num_vertices;                 /* number of vertices in the face */
     GLint *vertex_table;                /* table with the index of each vertex */
+    double bektore_normala[3];
 } face;
 
 typedef struct mz{                      /*Objektu bat 4x4-ko matrize bat gordeko duena*/

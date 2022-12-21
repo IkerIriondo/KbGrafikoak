@@ -307,6 +307,80 @@ void keyboard(unsigned char key, int x, int y) {
                 bektore_normala = bektore_normala/l
             }*/
 
+            int i, j, ind0, ind1, ind2, ind;
+            double n[3];
+            n[0] = 0.0; n[1] = 0.0; n[2] = 0.0;
+            //erpin bakoitzeko
+            for(i = 0; i < auxiliar_object->num_vertices; i++){
+                auxiliar_object->vertex_table[i].bektore_normala[0] = n[0];
+                auxiliar_object->vertex_table[i].bektore_normala[1] = n[1];
+                auxiliar_object->vertex_table[i].bektore_normala[2] = n[2];
+            }
+            //poligono bakoitzeko
+            double p0[3];
+            double p1[3];
+            double p2[3];
+            double v1[3];
+            double v2[3];
+            double v[3];
+            double norma;
+            for(i = 0; i < auxiliar_object->num_faces; i++){
+                //Kalkulatu normala
+                ind0 = auxiliar_object->face_table[i].vertex_table[0];
+                ind1 = auxiliar_object->face_table[i].vertex_table[1];
+                ind2 = auxiliar_object->face_table[i].vertex_table[2];
+
+                p0[0] = auxiliar_object->vertex_table[ind0].coord.x; 
+                p0[1] = auxiliar_object->vertex_table[ind0].coord.y;
+                p0[2] = auxiliar_object->vertex_table[ind0].coord.z;
+
+                p1[0] = auxiliar_object->vertex_table[ind1].coord.x; 
+                p1[1] = auxiliar_object->vertex_table[ind1].coord.y;
+                p1[2] = auxiliar_object->vertex_table[ind1].coord.z;
+
+                p2[0] = auxiliar_object->vertex_table[ind2].coord.x; 
+                p2[1] = auxiliar_object->vertex_table[ind2].coord.y;
+                p2[2] = auxiliar_object->vertex_table[ind2].coord.z;
+
+                v1[0] = p1[0] - p0[0]; v1[1] = p1[1] - p0[1]; v1[2] = p1[2] - p0[2];
+                v2[0] = p2[0] - p0[0]; v2[1] = p2[1] - p0[1]; v2[2] = p2[2] - p0[2];
+
+                v[0] = v1[1]*v2[2] - v1[2]*v2[1]; v[1] = v1[2]*v2[0] - v1[0]*v2[2]; v[2] = v1[0]*v2[1] - v1[1]*v2[0];
+
+                norma = sqrt(v[0]*v[0] + v[1]*v[1] + v[2]*v[2]);
+
+                v[0] = v[0]/norma; v[1] = v[1]/norma; v[2] = v[2]/norma;
+
+                auxiliar_object->face_table[i].bektore_normala[0] = v[0];
+                auxiliar_object->face_table[i].bektore_normala[1] = v[1];
+                auxiliar_object->face_table[i].bektore_normala[2] = v[2];
+
+                //printf("v = (%f, %f, %f)\n", v[0], v[1], v[2]);
+
+                for(j = 0; j<auxiliar_object->face_table[i].num_vertices; j++){
+                    ind = auxiliar_object->face_table[i].vertex_table[j];
+
+                    auxiliar_object->vertex_table[ind].bektore_normala[0] += v[0];
+                    auxiliar_object->vertex_table[ind].bektore_normala[1] += v[1];
+                    auxiliar_object->vertex_table[ind].bektore_normala[2] += v[2];
+                }
+            }
+            //erpin bakoitzeko
+            for(i = 0; i < auxiliar_object->num_vertices; i++){
+                n[0] = auxiliar_object->vertex_table[i].bektore_normala[0];
+                n[1] = auxiliar_object->vertex_table[i].bektore_normala[1];
+                n[2] = auxiliar_object->vertex_table[i].bektore_normala[2];
+
+                norma = sqrt(n[0]*n[0] + n[1]*n[1] + n[2]*n[2]);
+                n[0] = n[0]/norma; n[1] = n[1]/norma; n[2] = n[2]/norma;
+
+                auxiliar_object->vertex_table[i].bektore_normala[0] = n[0];
+                auxiliar_object->vertex_table[i].bektore_normala[1] = n[1];
+                auxiliar_object->vertex_table[i].bektore_normala[2] = n[2];
+
+                //printf("n = (%f, %f, %f)\n", n[0], n[1], n[2]);
+            }
+
             auxiliar_object->next = _first_object;
             _first_object = auxiliar_object;
             _selected_object = _first_object;
