@@ -24,6 +24,7 @@ extern char aldaketa_mota;
 extern char zer_aldatu;
 extern char erreferentzi_sistema;
 extern char kam_mota;
+extern char poligonoak;
 
 extern double ezker,eskuin,behekoa,goikoa,near,far;
 
@@ -231,10 +232,14 @@ void display(void) {
     glMatrixMode(GL_MODELVIEW);
     //glLoadIdentity();
 
+    if(poligonoak == 'b'){
+        glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+    }else{
+        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+    }
+
     /*First, we draw the axes*/
     draw_axes();
-
-    //if(erreferentzi_sistema == 'g' && kam_mota != 'o') kam_objri_begira();
     
     /*Now each of the objects in the list*/
     while (aux_obj != 0) {
@@ -247,11 +252,14 @@ void display(void) {
         }
 
         if(kam_mota == 'o'){
-            //glFrustum(_selected_kamera->min.x, _selected_kamera->max.x, _selected_kamera->min.y, _selected_kamera->max.y, _selected_kamera->min.z, _selected_kamera->max.z);
+            glFrustum(_selected_kamera->min.x, _selected_kamera->max.x, _selected_kamera->min.y, _selected_kamera->max.y, _selected_kamera->min.z, _selected_kamera->max.z);
             esam_matrizea_lortu(&(ESAM[0]),_selected_object->mzptr->matrize);
         }else{
-            //if kamera paralelo ortho
-            //perspektiba frustum
+            if(_selected_kamera->kam_mota == '0'){
+                glOrtho(_selected_kamera->min.x, _selected_kamera->max.x, _selected_kamera->min.y, _selected_kamera->max.y, _selected_kamera->min.z, _selected_kamera->max.z);
+            }else{
+                glFrustum(_selected_kamera->min.x, _selected_kamera->max.x, _selected_kamera->min.y, _selected_kamera->max.y, _selected_kamera->min.z, _selected_kamera->max.z);
+            }
             esam_matrizea_lortu(&(ESAM[0]),_selected_kamera->mzptr->matrize);
         }
         glLoadMatrixd(ESAM);
@@ -267,7 +275,9 @@ void display(void) {
             }
             glEnd();
         }
-        for(f = 0; f < aux_obj->num_vertices; f++){
+
+        //Bektore normalak marrazteko
+        /*for(f = 0; f < aux_obj->num_vertices; f++){
             glBegin(GL_LINES);
             glVertex3d(aux_obj->vertex_table[f].coord.x,
                        aux_obj->vertex_table[f].coord.y,
@@ -276,7 +286,8 @@ void display(void) {
                        aux_obj->vertex_table[f].coord.y + aux_obj->vertex_table[f].bektore_normala[1],
                        aux_obj->vertex_table[f].coord.z + aux_obj->vertex_table[f].bektore_normala[2]);
             glEnd();
-        }
+        }*/
+
         aux_obj = aux_obj->next;
     }
     /*Do the actual drawing*/

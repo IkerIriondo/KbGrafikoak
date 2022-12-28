@@ -21,6 +21,7 @@ extern char aldaketa_mota;
 extern char erreferentzi_sistema;
 extern char zer_aldatu;
 extern char kam_mota;
+extern char poligonoak;
 
 /**
  * @brief This function just prints information about the use
@@ -328,7 +329,7 @@ void keyboard(unsigned char key, int x, int y) {
                 //Kalkulatu normala
                 ind0 = auxiliar_object->face_table[i].vertex_table[0];
                 ind1 = auxiliar_object->face_table[i].vertex_table[1];
-                ind2 = auxiliar_object->face_table[i].vertex_table[2];
+                ind2 = auxiliar_object->face_table[i].vertex_table[auxiliar_object->face_table[i].num_vertices - 1];
 
                 p0[0] = auxiliar_object->vertex_table[ind0].coord.x; 
                 p0[1] = auxiliar_object->vertex_table[ind0].coord.y;
@@ -355,8 +356,6 @@ void keyboard(unsigned char key, int x, int y) {
                 auxiliar_object->face_table[i].bektore_normala[1] = v[1];
                 auxiliar_object->face_table[i].bektore_normala[2] = v[2];
 
-                //printf("v = (%f, %f, %f)\n", v[0], v[1], v[2]);
-
                 for(j = 0; j<auxiliar_object->face_table[i].num_vertices; j++){
                     ind = auxiliar_object->face_table[i].vertex_table[j];
 
@@ -378,7 +377,6 @@ void keyboard(unsigned char key, int x, int y) {
                 auxiliar_object->vertex_table[i].bektore_normala[1] = n[1];
                 auxiliar_object->vertex_table[i].bektore_normala[2] = n[2];
 
-                //printf("n = (%f, %f, %f)\n", n[0], n[1], n[2]);
             }
 
             auxiliar_object->next = _first_object;
@@ -656,6 +654,37 @@ void keyboard(unsigned char key, int x, int y) {
                 printf("Ez dago berregiteko aldaketarik\n");
             }
         }
+        break;
+    case 32: //SPACEBAR
+        if(poligonoak == 'b'){
+            poligonoak = 'h';
+        }else{
+            poligonoak = 'b';
+        }
+        break;
+    case 49: //1
+
+        break;
+    case 50: //2
+
+        break;
+    case 51: //3
+
+        break;
+    case 52: //4
+
+        break;
+    case 53: //5
+
+        break;
+    case 54: //6
+
+        break;
+    case 55: //7
+
+        break;
+    case 56: //8
+
         break;
     default:
         /*In the default case we just print the code of the key. This is usefull to define new cases*/
@@ -1060,6 +1089,42 @@ void tekla_berezien_arretarako_funtzioa(int key, int x, int y){
         }else{
             printf("Ez dago objekturik zerrendan\n");
         }
+        break;
+    case GLUT_KEY_F1:
+
+        break;
+    case GLUT_KEY_F2:
+
+        break;
+    case GLUT_KEY_F3:
+
+        break;
+    case GLUT_KEY_F4:
+    
+        break;
+    case GLUT_KEY_F5:
+
+        break;
+    case GLUT_KEY_F6:
+
+        break;
+    case GLUT_KEY_F7:
+
+        break;
+    case GLUT_KEY_F8:
+
+        break;
+    case GLUT_KEY_F9:
+
+        break;
+    case GLUT_KEY_F10:
+
+        break;
+    case GLUT_KEY_F11:
+
+        break;
+    case GLUT_KEY_F12:
+
         break;
     }
     glutPostRedisplay();

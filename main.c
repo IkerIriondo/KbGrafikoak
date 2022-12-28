@@ -25,6 +25,7 @@ char aldaketa_mota;
 char erreferentzi_sistema;
 char zer_aldatu;
 char kam_mota;
+char poligonoak;
 
 double ezker,eskuin,behekoa,goikoa,near,far;
 
@@ -41,6 +42,7 @@ void initialization (){
     near = 0.1;
     far = 1000;
     kam_mota = 'l';
+    poligonoak = 'b';
 
     /*Initialization of all the variables with the default values*/
     _ortho_x_min = KG_ORTHO_X_MIN_INIT;
@@ -56,7 +58,8 @@ void initialization (){
     glClearColor(KG_COL_BACK_R, KG_COL_BACK_G, KG_COL_BACK_B, KG_COL_BACK_A);
 
     /*Definition of the method to draw the objects*/
-    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+    //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+    //glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
     erreferentzi_sistema = 'g';
     zer_aldatu = 'o';
@@ -80,6 +83,7 @@ void initialization (){
     aux_kamera->mzptr =(mz *)malloc(sizeof(mz));
     for(i = 0; i<16; i++) aux_kamera->mzptr->matrize[i] = mat[i];
     aux_kamera->next = 0;
+    aux_kamera->kam_mota = '0'; //paraleloan, 1 perspektiba
 
     _first_kamera = aux_kamera;
     _selected_kamera = aux_kamera;
@@ -102,6 +106,7 @@ void initialization (){
     aux_kamera->mzptr =(mz *)malloc(sizeof(mz));
     for(i = 0; i<16; i++) aux_kamera->mzptr->matrize[i] = mat[i];
     aux_kamera->next = _first_kamera;
+    aux_kamera->kam_mota = '1'; //paraleloan, 1 perspektiba
 
     _first_kamera = aux_kamera;
     _selected_kamera = aux_kamera;
@@ -124,6 +129,7 @@ void initialization (){
     aux_kamera->mzptr =(mz *)malloc(sizeof(mz));
     for(i = 0; i<16; i++) aux_kamera->mzptr->matrize[i] = mat[i];
     aux_kamera->next = _first_kamera;
+    aux_kamera->kam_mota = '0'; //paraleloan, 1 perspektiba
 
     _first_kamera = aux_kamera;
     _selected_kamera = aux_kamera;
@@ -141,15 +147,13 @@ int main(int argc, char** argv) {
 
     /* glut initializations */
     glutInit(&argc, argv);
-    //glutInitDisplayMode(GLUT_RGB);
-    glutInitDisplayMode(GLUT_RGB|GLUT_DEPTH|GLUT_DOUBLE); //buffer bikoitza eta Z-bufferra
+    glutInitDisplayMode(GLUT_RGB);
     glutInitWindowSize(KG_WINDOW_WIDTH, KG_WINDOW_HEIGHT);
     glutInitWindowPosition(KG_WINDOW_X, KG_WINDOW_Y);
     glutCreateWindow(KG_WINDOW_TITLE);
 
-    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL); //Poligonoak betetzea nahi dugu
-    
-    glEnable(GL_DEPTH_TEST); //Sakonera testa aktibatu (Z-bufferra)
+    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB | GLUT_DEPTH);
+    glEnable(GL_DEPTH_TEST);
     glEnable(GL_LIGHTING);
     glShadeModel(GL_SMOOTH);
 

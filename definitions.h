@@ -89,7 +89,7 @@ typedef struct {
 typedef struct {
     point3 coord;                       /* coordinates,x, y, z */
     GLint num_faces;                    /* number of faces that share this vertex */
-    double bektore_normala[3];
+    double bektore_normala[3];          /*erpinari dagokion bektore normala*/
 } vertex;
 
 /****************************
@@ -100,7 +100,7 @@ typedef struct {
 typedef struct {
     GLint num_vertices;                 /* number of vertices in the face */
     GLint *vertex_table;                /* table with the index of each vertex */
-    double bektore_normala[3];
+    double bektore_normala[3];          /*poligonoaren bektore normala*/
 } face;
 
 typedef struct mz{                      /*Objektu bat 4x4-ko matrize bat gordeko duena*/
@@ -122,6 +122,7 @@ struct object3d{
     point3 max;                         /* coordinates' bigger bounds */
     mz *mzptr;                          /* Aldaketen matrizeen zerrenda*/
     mz *mzptr2;                         /* Aldaketak berregiteko matrizeen zerrenda*/
+    char kam_mota;
     struct object3d *next;              /* next element in the pile of objects */
 };
 
