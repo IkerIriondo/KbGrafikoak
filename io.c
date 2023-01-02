@@ -22,6 +22,7 @@ extern char erreferentzi_sistema;
 extern char zer_aldatu;
 extern char kam_mota;
 extern char poligonoak;
+extern char argiak;
 
 /**
  * @brief This function just prints information about the use
@@ -1115,7 +1116,13 @@ void tekla_berezien_arretarako_funtzioa(int key, int x, int y){
 
         break;
     case GLUT_KEY_F9:
-
+        if(argiak == 'b'){
+            glDisable(GL_LIGHTING);
+            argiak = 'e';
+        }else{
+            glEnable(GL_LIGHTING);
+            argiak = 'b';
+        }
         break;
     case GLUT_KEY_F10:
 

@@ -21,11 +21,15 @@ object3d * _selected_object = 0;            /*Object currently selected*/
 object3d *_first_kamera = 0;
 object3d *_selected_kamera = 0;
 
+object3d *eguzkia;
+object3d *bonbila;
+
 char aldaketa_mota; 
 char erreferentzi_sistema;
 char zer_aldatu;
 char kam_mota;
 char poligonoak;
+char argiak;
 
 double ezker,eskuin,behekoa,goikoa,near,far;
 
@@ -43,6 +47,7 @@ void initialization (){
     far = 1000;
     kam_mota = 'l';
     poligonoak = 'b';
+    argiak = 'b';
 
     /*Initialization of all the variables with the default values*/
     _ortho_x_min = KG_ORTHO_X_MIN_INIT;
@@ -136,6 +141,17 @@ void initialization (){
 
     printf("Erreferentzi sistema: %c, Zer aldatu: %c, Aldaketa mota: %c\n", erreferentzi_sistema, zer_aldatu, aldaketa_mota);
 
+    //ARGIAK
+
+    //Bonbila
+    glEnable(GL_LIGHT0);
+    /*GLfloat kokapena [4] = {0.0 , 10.0 , 0.0 , 1.0};
+    glLightfv ( GL_LIGHT0 , GL_POSITION , kokapena );
+    glLightf ( GL_LIGHT0 , GL_SPOT_CUTOFF , 180.0);*/
+
+    //Eguzkia
+    GLfloat norabidea [4] = {1.0 , 0.0 , 0.0 , 0.0};
+    glLightfv(GL_LIGHT0, GL_POSITION, norabidea);
 }
 
 
@@ -147,18 +163,22 @@ int main(int argc, char** argv) {
 
     /* glut initializations */
     glutInit(&argc, argv);
-    glutInitDisplayMode(GLUT_RGB);
+    //glutInitDisplayMode(GLUT_RGB);
+    glutInitDisplayMode(GLUT_RGB|GLUT_DEPTH|GLUT_DOUBLE);
     glutInitWindowSize(KG_WINDOW_WIDTH, KG_WINDOW_HEIGHT);
     glutInitWindowPosition(KG_WINDOW_X, KG_WINDOW_Y);
     glutCreateWindow(KG_WINDOW_TITLE);
 
-    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB | GLUT_DEPTH);
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_LIGHTING);
-    glShadeModel(GL_SMOOTH);
 
-    /*if (flat_smooth) glShadeModel(GL_SMOOTH);  // Erpin bakoitzaren bektore normala beharrezkoa da
-    else glShadeModel(GL_FLAT);  // poligonoen bektore normalarekin nahikoa da kasu honetan*/
+    /*if (poligonoak == 'h') {
+        glShadeModel(GL_SMOOTH);  // Erpin bakoitzaren bektore normala beharrezkoa da
+        printf("Hutsa\n");
+    }else{
+        glShadeModel(GL_FLAT);  // poligonoen bektore normalarekin nahikoa da kasu honetan
+        printf("Beteta\n");
+    } */
 
     /* set the callback functions */
     glutDisplayFunc(display);

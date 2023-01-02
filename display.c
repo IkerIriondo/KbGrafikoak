@@ -238,9 +238,21 @@ void display(void) {
         glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
     }
 
+    if (poligonoak == 'h') {
+        glShadeModel(GL_SMOOTH);  // Erpin bakoitzaren bektore normala beharrezkoa da
+        //printf("Hutsa\n");
+    }else{
+        glShadeModel(GL_FLAT);  // poligonoen bektore normalarekin nahikoa da kasu honetan
+        //printf("Beteta\n");
+    } 
+
     /*First, we draw the axes*/
     draw_axes();
     
+    /*GLfloat kokapena [4] = {0.0 , 1.0 , 0.0 , 1.0};
+    glLightfv ( GL_LIGHT0 , GL_POSITION , kokapena );
+    glLightf ( GL_LIGHT0 , GL_SPOT_CUTOFF , 180.0);*/
+
     /*Now each of the objects in the list*/
     while (aux_obj != 0) {
 
@@ -265,7 +277,7 @@ void display(void) {
         glLoadMatrixd(ESAM);
         glMultMatrixd(aux_obj->mzptr->matrize);
 
-        for (f = 0; f < aux_obj->num_faces; f++) {
+        /*for (f = 0; f < aux_obj->num_faces; f++) {
             glBegin(GL_POLYGON);
             for (v = 0; v < aux_obj->face_table[f].num_vertices; v++) {
                 v_index = aux_obj->face_table[f].vertex_table[v];
@@ -274,9 +286,9 @@ void display(void) {
                            aux_obj->vertex_table[v_index].coord.z);
             }
             glEnd();
-        }
+        }*/
 
-        //Bektore normalak marrazteko
+        //Erpinen bektore normalak marrazteko
         /*for(f = 0; f < aux_obj->num_vertices; f++){
             glBegin(GL_LINES);
             glVertex3d(aux_obj->vertex_table[f].coord.x,
@@ -288,10 +300,27 @@ void display(void) {
             glEnd();
         }*/
 
+        for (f = 0; f < aux_obj->num_faces; f++) {
+            glBegin(GL_POLYGON);
+            if(poligonoak == 'b'){
+                glNormal3d(aux_obj->face_table[f].bektore_normala[0], aux_obj->face_table[f].bektore_normala[1], aux_obj->face_table[f].bektore_normala[2]);
+            }
+            for (v = 0; v < aux_obj->face_table[f].num_vertices; v++) {
+                v_index = aux_obj->face_table[f].vertex_table[v];
+                if(poligonoak == 'h'){
+                    glNormal3d(aux_obj->vertex_table[v_index].bektore_normala[0], aux_obj->vertex_table[v_index].bektore_normala[1], aux_obj->vertex_table[v_index].bektore_normala[2]);
+                }
+                glVertex3d(aux_obj->vertex_table[v_index].coord.x,
+                           aux_obj->vertex_table[v_index].coord.y,
+                           aux_obj->vertex_table[v_index].coord.z);
+            }
+            glEnd();
+        }
+
         aux_obj = aux_obj->next;
     }
     /*Do the actual drawing*/
     glutSwapBuffers();  // Buffer bikoitza erabili dugunez bata besteagatik trukatu
-    glFlush();
+    //glFlush();
 }
 
