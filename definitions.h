@@ -123,6 +123,7 @@ struct object3d{
     mz *mzptr;                          /* aldaketen matrizeen zerrenda*/
     mz *mzptr2;                         /* aldaketak berregiteko matrizeen zerrenda*/
     char kam_mota;                      /* zein kamara mota den esaten digun aldagaia (perspektiba edo paraleloan)*/
+    char flat_smooth;
     struct object3d *next;              /* next element in the pile of objects */
 };
 

@@ -29,7 +29,7 @@ char erreferentzi_sistema;
 char zer_aldatu;
 char kam_mota;
 char poligonoak;
-char argiak;
+char argiak, argi1, argi2, argi3, argi4, argi5, argi6, argi7, argi8;
 
 double ezker,eskuin,behekoa,goikoa,near,far;
 
@@ -48,6 +48,14 @@ void initialization (){
     kam_mota = 'l';
     poligonoak = 'b';
     argiak = 'b';
+    argi1 = 'p';
+    argi2 = 'i';
+    argi3 = 'i';
+    argi4 = 'i';
+    argi5 = 'i';
+    argi6 = 'i';
+    argi7 = 'i';
+    argi8 = 'i';
 
     /*Initialization of all the variables with the default values*/
     _ortho_x_min = KG_ORTHO_X_MIN_INIT;

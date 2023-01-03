@@ -22,7 +22,7 @@ extern char erreferentzi_sistema;
 extern char zer_aldatu;
 extern char kam_mota;
 extern char poligonoak;
-extern char argiak;
+extern char argiak, argi1, argi2, argi3, argi4, argi5, argi6, argi7, argi8;
 
 /**
  * @brief This function just prints information about the use
@@ -379,6 +379,8 @@ void keyboard(unsigned char key, int x, int y) {
                 auxiliar_object->vertex_table[i].bektore_normala[2] = n[2];
 
             }
+
+            auxiliar_object->flat_smooth = 'f';
 
             auxiliar_object->next = _first_object;
             _first_object = auxiliar_object;
@@ -1092,28 +1094,76 @@ void tekla_berezien_arretarako_funtzioa(int key, int x, int y){
         }
         break;
     case GLUT_KEY_F1:
-
+        if(argi1 == 'i'){
+            glEnable(GL_LIGHT0);
+            argi1 = 'p';
+        }else{
+            glDisable(GL_LIGHT0);
+            argi1 = 'i';
+        }
         break;
     case GLUT_KEY_F2:
-
+        if(argi2 == 'i'){
+            glEnable(GL_LIGHT1);
+            argi2 = 'p';
+        }else{
+            glDisable(GL_LIGHT1);
+            argi2 = 'i';
+        }
         break;
     case GLUT_KEY_F3:
-
+        if(argi3 == 'i'){
+            glEnable(GL_LIGHT2);
+            argi3 = 'p';
+        }else{
+            glDisable(GL_LIGHT2);
+            argi3 = 'i';
+        }
         break;
     case GLUT_KEY_F4:
-    
+        if(argi4 == 'i'){
+            glEnable(GL_LIGHT3);
+            argi4 = 'p';
+        }else{
+            glDisable(GL_LIGHT3);
+            argi4 = 'i';
+        }    
         break;
     case GLUT_KEY_F5:
-
+        if(argi5 == 'i'){
+            glEnable(GL_LIGHT4);
+            argi5 = 'p';
+        }else{
+            glDisable(GL_LIGHT4);
+            argi5 = 'i';
+        }
         break;
     case GLUT_KEY_F6:
-
+        if(argi6 == 'i'){
+            glEnable(GL_LIGHT5);
+            argi6 = 'p';
+        }else{
+            glDisable(GL_LIGHT5);
+            argi6 = 'i';
+        }
         break;
     case GLUT_KEY_F7:
-
+        if(argi7 == 'i'){
+            glEnable(GL_LIGHT6);
+            argi7 = 'p';
+        }else{
+            glDisable(GL_LIGHT6);
+            argi7 = 'i';
+        }
         break;
     case GLUT_KEY_F8:
-
+        if(argi8 == 'i'){
+            glEnable(GL_LIGHT7);
+            argi8 = 'p';
+        }else{
+            glDisable(GL_LIGHT7);
+            argi8 = 'i';
+        }
         break;
     case GLUT_KEY_F9:
         if(argiak == 'b'){
@@ -1125,13 +1175,17 @@ void tekla_berezien_arretarako_funtzioa(int key, int x, int y){
         }
         break;
     case GLUT_KEY_F10:
-
+        //EZER
         break;
     case GLUT_KEY_F11:
 
         break;
     case GLUT_KEY_F12:
-
+        if(_selected_object->flat_smooth == 's'){
+            _selected_object->flat_smooth = 'f';
+        }else{
+            _selected_object->flat_smooth = 's';
+        }
         break;
     }
     glutPostRedisplay();

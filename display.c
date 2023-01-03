@@ -238,20 +238,16 @@ void display(void) {
         glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
     }
 
-    if (poligonoak == 'h') {
+    /*if (poligonoak == 'h') {
         glShadeModel(GL_SMOOTH);  // Erpin bakoitzaren bektore normala beharrezkoa da
         //printf("Hutsa\n");
     }else{
         glShadeModel(GL_FLAT);  // poligonoen bektore normalarekin nahikoa da kasu honetan
         //printf("Beteta\n");
-    } 
+    } */
 
     /*First, we draw the axes*/
     draw_axes();
-    
-    /*GLfloat kokapena [4] = {0.0 , 1.0 , 0.0 , 1.0};
-    glLightfv ( GL_LIGHT0 , GL_POSITION , kokapena );
-    glLightf ( GL_LIGHT0 , GL_SPOT_CUTOFF , 180.0);*/
 
     /*Now each of the objects in the list*/
     while (aux_obj != 0) {
@@ -262,6 +258,12 @@ void display(void) {
         }else{
             glColor3f(KG_COL_NONSELECTED_R,KG_COL_NONSELECTED_G,KG_COL_NONSELECTED_B);
         }
+
+        if (aux_obj->flat_smooth == 's') {
+            glShadeModel(GL_SMOOTH);  // Erpin bakoitzaren bektore normala beharrezkoa da
+        }else{
+            glShadeModel(GL_FLAT);  // poligonoen bektore normalarekin nahikoa da kasu honetan
+        }        
 
         if(kam_mota == 'o'){
             glFrustum(_selected_kamera->min.x, _selected_kamera->max.x, _selected_kamera->min.y, _selected_kamera->max.y, _selected_kamera->min.z, _selected_kamera->max.z);
@@ -276,17 +278,6 @@ void display(void) {
         }
         glLoadMatrixd(ESAM);
         glMultMatrixd(aux_obj->mzptr->matrize);
-
-        /*for (f = 0; f < aux_obj->num_faces; f++) {
-            glBegin(GL_POLYGON);
-            for (v = 0; v < aux_obj->face_table[f].num_vertices; v++) {
-                v_index = aux_obj->face_table[f].vertex_table[v];
-                glVertex3d(aux_obj->vertex_table[v_index].coord.x,
-                           aux_obj->vertex_table[v_index].coord.y,
-                           aux_obj->vertex_table[v_index].coord.z);
-            }
-            glEnd();
-        }*/
 
         //Erpinen bektore normalak marrazteko
         /*for(f = 0; f < aux_obj->num_vertices; f++){
@@ -316,7 +307,6 @@ void display(void) {
             }
             glEnd();
         }
-
         aux_obj = aux_obj->next;
     }
     /*Do the actual drawing*/
