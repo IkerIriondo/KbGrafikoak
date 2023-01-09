@@ -21,7 +21,7 @@ object3d * _selected_object = 0;            /*Object currently selected*/
 object3d *_first_kamera = 0;
 object3d *_selected_kamera = 0;
 
-argia *bonbila, *eguzkia, *fokoa, *_selected_argia;
+argia *bonbila, *eguzkia, *fokoa, *fokoa_obj, *_selected_argia;
 
 char aldaketa_mota; 
 char erreferentzi_sistema;
@@ -188,10 +188,25 @@ void initialization (){
 
     glLightfv(eguzkia->argi_zenb, GL_POSITION, eguzkia->norabidea);
 
-    //FOKOA
+    //FOKOA (objektua)
+
+    fokoa_obj = (argia *)malloc(sizeof(argia));
+
+    fokoa_obj->argi_zenb = GL_LIGHT2;
+
+    fokoa_obj->angelua = 45.0;
+    fokoa_obj->intentsitatea = 0.7;
+    fokoa_obj->argi_mota = 'f';
+
+    glLightfv(fokoa_obj->argi_zenb, GL_AMBIENT, grisa);
+    glLightfv(fokoa_obj->argi_zenb, GL_DIFFUSE, horia);
+    glLightfv(fokoa_obj->argi_zenb, GL_SPECULAR, txuria);
+
+
+    //FOKOA (kamera)
 
     fokoa = (argia *)malloc(sizeof(argia));
-    fokoa->argi_zenb = GL_LIGHT2;
+    fokoa->argi_zenb = GL_LIGHT3;
 
     fokoa->kokapena[0] = _selected_kamera->mzptr->matrize[12];
     fokoa->kokapena[1] = _selected_kamera->mzptr->matrize[13];

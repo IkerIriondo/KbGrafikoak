@@ -25,7 +25,7 @@ extern char poligonoak;
 extern char argiak, argi1, argi2, argi3, argi4, argi5, argi6, argi7, argi8;
 extern char flat_smooth;
 
-extern argia *bonbila, *eguzkia, *fokoa, *_selected_argia;
+extern argia *bonbila, *eguzkia, *fokoa, *fokoa_obj, *_selected_argia;
 
 /**
  * @brief This function just prints information about the use
@@ -656,16 +656,16 @@ void keyboard(unsigned char key, int x, int y) {
         }
         break;
     case 49: //1
-
+        _selected_argia = bonbila;
         break;
     case 50: //2
-
+        _selected_argia = eguzkia;
         break;
     case 51: //3
-
+        _selected_argia = fokoa_obj;
         break;
     case 52: //4
-
+        _selected_argia = fokoa;
         break;
     case 53: //5
 
@@ -1103,19 +1103,19 @@ void tekla_berezien_arretarako_funtzioa(int key, int x, int y){
         break;
     case GLUT_KEY_F3:
         if(argi3 == 'i'){
-            glEnable(fokoa->argi_zenb);
+            glEnable(fokoa_obj->argi_zenb);
             argi3 = 'p';
         }else{
-            glDisable(fokoa->argi_zenb);
+            glDisable(fokoa_obj->argi_zenb);
             argi3 = 'i';
         }
         break;
     case GLUT_KEY_F4:
         if(argi4 == 'i'){
-            glEnable(GL_LIGHT3);
+            glEnable(fokoa->argi_zenb);
             argi4 = 'p';
         }else{
-            glDisable(GL_LIGHT3);
+            glDisable(fokoa->argi_zenb);
             argi4 = 'i';
         }    
         break;

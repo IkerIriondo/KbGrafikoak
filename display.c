@@ -20,7 +20,7 @@ extern object3d *_selected_object;
 extern object3d *_first_kamera;
 extern object3d *_selected_kamera;
 
-extern argia *bonbila, *eguzkia, *fokoa, *_selected_argia;
+extern argia *bonbila, *eguzkia, *fokoa, *fokoa_obj, *_selected_argia;
 
 extern char aldaketa_mota;
 extern char zer_aldatu;
@@ -289,7 +289,22 @@ void display(void) {
         //EGUZKIA
         glLightfv(eguzkia->argi_zenb, GL_POSITION, eguzkia->norabidea);
 
-        //FOKOA
+        //FOKOA (objektua)
+        fokoa_obj->kokapena[0] = _selected_object->mzptr->matrize[12];
+        fokoa_obj->kokapena[1] = _selected_object->mzptr->matrize[13];
+        fokoa_obj->kokapena[2] = _selected_object->mzptr->matrize[14];
+        fokoa_obj->kokapena[3] = _selected_object->mzptr->matrize[15];
+        
+        fokoa_obj->norabidea[0] = _selected_object->mzptr->matrize[8];
+        fokoa_obj->norabidea[1] = _selected_object->mzptr->matrize[9];
+        fokoa_obj->norabidea[2] = _selected_object->mzptr->matrize[10];                
+
+        glLightfv(fokoa_obj->argi_zenb, GL_POSITION, fokoa->kokapena);
+        glLightfv(fokoa_obj->argi_zenb, GL_SPOT_DIRECTION, fokoa->norabidea);
+        glLightf(fokoa_obj->argi_zenb, GL_SPOT_CUTOFF, fokoa->angelua);
+        glLightf(fokoa_obj->argi_zenb, GL_SPOT_EXPONENT, fokoa->intentsitatea);
+
+        //FOKOA (kamera)
         fokoa->kokapena[0] = _selected_kamera->mzptr->matrize[12];
         fokoa->kokapena[1] = _selected_kamera->mzptr->matrize[13];
         fokoa->kokapena[2] = _selected_kamera->mzptr->matrize[14];
