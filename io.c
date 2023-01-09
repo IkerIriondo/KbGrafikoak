@@ -23,6 +23,9 @@ extern char zer_aldatu;
 extern char kam_mota;
 extern char poligonoak;
 extern char argiak, argi1, argi2, argi3, argi4, argi5, argi6, argi7, argi8;
+extern char flat_smooth;
+
+extern argia *bonbila, *eguzkia, *fokoa, *_selected_argia;
 
 /**
  * @brief This function just prints information about the use
@@ -241,6 +244,40 @@ bool ahal_da_aurrera(){
 
 }
 
+void argien_koloreak(int argi_zenb){
+
+    GLfloat horia [4] = {0.0 , 1.0 , 1.0 , 1.0};
+    GLfloat grisa [4] = {0.2 , 0.2 , 0.2 , 1.0};
+    GLfloat txuria [4] = {1.0 , 1.0 , 1.0 , 1.0};
+
+    glLightfv(argi_zenb, GL_AMBIENT, grisa);
+    glLightfv(argi_zenb, GL_DIFFUSE, horia);
+    glLightfv(argi_zenb, GL_SPECULAR, txuria);
+
+    glLightf(argi_zenb, GL_CONSTANT_ATTENUATION, 1.0);
+    glLightf(argi_zenb, GL_LINEAR_ATTENUATION, 0.0);
+    glLightf(argi_zenb, GL_QUADRATIC_ATTENUATION, 1.0);
+
+}
+
+void argiak_piztu(argia *argia){
+
+    switch(argia->argi_mota){
+        case 'b':
+
+        break;
+        case 'e':
+
+        break;
+        case 'f':
+
+        break;
+        default:
+        break;
+    }
+
+}
+
 /**
  * @brief Callback function to control the basic keys
  * @param key Key that has been pressed
@@ -297,17 +334,7 @@ void keyboard(unsigned char key, int x, int y) {
             auxiliar_object->mzptr2->matrize[10] = 1.0;
             auxiliar_object->mzptr2->matrize[15] = 1.0;
 
-
             //ARGIAK
-            /*erpin bakoitzean n = (0,0,0)
-            poligono bakoitzeko{
-                n kalkulatu
-                bere erpin bakoitzari n gehitu
-            }
-            erpin bakoitzari{
-                l = norma(bektore_normala)
-                bektore_normala = bektore_normala/l
-            }*/
 
             int i, j, ind0, ind1, ind2, ind;
             double n[3];
@@ -379,8 +406,6 @@ void keyboard(unsigned char key, int x, int y) {
                 auxiliar_object->vertex_table[i].bektore_normala[2] = n[2];
 
             }
-
-            auxiliar_object->flat_smooth = 'f';
 
             auxiliar_object->next = _first_object;
             _first_object = auxiliar_object;
@@ -592,7 +617,6 @@ void keyboard(unsigned char key, int x, int y) {
             }else{
                 printf("Ez dago desegiteko aldaketarik\n");
             }
-            printf("Kamera desegin\n");
         }else if(zer_aldatu == 'o'){
             if(_selected_object != 0){
                 if(_selected_object->mzptr->next != 0){
@@ -1095,28 +1119,28 @@ void tekla_berezien_arretarako_funtzioa(int key, int x, int y){
         break;
     case GLUT_KEY_F1:
         if(argi1 == 'i'){
-            glEnable(GL_LIGHT0);
+            glEnable(bonbila->argi_zenb);
             argi1 = 'p';
         }else{
-            glDisable(GL_LIGHT0);
+            glDisable(bonbila->argi_zenb);
             argi1 = 'i';
         }
         break;
     case GLUT_KEY_F2:
         if(argi2 == 'i'){
-            glEnable(GL_LIGHT1);
+            glEnable(eguzkia->argi_zenb);
             argi2 = 'p';
         }else{
-            glDisable(GL_LIGHT1);
+            glDisable(eguzkia->argi_zenb);
             argi2 = 'i';
         }
         break;
     case GLUT_KEY_F3:
         if(argi3 == 'i'){
-            glEnable(GL_LIGHT2);
+            glEnable(fokoa->argi_zenb);
             argi3 = 'p';
         }else{
-            glDisable(GL_LIGHT2);
+            glDisable(fokoa->argi_zenb);
             argi3 = 'i';
         }
         break;
@@ -1181,10 +1205,10 @@ void tekla_berezien_arretarako_funtzioa(int key, int x, int y){
 
         break;
     case GLUT_KEY_F12:
-        if(_selected_object->flat_smooth == 's'){
-            _selected_object->flat_smooth = 'f';
+        if(flat_smooth == 'f'){
+            flat_smooth = 's';
         }else{
-            _selected_object->flat_smooth = 's';
+            flat_smooth = 'f';
         }
         break;
     }

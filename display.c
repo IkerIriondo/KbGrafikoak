@@ -20,6 +20,8 @@ extern object3d *_selected_object;
 extern object3d *_first_kamera;
 extern object3d *_selected_kamera;
 
+extern argia *bonbila, *eguzkia, *fokoa, *_selected_argia;
+
 extern char aldaketa_mota;
 extern char zer_aldatu;
 extern char erreferentzi_sistema;
@@ -27,6 +29,8 @@ extern char kam_mota;
 extern char poligonoak;
 
 extern double ezker,eskuin,behekoa,goikoa,near,far;
+
+extern char flat_smooth;
 
 void esam_matrizea_lortu(double *esamptr, double *mptr){ //mptr zutabetan dagoena errenkadetan jarri
 
@@ -121,6 +125,14 @@ void kamera_esferan_biratu(double *v){
     mzpt->next = _selected_kamera->mzptr;
     _selected_kamera->mzptr = mzpt;
 
+}
+
+void posizio_berriak_lortu(double *esam, GLfloat *v, GLfloat *berria){
+
+    berria[0] = v[0]*esam[0] + v[1]*esam[4] + v[2]*esam[8] + v[3]*esam[12];
+    berria[1] = v[0]*esam[1] + v[1]*esam[5] + v[2]*esam[9] + v[3]*esam[13];
+    berria[2] = v[0]*esam[2] + v[1]*esam[6] + v[2]*esam[10] + v[3]*esam[14];
+    berria[3] = v[0]*esam[3] + v[1]*esam[7] + v[2]*esam[11] + v[3]*esam[15];
 }
 
 /**
@@ -238,14 +250,6 @@ void display(void) {
         glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
     }
 
-    /*if (poligonoak == 'h') {
-        glShadeModel(GL_SMOOTH);  // Erpin bakoitzaren bektore normala beharrezkoa da
-        //printf("Hutsa\n");
-    }else{
-        glShadeModel(GL_FLAT);  // poligonoen bektore normalarekin nahikoa da kasu honetan
-        //printf("Beteta\n");
-    } */
-
     /*First, we draw the axes*/
     draw_axes();
 
@@ -259,10 +263,10 @@ void display(void) {
             glColor3f(KG_COL_NONSELECTED_R,KG_COL_NONSELECTED_G,KG_COL_NONSELECTED_B);
         }
 
-        if (aux_obj->flat_smooth == 's') {
-            glShadeModel(GL_SMOOTH);  // Erpin bakoitzaren bektore normala beharrezkoa da
+        if (flat_smooth == 's') {
+            glShadeModel(GL_SMOOTH);
         }else{
-            glShadeModel(GL_FLAT);  // poligonoen bektore normalarekin nahikoa da kasu honetan
+            glShadeModel(GL_FLAT);
         }        
 
         if(kam_mota == 'o'){
@@ -277,6 +281,25 @@ void display(void) {
             esam_matrizea_lortu(&(ESAM[0]),_selected_kamera->mzptr->matrize);
         }
         glLoadMatrixd(ESAM);
+
+        //BONBILA
+        glLightfv(bonbila->argi_zenb, GL_POSITION , bonbila->kokapena);
+        glLightf(bonbila->argi_zenb, GL_SPOT_CUTOFF , 180.0);
+
+        //EGUZKIA
+        glLightfv(eguzkia->argi_zenb, GL_POSITION, eguzkia->norabidea);
+
+        //FOKOA
+        fokoa->kokapena[0] = _selected_kamera->mzptr->matrize[12];
+        fokoa->kokapena[1] = _selected_kamera->mzptr->matrize[13];
+        fokoa->kokapena[2] = _selected_kamera->mzptr->matrize[14];
+        fokoa->kokapena[3] = _selected_kamera->mzptr->matrize[15];
+
+        glLightfv(fokoa->argi_zenb, GL_POSITION, fokoa->kokapena);
+        glLightfv(fokoa->argi_zenb, GL_SPOT_DIRECTION, fokoa->norabidea);
+        glLightf(fokoa->argi_zenb, GL_SPOT_CUTOFF , 20.0);
+        glLightf(fokoa->argi_zenb, GL_SPOT_EXPONENT, 0.0);
+
         glMultMatrixd(aux_obj->mzptr->matrize);
 
         //Erpinen bektore normalak marrazteko
@@ -291,6 +314,11 @@ void display(void) {
             glEnd();
         }*/
 
+        /*glLightfv(bonbila->argi_zenb, GL_POSITION , bonbila->kokapena);
+        glLightf(bonbila->argi_zenb, GL_SPOT_CUTOFF , 180.0);
+
+        glLightfv(eguzkia->argi_zenb, GL_POSITION, eguzkia->norabidea);*/
+
         for (f = 0; f < aux_obj->num_faces; f++) {
             glBegin(GL_POLYGON);
             if(poligonoak == 'b'){
@@ -298,7 +326,7 @@ void display(void) {
             }
             for (v = 0; v < aux_obj->face_table[f].num_vertices; v++) {
                 v_index = aux_obj->face_table[f].vertex_table[v];
-                if(poligonoak == 'h'){
+                if(poligonoak == 'h' || flat_smooth == 's'){
                     glNormal3d(aux_obj->vertex_table[v_index].bektore_normala[0], aux_obj->vertex_table[v_index].bektore_normala[1], aux_obj->vertex_table[v_index].bektore_normala[2]);
                 }
                 glVertex3d(aux_obj->vertex_table[v_index].coord.x,
@@ -309,8 +337,9 @@ void display(void) {
         }
         aux_obj = aux_obj->next;
     }
+
     /*Do the actual drawing*/
     glutSwapBuffers();  // Buffer bikoitza erabili dugunez bata besteagatik trukatu
-    //glFlush();
+    glFlush();
 }
 

@@ -123,10 +123,20 @@ struct object3d{
     mz *mzptr;                          /* aldaketen matrizeen zerrenda*/
     mz *mzptr2;                         /* aldaketak berregiteko matrizeen zerrenda*/
     char kam_mota;                      /* zein kamara mota den esaten digun aldagaia (perspektiba edo paraleloan)*/
-    char flat_smooth;
     struct object3d *next;              /* next element in the pile of objects */
 };
 
 typedef struct object3d object3d;
+
+struct argia{
+    int argi_zenb;  //zein argi den adierazten du
+    GLfloat kokapena[4];  //argia non dagoen kokatuta
+    GLfloat norabidea[4]; //argia noruntz dagoen begira
+    GLfloat angelua; 
+    char argi_mota; //f(fokua), e(eguzkia), b(bonbila)
+    struct argia *next;
+};
+
+typedef struct argia argia;
 
 #endif // DEFINITIONS_H

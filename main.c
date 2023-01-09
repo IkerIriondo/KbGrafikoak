@@ -21,8 +21,7 @@ object3d * _selected_object = 0;            /*Object currently selected*/
 object3d *_first_kamera = 0;
 object3d *_selected_kamera = 0;
 
-object3d *eguzkia;
-object3d *bonbila;
+argia *bonbila, *eguzkia, *fokoa, *_selected_argia;
 
 char aldaketa_mota; 
 char erreferentzi_sistema;
@@ -30,6 +29,7 @@ char zer_aldatu;
 char kam_mota;
 char poligonoak;
 char argiak, argi1, argi2, argi3, argi4, argi5, argi6, argi7, argi8;
+char flat_smooth;
 
 double ezker,eskuin,behekoa,goikoa,near,far;
 
@@ -48,7 +48,7 @@ void initialization (){
     kam_mota = 'l';
     poligonoak = 'b';
     argiak = 'b';
-    argi1 = 'p';
+    argi1 = 'i';
     argi2 = 'i';
     argi3 = 'i';
     argi4 = 'i';
@@ -56,6 +56,8 @@ void initialization (){
     argi6 = 'i';
     argi7 = 'i';
     argi8 = 'i';
+
+    flat_smooth = 'f';
 
     /*Initialization of all the variables with the default values*/
     _ortho_x_min = KG_ORTHO_X_MIN_INIT;
@@ -150,16 +152,73 @@ void initialization (){
     printf("Erreferentzi sistema: %c, Zer aldatu: %c, Aldaketa mota: %c\n", erreferentzi_sistema, zer_aldatu, aldaketa_mota);
 
     //ARGIAK
+    _selected_argia = 0;
+    GLfloat horia [4] = {0.0 , 1.0 , 1.0 , 1.0};
+    GLfloat grisa [4] = {0.2 , 0.2 , 0.2 , 1.0};
+    GLfloat txuria [4] = {1.0 , 1.0 , 1.0 , 1.0};
 
-    //Bonbila
-    glEnable(GL_LIGHT0);
-    /*GLfloat kokapena [4] = {0.0 , 10.0 , 0.0 , 1.0};
-    glLightfv ( GL_LIGHT0 , GL_POSITION , kokapena );
-    glLightf ( GL_LIGHT0 , GL_SPOT_CUTOFF , 180.0);*/
+    //BONBILA
 
-    //Eguzkia
-    GLfloat norabidea [4] = {1.0 , 0.0 , 0.0 , 0.0};
-    glLightfv(GL_LIGHT0, GL_POSITION, norabidea);
+    bonbila = (argia *)malloc(sizeof(argia));
+
+    bonbila->argi_zenb = GL_LIGHT0;
+    bonbila->kokapena[0] = 0.0; bonbila->kokapena[1] = 10.0;
+    bonbila->kokapena[2] = 0.0; bonbila->kokapena[3] = 1.0;
+    bonbila->angelua = 180.0;
+    bonbila->argi_mota = 'b';
+
+    glLightfv(bonbila->argi_zenb, GL_AMBIENT , grisa);
+    glLightfv(bonbila->argi_zenb, GL_DIFFUSE , horia);
+    glLightfv(bonbila->argi_zenb, GL_SPECULAR , txuria);
+
+    glLightfv(bonbila->argi_zenb, GL_POSITION , bonbila->kokapena);
+    glLightf(bonbila->argi_zenb, GL_SPOT_CUTOFF , 180.0);
+
+    //EGUZKIA
+
+    eguzkia = (argia *)malloc(sizeof(argia));
+    eguzkia->argi_zenb = GL_LIGHT1;
+    eguzkia->norabidea[0] = 1.0; eguzkia->norabidea[1] = 0.0;
+    eguzkia->norabidea[2] = 0.0; eguzkia->norabidea[3] = 0.0;
+    eguzkia->argi_mota = 'e';
+
+    glLightfv(eguzkia->argi_zenb, GL_AMBIENT, grisa);
+    glLightfv(eguzkia->argi_zenb, GL_DIFFUSE, horia);
+    glLightfv(eguzkia->argi_zenb, GL_SPECULAR, txuria);
+
+    glLightfv(eguzkia->argi_zenb, GL_POSITION, eguzkia->norabidea);
+
+    //FOKOA
+
+    fokoa = (argia *)malloc(sizeof(argia));
+    fokoa->argi_zenb = GL_LIGHT2;
+
+    fokoa->kokapena[0] = _selected_kamera->mzptr->matrize[12];
+    fokoa->kokapena[1] = _selected_kamera->mzptr->matrize[13];
+    fokoa->kokapena[2] = _selected_kamera->mzptr->matrize[14];
+    fokoa->kokapena[3] = _selected_kamera->mzptr->matrize[15];
+
+    /*fokoa->norabidea[0] = _selected_kamera->mzptr->matrize[8];
+    fokoa->norabidea[1] = _selected_kamera->mzptr->matrize[9];
+    fokoa->norabidea[2] = _selected_kamera->mzptr->matrize[10];
+    fokoa->norabidea[3] = _selected_kamera->mzptr->matrize[11];*/
+
+    fokoa->norabidea[0] = 0;
+    fokoa->norabidea[1] = 0;
+    fokoa->norabidea[2] = 0;
+    fokoa->norabidea[3] = 0;
+
+    fokoa->argi_mota = 'f';
+
+    glLightfv(fokoa->argi_zenb, GL_AMBIENT, grisa);
+    glLightfv(fokoa->argi_zenb, GL_DIFFUSE, horia);
+    glLightfv(fokoa->argi_zenb, GL_SPECULAR, txuria);
+
+    glLightfv(fokoa->argi_zenb, GL_POSITION, fokoa->kokapena);
+    glLightfv(fokoa->argi_zenb, GL_SPOT_DIRECTION, fokoa->norabidea);
+    glLightf(fokoa->argi_zenb, GL_SPOT_CUTOFF , 20.0);
+    glLightf(fokoa->argi_zenb, GL_SPOT_EXPONENT, 0.0);
+
 }
 
 
@@ -171,8 +230,7 @@ int main(int argc, char** argv) {
 
     /* glut initializations */
     glutInit(&argc, argv);
-    //glutInitDisplayMode(GLUT_RGB);
-    glutInitDisplayMode(GLUT_RGB|GLUT_DEPTH|GLUT_DOUBLE);
+    glutInitDisplayMode(GLUT_RGB | GLUT_DEPTH | GLUT_DOUBLE);
     glutInitWindowSize(KG_WINDOW_WIDTH, KG_WINDOW_HEIGHT);
     glutInitWindowPosition(KG_WINDOW_X, KG_WINDOW_Y);
     glutCreateWindow(KG_WINDOW_TITLE);
@@ -180,13 +238,6 @@ int main(int argc, char** argv) {
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_LIGHTING);
 
-    /*if (poligonoak == 'h') {
-        glShadeModel(GL_SMOOTH);  // Erpin bakoitzaren bektore normala beharrezkoa da
-        printf("Hutsa\n");
-    }else{
-        glShadeModel(GL_FLAT);  // poligonoen bektore normalarekin nahikoa da kasu honetan
-        printf("Beteta\n");
-    } */
 
     /* set the callback functions */
     glutDisplayFunc(display);
