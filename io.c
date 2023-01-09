@@ -244,40 +244,6 @@ bool ahal_da_aurrera(){
 
 }
 
-void argien_koloreak(int argi_zenb){
-
-    GLfloat horia [4] = {0.0 , 1.0 , 1.0 , 1.0};
-    GLfloat grisa [4] = {0.2 , 0.2 , 0.2 , 1.0};
-    GLfloat txuria [4] = {1.0 , 1.0 , 1.0 , 1.0};
-
-    glLightfv(argi_zenb, GL_AMBIENT, grisa);
-    glLightfv(argi_zenb, GL_DIFFUSE, horia);
-    glLightfv(argi_zenb, GL_SPECULAR, txuria);
-
-    glLightf(argi_zenb, GL_CONSTANT_ATTENUATION, 1.0);
-    glLightf(argi_zenb, GL_LINEAR_ATTENUATION, 0.0);
-    glLightf(argi_zenb, GL_QUADRATIC_ATTENUATION, 1.0);
-
-}
-
-void argiak_piztu(argia *argia){
-
-    switch(argia->argi_mota){
-        case 'b':
-
-        break;
-        case 'e':
-
-        break;
-        case 'f':
-
-        break;
-        default:
-        break;
-    }
-
-}
-
 /**
  * @brief Callback function to control the basic keys
  * @param key Key that has been pressed

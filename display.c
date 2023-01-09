@@ -283,8 +283,8 @@ void display(void) {
         glLoadMatrixd(ESAM);
 
         //BONBILA
-        glLightfv(bonbila->argi_zenb, GL_POSITION , bonbila->kokapena);
-        glLightf(bonbila->argi_zenb, GL_SPOT_CUTOFF , 180.0);
+        glLightfv(bonbila->argi_zenb, GL_POSITION, bonbila->kokapena);
+        glLightf(bonbila->argi_zenb, GL_SPOT_CUTOFF, bonbila->angelua);
 
         //EGUZKIA
         glLightfv(eguzkia->argi_zenb, GL_POSITION, eguzkia->norabidea);
@@ -295,10 +295,14 @@ void display(void) {
         fokoa->kokapena[2] = _selected_kamera->mzptr->matrize[14];
         fokoa->kokapena[3] = _selected_kamera->mzptr->matrize[15];
 
+        fokoa->norabidea[0] = -_selected_kamera->mzptr->matrize[8];
+        fokoa->norabidea[1] = -_selected_kamera->mzptr->matrize[9];
+        fokoa->norabidea[2] = -_selected_kamera->mzptr->matrize[10];        
+
         glLightfv(fokoa->argi_zenb, GL_POSITION, fokoa->kokapena);
         glLightfv(fokoa->argi_zenb, GL_SPOT_DIRECTION, fokoa->norabidea);
-        glLightf(fokoa->argi_zenb, GL_SPOT_CUTOFF , 20.0);
-        glLightf(fokoa->argi_zenb, GL_SPOT_EXPONENT, 0.0);
+        glLightf(fokoa->argi_zenb, GL_SPOT_CUTOFF, fokoa->angelua);
+        glLightf(fokoa->argi_zenb, GL_SPOT_EXPONENT, fokoa->intentsitatea);
 
         glMultMatrixd(aux_obj->mzptr->matrize);
 

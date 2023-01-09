@@ -167,12 +167,12 @@ void initialization (){
     bonbila->angelua = 180.0;
     bonbila->argi_mota = 'b';
 
-    glLightfv(bonbila->argi_zenb, GL_AMBIENT , grisa);
-    glLightfv(bonbila->argi_zenb, GL_DIFFUSE , horia);
-    glLightfv(bonbila->argi_zenb, GL_SPECULAR , txuria);
+    glLightfv(bonbila->argi_zenb, GL_AMBIENT, grisa);
+    glLightfv(bonbila->argi_zenb, GL_DIFFUSE, horia);
+    glLightfv(bonbila->argi_zenb, GL_SPECULAR, txuria);
 
-    glLightfv(bonbila->argi_zenb, GL_POSITION , bonbila->kokapena);
-    glLightf(bonbila->argi_zenb, GL_SPOT_CUTOFF , 180.0);
+    glLightfv(bonbila->argi_zenb, GL_POSITION, bonbila->kokapena);
+    glLightf(bonbila->argi_zenb, GL_SPOT_CUTOFF, bonbila->angelua);
 
     //EGUZKIA
 
@@ -198,16 +198,12 @@ void initialization (){
     fokoa->kokapena[2] = _selected_kamera->mzptr->matrize[14];
     fokoa->kokapena[3] = _selected_kamera->mzptr->matrize[15];
 
-    /*fokoa->norabidea[0] = _selected_kamera->mzptr->matrize[8];
-    fokoa->norabidea[1] = _selected_kamera->mzptr->matrize[9];
-    fokoa->norabidea[2] = _selected_kamera->mzptr->matrize[10];
-    fokoa->norabidea[3] = _selected_kamera->mzptr->matrize[11];*/
+    fokoa->norabidea[0] = -_selected_kamera->mzptr->matrize[8];
+    fokoa->norabidea[1] = -_selected_kamera->mzptr->matrize[9];
+    fokoa->norabidea[2] = -_selected_kamera->mzptr->matrize[10];
 
-    fokoa->norabidea[0] = 0;
-    fokoa->norabidea[1] = 0;
-    fokoa->norabidea[2] = 0;
-    fokoa->norabidea[3] = 0;
-
+    fokoa->angelua = 45.0;
+    fokoa->intentsitatea = 0.7;
     fokoa->argi_mota = 'f';
 
     glLightfv(fokoa->argi_zenb, GL_AMBIENT, grisa);
@@ -215,9 +211,9 @@ void initialization (){
     glLightfv(fokoa->argi_zenb, GL_SPECULAR, txuria);
 
     glLightfv(fokoa->argi_zenb, GL_POSITION, fokoa->kokapena);
-    glLightfv(fokoa->argi_zenb, GL_SPOT_DIRECTION, fokoa->norabidea);
-    glLightf(fokoa->argi_zenb, GL_SPOT_CUTOFF , 20.0);
-    glLightf(fokoa->argi_zenb, GL_SPOT_EXPONENT, 0.0);
+    glLightfv(fokoa->argi_zenb, GL_SPOT_DIRECTION, fokoa->norabidea2);
+    glLightf(fokoa->argi_zenb, GL_SPOT_CUTOFF , fokoa->angelua);
+    glLightf(fokoa->argi_zenb, GL_SPOT_EXPONENT, fokoa->intentsitatea);
 
 }
 
