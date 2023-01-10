@@ -66,6 +66,113 @@ void print_help(){
     printf("\n\n");
 }
 
+void print_help_obj(){
+    printf("KbG Irakasgaiaren Praktika. Programa honek 3D objektuak \n");
+    printf("aldatzen eta bistaratzen ditu.  \n\n");
+    printf("\n\n");
+    printf("FUNTZIO NAGUSIAK \n");
+    printf("<?>\t\t Laguntza hau bistaratu \n");
+    printf("<ESC>\t\t Programatik irten \n");
+    printf("<F>\t\t Objektua bat kargatu\n");
+    printf("<TAB>\t\t Kargaturiko objektuen artean bat hautatu\n");
+    printf("<DEL>\t\t Hautatutako objektua ezabatu\n");
+    printf("<->\t\t Objektuaren ardatz guztiak txikitu\n");
+    printf("<+>\t\t Objektuaren ardatz guztiak handitu\n");
+    printf("<I>\t\t Objektuaren informazioa bistaratu\n");
+    printf("<k>\t\t Hurrengo kameraren ikuspegia erakutsi\n");
+    printf("<K>\t\t Objektuaren ikuspegia erakutsi\n");
+    printf("<T>\t\t Traslazioa aktibatu\n");
+    printf("<R>\t\t Biraketa aktibatu\n");
+    printf("<E>\t\t Eskalaketa aktibatu\n");
+    printf("<S>\t\t Islapena aktibatu\n");
+    printf("<P>\t\t Zizailaketa aktibatu\n");
+    printf("<G>\t\t Aldaketak munduaren erreferentzi sisteman\n");
+    printf("<L>\t\t Aldaketak lokalak\n");
+    printf("<O>\t\t Aldaketak objektuen gainean\n");
+    printf("<C>\t\t Aldaketak kamerari\n");
+    printf("<A>\t\t Aldaketak argiei\n");
+    printf("<Z>\t\t Aldaketak desegin\n");
+    printf("<B>\t\t Aldaketak berregin\n");
+    printf("<GORA>\t\t Mugitu +Y | Txikitu Y | Biratu -X | Islapena XZ | Zizailatu +Y\n");
+    printf("<BEHERA>\t Mugitu -Y | Handitu Y | Biratu +X | Islapena XZ | Zizailatu -Y\n");
+    printf("<ESKUIN>\t Mugitu +X | Txikitu X | Biratu +Y | Islapena YZ | Zizailatu +X\n");
+    printf("<EZKER>\t\t Mugitu -X | Handitu X | Biratu -Y | Islapena YZ | Zizailatu -X\n");
+    printf("<AVPAG>\t\t Mugitu -Z | Txikitu Z | Biratu +Z | Islapena XY | Zizailatu +Z\n");
+    printf("<REPAG>\t\t Mugitu +Z | Handitu Z | Biratu -Z | Islapena XY | Zizailatu -Z\n");
+    printf("\n\n");
+}
+
+void print_help_kam(){
+    printf("KbG Irakasgaiaren Praktika. Programa honek 3D objektuak \n");
+    printf("aldatzen eta bistaratzen ditu.  \n\n");
+    printf("\n\n");
+    printf("FUNTZIO NAGUSIAK \n");
+    printf("<?>\t\t Laguntza hau bistaratu \n");
+    printf("<ESC>\t\t Programatik irten \n");
+    printf("<F>\t\t Objektua bat kargatu\n");
+    printf("<TAB>\t\t Kargaturiko objektuen artean bat hautatu\n");
+    printf("<DEL>\t\t Hautatutako objektua ezabatu\n");
+    printf("<->\t\t Ikuste bolumena txikitu\n");
+    printf("<+>\t\t Ikuste bolumena handitu\n");
+    printf("<I>\t\t Objektuaren informazioa bistaratu\n");
+    printf("<k>\t\t Hurrengo kameraren ikuspegia erakutsi\n");
+    printf("<K>\t\t Objektuaren ikuspegia erakutsi\n");
+    printf("<T>\t\t Traslazioa aktibatu\n");
+    printf("<R>\t\t Biraketa aktibatu\n");
+    printf("<G>\t\t Kamera analisi moduan jarri\n");
+    printf("<L>\t\t Kamera hegaldi moduan jarri\n");
+    printf("<O>\t\t Aldaketak objektuen gainean\n");
+    printf("<C>\t\t Aldaketak kamerari\n");
+    printf("<A>\t\t Aldaketak argiei\n");
+    printf("<Z>\t\t Aldaketak desegin\n");
+    printf("<Z + CTRL>\t Aldaketak desegin");
+    printf("<B>\t\t Aldaketak berregin\n");
+    printf("<B + CTRL>\t Aldaketak berregin");
+    printf("<GORA>\t\t -X ardatzarekiko biratu\n");
+    printf("<BEHERA>\t +X ardatzarekiko biratu\n");
+    printf("<ESKUIN>\t +Y ardatzarekiko biratu\n");
+    printf("<EZKER>\t\t -Y ardatzarekiko biratu\n");
+    printf("<AVPAG>\t\t +Z ardatzarekiko biratu | Kamera aurrera eraman\n");
+    printf("<REPAG>\t\t -Z ardatzarekiko biratu | Kamera atzera eraman\n");
+    printf("\n\n");
+}
+
+void print_help_arg(){
+    printf("KbG Irakasgaiaren Praktika. Programa honek 3D objektuak \n");
+    printf("aldatzen eta bistaratzen ditu.  \n\n");
+    printf("\n\n");
+    printf("FUNTZIO NAGUSIAK \n");
+    printf("<?>\t\t Laguntza hau bistaratu \n");
+    printf("<ESC>\t\t Programatik irten \n");
+    printf("<F>\t\t Objektua bat kargatu\n");
+    printf("<TAB>\t\t Kargaturiko objektuen artean bat hautatu\n");
+    printf("<DEL>\t\t Hautatutako objektua ezabatu\n");
+    printf("<->\t\t Ikuste bolumena txikitu\n");
+    printf("<+>\t\t Ikuste bolumena handitu\n");
+    printf("<I>\t\t Objektuaren informazioa bistaratu\n");
+    printf("<k>\t\t Hurrengo kameraren ikuspegia erakutsi\n");
+    printf("<K>\t\t Objektuaren ikuspegia erakutsi\n");
+
+    printf("<T>\t\t Traslazioa aktibatu\n");
+    printf("<R>\t\t Biraketa aktibatu\n");
+    printf("<G>\t\t Kamera analisi moduan jarri\n");
+    printf("<L>\t\t Kamera hegaldi moduan jarri\n");
+    printf("<O>\t\t Aldaketak objektuen gainean\n");
+    printf("<C>\t\t Aldaketak kamerari\n");
+    printf("<A>\t\t Aldaketak argiei\n");
+    printf("<Z>\t\t Aldaketak desegin\n");
+    printf("<Z + CTRL>\t Aldaketak desegin");
+    printf("<B>\t\t Aldaketak berregin\n");
+    printf("<B + CTRL>\t Aldaketak berregin");
+    printf("<GORA>\t\t -X ardatzarekiko biratu\n");
+    printf("<BEHERA>\t +X ardatzarekiko biratu\n");
+    printf("<ESKUIN>\t +Y ardatzarekiko biratu\n");
+    printf("<EZKER>\t\t -Y ardatzarekiko biratu\n");
+    printf("<AVPAG>\t\t +Z ardatzarekiko biratu | Kamera aurrera eraman\n");
+    printf("<REPAG>\t\t -Z ardatzarekiko biratu | Kamera atzera eraman\n");
+    printf("\n\n");
+}
+
 /*objektu baten barne memoria liberatzen duen funtzioa*/
 void free_object(object3d *obptr){
     int i;
@@ -73,7 +180,6 @@ void free_object(object3d *obptr){
     for(i = 0; i<obptr->num_faces; i++) free(obptr->face_table[i].vertex_table);
     free(obptr->vertex_table);
     free(obptr->face_table);
-    /*TODO Matrizeekin zer gertatzen da?*/
     for(auxptr = obptr->mzptr; auxptr != 0; auxptr = obptr->mzptr){
         obptr->mzptr = obptr->mzptr->next;
         free(auxptr);
@@ -245,12 +351,12 @@ bool ahal_da_aurrera(){
 
 }
 
-void matrize_bider_bektore(double *mat, GLfloat *v){
+void matrize_bider_bektore(double *mat, GLfloat *v, GLfloat *ema){
 
-    v[0] = v[0]*mat[0] + v[1]*mat[4] + v[2]*mat[8]  + v[3]*mat[12];
-    v[1] = v[0]*mat[1] + v[1]*mat[5] + v[2]*mat[9]  + v[3]*mat[13];
-    v[2] = v[0]*mat[2] + v[1]*mat[6] + v[2]*mat[10] + v[3]*mat[14];
-    v[3] = v[0]*mat[3] + v[1]*mat[7] + v[2]*mat[11] + v[3]*mat[15];
+    ema[0] = v[0]*mat[0] + v[1]*mat[4] + v[2]*mat[8]  + v[3]*mat[12];
+    ema[1] = v[0]*mat[1] + v[1]*mat[5] + v[2]*mat[9]  + v[3]*mat[13];
+    ema[2] = v[0]*mat[2] + v[1]*mat[6] + v[2]*mat[10] + v[3]*mat[14];
+    ema[3] = v[0]*mat[3] + v[1]*mat[7] + v[2]*mat[11] + v[3]*mat[15];
 
 }
 
@@ -270,6 +376,7 @@ void keyboard(unsigned char key, int x, int y) {
     mz *mzptr2;
     double Mald[16];
     double Mberria[16];
+    bekz *lag;
 
     switch (key) {
     case 'f':
@@ -514,7 +621,18 @@ void keyboard(unsigned char key, int x, int y) {
             }
         break;
     case '?':
-        print_help();
+        switch(zer_aldatu){
+            case 'o':
+            print_help_obj();
+            break;
+            case 'k':
+            print_help_kam();
+            break;
+            case 'a':
+            print_help_arg();
+            break;
+        }
+        //print_help();
         break;
     case 27: /* <ESC> */
         exit(0);
@@ -598,28 +716,116 @@ void keyboard(unsigned char key, int x, int y) {
         break;
     case 'Z':
     case 'z':
-        if (zer_aldatu == 'k'){
-            if(_selected_kamera->mzptr->next != 0){
-                mzptr2 = _selected_kamera->mzptr;
-                _selected_kamera->mzptr = mzptr2->next;
-                mzptr2->next = _selected_kamera->mzptr2;
-                _selected_kamera->mzptr2 = mzptr2;
-            }else{
-                printf("Ez dago desegiteko aldaketarik\n");
-            }
-        }else if(zer_aldatu == 'o'){
-            if(_selected_object != 0){
-                if(_selected_object->mzptr->next != 0){
-                    mzptr2 = _selected_object->mzptr;
-                    _selected_object->mzptr = mzptr2->next;
-                    mzptr2->next = _selected_object->mzptr2;
-                    _selected_object->mzptr2 = mzptr2;
+        switch(zer_aldatu){
+            case 'o':
+                if(_selected_object != 0){
+                    if(_selected_object->mzptr->next != 0){
+                        mzptr2 = _selected_object->mzptr;
+                        _selected_object->mzptr = mzptr2->next;
+                        mzptr2->next = _selected_object->mzptr2;
+                        _selected_object->mzptr2 = mzptr2;
+                    }else{
+                        printf("Ez dago desegiteko aldaketarik\n");
+                    }
+                }else{
+                    printf("Ez dago objekturik kargatuta\n");
+                }
+            break;
+            case 'k':
+                if(_selected_kamera->mzptr->next != 0){
+                    mzptr2 = _selected_kamera->mzptr;
+                    _selected_kamera->mzptr = mzptr2->next;
+                    mzptr2->next = _selected_kamera->mzptr2;
+                    _selected_kamera->mzptr2 = mzptr2;
                 }else{
                     printf("Ez dago desegiteko aldaketarik\n");
                 }
-            }else{
-                printf("Ez dago objekturik kargatuta\n");
-            }
+            break;
+            case 'a':
+                if(_selected_argia != 0){
+                    switch(_selected_argia->argi_mota){
+                        case 'e':
+                            if(_selected_argia->norabidea->next != 0){
+                                lag = _selected_argia->norabidea;
+                                _selected_argia->norabidea = lag->next;
+                                lag->next = _selected_argia->norabidea2;
+                                _selected_argia->norabidea2 = lag;
+                            }else{
+                                printf("Ez dago desegiteko aldaketarik\n");
+                            }
+                        break;
+                        case 'b':
+                            if(_selected_argia->kokapena->next != 0){
+                                lag = _selected_argia->kokapena;
+                                _selected_argia->kokapena = lag->next;
+                                lag->next = _selected_argia->kokapena2;
+                                _selected_argia->kokapena2 = lag;
+                            }else{
+                                printf("Ez dago desegiteko aldaketarik\n");
+                            }
+                        break;
+                    }
+                }else{
+                    printf("Ez dago argirik aukeratuta\n");
+                }
+            break;
+        }
+        break;
+    case 'B':
+    case 'b':
+        switch(zer_aldatu){
+            case 'o':
+                if(_selected_object != 0){
+                    if(_selected_object->mzptr2->next != 0){
+                        mzptr2 = _selected_object->mzptr2;
+                        _selected_object->mzptr2 = mzptr2->next;
+                        mzptr2->next = _selected_object->mzptr;
+                        _selected_object->mzptr = mzptr2;
+                    }else{
+                        printf("Ez dago berregiteko aldaketarik\n");
+                    }
+                }else{
+                    printf("Ez dago objekturik kargatuta\n");
+                }
+            break;
+            case 'k':
+                if(_selected_kamera->mzptr2->next != 0){
+                    mzptr2 = _selected_kamera->mzptr2;
+                    _selected_kamera->mzptr2 = mzptr2->next;
+                    mzptr2->next = _selected_kamera->mzptr;
+                    _selected_kamera->mzptr = mzptr2;
+                }else{
+                    printf("Ez dago berregiteko aldaketarik\n");
+                }
+            break;
+            case 'a':
+                if(_selected_argia != 0){
+                    switch(_selected_argia->argi_mota){
+                        case 'e':
+                            if(_selected_argia->norabidea2->next != 0){
+                                lag = _selected_argia->norabidea2;
+                                _selected_argia->norabidea2 = lag->next;
+                                lag->next = _selected_argia->norabidea;
+                                _selected_argia->norabidea = lag;
+                            }else{
+                                printf("Ez dago desegiteko aldaketarik\n");
+                            }
+                        break;
+                        case 'b':
+                            if(_selected_argia->kokapena2->next != 0){
+                                lag = _selected_argia->kokapena2;
+                                _selected_argia->kokapena2 = lag->next;
+                                lag->next = _selected_argia->kokapena;
+                                _selected_argia->kokapena = lag;
+                            }else{
+                                printf("Ez dago desegiteko aldaketarik\n");
+                            }
+                        break;
+                    }
+                }else{
+                    printf("Ez dago argirik aukeratuta\n");
+                }
+            break;
         }
         break;
     case 26: //Z
@@ -631,32 +837,6 @@ void keyboard(unsigned char key, int x, int y) {
                 _selected_kamera->mzptr2 = mzptr2;
             }else{
                 printf("Ez dago desegiteko aldaketarik\n");
-            }
-        }
-        break;
-    case 'B':
-    case 'b':
-        if (glutGetModifiers() == GLUT_ACTIVE_CTRL){
-            if(_selected_kamera->mzptr2->next != 0){
-                mzptr2 = _selected_kamera->mzptr2;
-                _selected_kamera->mzptr2 = mzptr2->next;
-                mzptr2->next = _selected_kamera->mzptr;
-                _selected_kamera->mzptr = mzptr2;
-            }else{
-                printf("Ez dago berregiteko aldaketarik\n");
-            }
-        }else{
-            if(_selected_object != 0){
-                if(_selected_object->mzptr2->next != 0){
-                    mzptr2 = _selected_object->mzptr2;
-                    _selected_object->mzptr2 = mzptr2->next;
-                    mzptr2->next = _selected_object->mzptr;
-                    _selected_object->mzptr = mzptr2;
-                }else{
-                    printf("Ez dago berregiteko aldaketarik\n");
-                }
-            }else{
-                printf("Ez dago objekturik kargatuta\n");
             }
         }
         break;
@@ -714,6 +894,9 @@ void tekla_berezien_arretarako_funtzioa(int key, int x, int y){
     
     double Mald[16];
     double Mberria[16];
+    GLfloat ema[4];
+    bekz *Bberria;
+    int i;
 
     switch (key){
     case GLUT_KEY_UP: /*Gorako gezia*/
@@ -778,10 +961,15 @@ void tekla_berezien_arretarako_funtzioa(int key, int x, int y){
                                 switch(aldaketa_mota){
                                     case 'r':
                                         lortu_biratu_matrizea(&(Mald[0]), 1.0, 0.0, 0.0);
-                                        matrize_bider_bektore(&(Mald[0]), &(_selected_argia->norabidea[0]));
+                                        matrize_bider_bektore(&(Mald[0]), &(_selected_argia->norabidea->bektorea[0]), &(ema[0]));
+                                        Bberria = (bekz *)malloc(sizeof(bekz));
+                                        for(i = 0; i<4; i++) Bberria->bektorea[i] = ema[i];
+                                        Bberria->next = _selected_argia->norabidea;
+                                        _selected_argia->norabidea = Bberria;
                                     break;
                                     case 'e':
-
+                                        _selected_argia->const_at += 0.1;
+                                        if(_selected_argia->const_at > 1.0) _selected_argia->const_at -= 0.1;
                                     break;
                                 }
                             break;
@@ -789,21 +977,31 @@ void tekla_berezien_arretarako_funtzioa(int key, int x, int y){
                                 switch(aldaketa_mota){
                                     case 't':
                                         lortu_traslazio_matrizea(&(Mald[0]), 0.0, 1.0, 0.0);
-                                        matrize_bider_bektore(&(Mald[0]), &(_selected_argia->kokapena[0]));
+                                        matrize_bider_bektore(&(Mald[0]), &(_selected_argia->kokapena->bektorea[0]), &(ema[0]));
+                                        Bberria = (bekz *)malloc(sizeof(bekz));
+                                        for(i = 0; i<4; i++) Bberria->bektorea[i] = ema[i];
+                                        Bberria->next = _selected_argia->kokapena;
+                                        _selected_argia->kokapena = Bberria;
                                     break;
                                     case 'r':
                                         lortu_biratu_matrizea(&(Mald[0]), 0.0, 1.0, 0.0);
-                                        matrize_bider_bektore(&(Mald[0]), &(_selected_argia->kokapena[0]));
+                                        matrize_bider_bektore(&(Mald[0]), &(_selected_argia->kokapena->bektorea[0]), &(ema[0]));
+                                        Bberria = (bekz *)malloc(sizeof(bekz));
+                                        for(i = 0; i<4; i++) Bberria->bektorea[i] = ema[i];
+                                        Bberria->next = _selected_argia->kokapena;
+                                        _selected_argia->kokapena = Bberria;
                                     break;
                                     case 'e':
-
+                                        _selected_argia->const_at += 0.1;
+                                        if(_selected_argia->const_at > 1.0) _selected_argia->const_at -= 0.1;
                                     break;
                                 }
                             break;
                             case 'f':
                                 switch(aldaketa_mota){
                                     case 'e':
-
+                                        _selected_argia->const_at += 0.1;
+                                        if(_selected_argia->const_at > 1.0) _selected_argia->const_at -= 0.1;
                                     break;
                                 }
                             break;
@@ -881,10 +1079,15 @@ void tekla_berezien_arretarako_funtzioa(int key, int x, int y){
                                 switch(aldaketa_mota){
                                     case 'r':
                                         lortu_biratu_matrizea(&(Mald[0]), -1.0, 0.0, 0.0);
-                                        matrize_bider_bektore(&(Mald[0]), &(_selected_argia->norabidea[0]));
+                                        matrize_bider_bektore(&(Mald[0]), &(_selected_argia->norabidea->bektorea[0]), &(ema[0]));
+                                        Bberria = (bekz *)malloc(sizeof(bekz));
+                                        for(i = 0; i<4; i++) Bberria->bektorea[i] = ema[i];
+                                        Bberria->next = _selected_argia->norabidea;
+                                        _selected_argia->norabidea = Bberria;
                                     break;
                                     case 'e':
-
+                                        _selected_argia->const_at -= 0.1;
+                                        if(_selected_argia->const_at < 0.0) _selected_argia->const_at += 0.1;
                                     break;
                                 }
                             break;
@@ -892,21 +1095,31 @@ void tekla_berezien_arretarako_funtzioa(int key, int x, int y){
                                 switch(aldaketa_mota){
                                     case 't':
                                         lortu_traslazio_matrizea(&(Mald[0]), 0.0, -1.0, 0.0);
-                                        matrize_bider_bektore(&(Mald[0]), &(_selected_argia->kokapena[0]));
+                                        matrize_bider_bektore(&(Mald[0]), &(_selected_argia->kokapena->bektorea[0]), &(ema[0]));
+                                        Bberria = (bekz *)malloc(sizeof(bekz));
+                                        for(i = 0; i<4; i++) Bberria->bektorea[i] = ema[i];
+                                        Bberria->next = _selected_argia->kokapena;
+                                        _selected_argia->kokapena = Bberria;
                                     break;
                                     case 'r':
                                         lortu_biratu_matrizea(&(Mald[0]), 0.0, -1.0, 0.0);
-                                        matrize_bider_bektore(&(Mald[0]), &(_selected_argia->kokapena[0]));
+                                        matrize_bider_bektore(&(Mald[0]), &(_selected_argia->kokapena->bektorea[0]), &(ema[0]));
+                                        Bberria = (bekz *)malloc(sizeof(bekz));
+                                        for(i = 0; i<4; i++) Bberria->bektorea[i] = ema[i];
+                                        Bberria->next = _selected_argia->kokapena;
+                                        _selected_argia->kokapena = Bberria;
                                     break;
                                     case 'e':
-
+                                        _selected_argia->const_at -= 0.1;
+                                        if(_selected_argia->const_at < 0.0) _selected_argia->const_at += 0.1;
                                     break;
                                 }
                             break;
                             case 'f':
                                 switch(aldaketa_mota){
                                     case 'e':
-
+                                        _selected_argia->const_at -= 0.1;
+                                        if(_selected_argia->const_at < 0.0) _selected_argia->const_at += 0.1;
                                     break;
                                 }
                             break;
@@ -984,10 +1197,15 @@ void tekla_berezien_arretarako_funtzioa(int key, int x, int y){
                                 switch(aldaketa_mota){
                                     case 'r':
                                         lortu_biratu_matrizea(&(Mald[0]), 0.0, 1.0, 0.0);
-                                        matrize_bider_bektore(&(Mald[0]), &(_selected_argia->norabidea[0]));
+                                        matrize_bider_bektore(&(Mald[0]), &(_selected_argia->norabidea->bektorea[0]), &(ema[0]));
+                                        Bberria = (bekz *)malloc(sizeof(bekz));
+                                        for(i = 0; i<4; i++) Bberria->bektorea[i] = ema[i];
+                                        Bberria->next = _selected_argia->norabidea;
+                                        _selected_argia->norabidea = Bberria;
                                     break;
                                     case 'e':
-
+                                        _selected_argia->lin_at += 0.1;
+                                        if(_selected_argia->lin_at > 1.0) _selected_argia->lin_at -= 0.1;
                                     break;
                                 }
                             break;
@@ -995,21 +1213,31 @@ void tekla_berezien_arretarako_funtzioa(int key, int x, int y){
                                 switch(aldaketa_mota){
                                     case 't':
                                         lortu_traslazio_matrizea(&(Mald[0]), 1.0, 0.0, 0.0);
-                                        matrize_bider_bektore(&(Mald[0]), &(_selected_argia->kokapena[0]));
+                                        matrize_bider_bektore(&(Mald[0]), &(_selected_argia->kokapena->bektorea[0]), &(ema[0]));
+                                        Bberria = (bekz *)malloc(sizeof(bekz));
+                                        for(i = 0; i<4; i++) Bberria->bektorea[i] = ema[i];
+                                        Bberria->next = _selected_argia->kokapena;
+                                        _selected_argia->kokapena = Bberria;
                                     break;
                                     case 'r':
                                         lortu_biratu_matrizea(&(Mald[0]), 1.0, 0.0, 0.0);
-                                        matrize_bider_bektore(&(Mald[0]), &(_selected_argia->kokapena[0]));
+                                        matrize_bider_bektore(&(Mald[0]), &(_selected_argia->kokapena->bektorea[0]), &(ema[0]));
+                                        Bberria = (bekz *)malloc(sizeof(bekz));
+                                        for(i = 0; i<4; i++) Bberria->bektorea[i] = ema[i];
+                                        Bberria->next = _selected_argia->kokapena;
+                                        _selected_argia->kokapena = Bberria;
                                     break;
                                     case 'e':
-
+                                        _selected_argia->lin_at += 0.1;
+                                        if(_selected_argia->lin_at > 1.0) _selected_argia->lin_at -= 0.1;
                                     break;
                                 }
                             break;
                             case 'f':
                                 switch(aldaketa_mota){
                                     case 'e':
-
+                                        _selected_argia->lin_at += 0.1;
+                                        if(_selected_argia->lin_at > 1.0) _selected_argia->lin_at -= 0.1;
                                     break;
                                 }
                             break;
@@ -1087,10 +1315,15 @@ void tekla_berezien_arretarako_funtzioa(int key, int x, int y){
                                 switch(aldaketa_mota){
                                     case 'r':
                                         lortu_biratu_matrizea(&(Mald[0]), 0.0, -1.0, 0.0);
-                                        matrize_bider_bektore(&(Mald[0]), &(_selected_argia->norabidea[0]));
+                                        matrize_bider_bektore(&(Mald[0]), &(_selected_argia->norabidea->bektorea[0]), &(ema[0]));
+                                        Bberria = (bekz *)malloc(sizeof(bekz));
+                                        for(i = 0; i<4; i++) Bberria->bektorea[i] = ema[i];
+                                        Bberria->next = _selected_argia->norabidea;
+                                        _selected_argia->norabidea = Bberria;
                                     break;
                                     case 'e':
-
+                                        _selected_argia->lin_at -= 0.1;
+                                        if(_selected_argia->lin_at < 0.0) _selected_argia->lin_at += 0.1;
                                     break;
                                 }
                             break;
@@ -1098,21 +1331,31 @@ void tekla_berezien_arretarako_funtzioa(int key, int x, int y){
                                 switch(aldaketa_mota){
                                     case 't':
                                         lortu_traslazio_matrizea(&(Mald[0]), -1.0, 0.0, 0.0);
-                                        matrize_bider_bektore(&(Mald[0]), &(_selected_argia->kokapena[0]));
+                                        matrize_bider_bektore(&(Mald[0]), &(_selected_argia->kokapena->bektorea[0]), &(ema[0]));
+                                        Bberria = (bekz *)malloc(sizeof(bekz));
+                                        for(i = 0; i<4; i++) Bberria->bektorea[i] = ema[i];
+                                        Bberria->next = _selected_argia->kokapena;
+                                        _selected_argia->kokapena = Bberria;
                                     break;
                                     case 'r':
                                         lortu_biratu_matrizea(&(Mald[0]), -1.0, 0.0, 0.0);
-                                        matrize_bider_bektore(&(Mald[0]), &(_selected_argia->kokapena[0]));
+                                        matrize_bider_bektore(&(Mald[0]), &(_selected_argia->kokapena->bektorea[0]), &(ema[0]));
+                                        Bberria = (bekz *)malloc(sizeof(bekz));
+                                        for(i = 0; i<4; i++) Bberria->bektorea[i] = ema[i];
+                                        Bberria->next = _selected_argia->kokapena;
+                                        _selected_argia->kokapena = Bberria;
                                     break;
                                     case 'e':
-
+                                        _selected_argia->lin_at -= 0.1;
+                                        if(_selected_argia->lin_at < 0.0) _selected_argia->lin_at += 0.1;
                                     break;
                                 }
                             break;
                             case 'f':
                                 switch(aldaketa_mota){
                                     case 'e':
-
+                                        _selected_argia->lin_at -= 0.1;
+                                        if(_selected_argia->lin_at < 0.0) _selected_argia->lin_at += 0.1;
                                     break;
                                 }
                             break;
@@ -1191,10 +1434,15 @@ void tekla_berezien_arretarako_funtzioa(int key, int x, int y){
                                 switch(aldaketa_mota){
                                     case 'r':
                                         lortu_biratu_matrizea(&(Mald[0]), 0.0, 0.0, 1.0);
-                                        matrize_bider_bektore(&(Mald[0]), &(_selected_argia->norabidea[0]));
+                                        matrize_bider_bektore(&(Mald[0]), &(_selected_argia->norabidea->bektorea[0]), &(ema[0]));
+                                        Bberria = (bekz *)malloc(sizeof(bekz));
+                                        for(i = 0; i<4; i++) Bberria->bektorea[i] = ema[i];
+                                        Bberria->next = _selected_argia->norabidea;
+                                        _selected_argia->norabidea = Bberria;
                                     break;
                                     case 'e':
-
+                                        _selected_argia->quad_at += 0.01;
+                                        if(_selected_argia->lin_at > 1.0) _selected_argia->lin_at -= 0.01;
                                     break;
                                 }
                             break;
@@ -1202,21 +1450,31 @@ void tekla_berezien_arretarako_funtzioa(int key, int x, int y){
                                 switch(aldaketa_mota){
                                     case 't':
                                         lortu_traslazio_matrizea(&(Mald[0]), 0.0, 0.0, 1.0);
-                                        matrize_bider_bektore(&(Mald[0]), &(_selected_argia->kokapena[0]));
+                                        matrize_bider_bektore(&(Mald[0]), &(_selected_argia->kokapena->bektorea[0]), &(ema[0]));
+                                        Bberria = (bekz *)malloc(sizeof(bekz));
+                                        for(i = 0; i<4; i++) Bberria->bektorea[i] = ema[i];
+                                        Bberria->next = _selected_argia->kokapena;
+                                        _selected_argia->kokapena = Bberria;
                                     break;
                                     case 'r':
                                         lortu_biratu_matrizea(&(Mald[0]), 0.0, 0.0, 1.0);
-                                        matrize_bider_bektore(&(Mald[0]), &(_selected_argia->kokapena[0]));
+                                        matrize_bider_bektore(&(Mald[0]), &(_selected_argia->kokapena->bektorea[0]), &(ema[0]));
+                                        Bberria = (bekz *)malloc(sizeof(bekz));
+                                        for(i = 0; i<4; i++) Bberria->bektorea[i] = ema[i];
+                                        Bberria->next = _selected_argia->kokapena;
+                                        _selected_argia->kokapena = Bberria;
                                     break;
                                     case 'e':
-
+                                        _selected_argia->quad_at += 0.01;
+                                        if(_selected_argia->lin_at > 1.0) _selected_argia->lin_at -= 0.01;
                                     break;
                                 }
                             break;
                             case 'f':
                                 switch(aldaketa_mota){
                                     case 'e':
-
+                                        _selected_argia->quad_at += 0.01;
+                                        if(_selected_argia->lin_at > 1.0) _selected_argia->lin_at -= 0.01;
                                     break;
                                 }
                             break;
@@ -1286,10 +1544,15 @@ void tekla_berezien_arretarako_funtzioa(int key, int x, int y){
                                 switch(aldaketa_mota){
                                     case 'r':
                                         lortu_biratu_matrizea(&(Mald[0]), 0.0, 0.0, -1.0);
-                                        matrize_bider_bektore(&(Mald[0]), &(_selected_argia->norabidea[0]));
+                                        matrize_bider_bektore(&(Mald[0]), &(_selected_argia->norabidea->bektorea[0]), &(ema[0]));
+                                        Bberria = (bekz *)malloc(sizeof(bekz));
+                                        for(i = 0; i<4; i++) Bberria->bektorea[i] = ema[i];
+                                        Bberria->next = _selected_argia->norabidea;
+                                        _selected_argia->norabidea = Bberria;
                                     break;
                                     case 'e':
-
+                                        _selected_argia->quad_at -= 0.01;
+                                        if(_selected_argia->lin_at < 0.0) _selected_argia->lin_at += 0.01;
                                     break;
                                 }
                             break;
@@ -1297,21 +1560,31 @@ void tekla_berezien_arretarako_funtzioa(int key, int x, int y){
                                 switch(aldaketa_mota){
                                     case 't':
                                         lortu_traslazio_matrizea(&(Mald[0]), 0.0, 0.0, -1.0);
-                                        matrize_bider_bektore(&(Mald[0]), &(_selected_argia->kokapena[0]));
+                                        matrize_bider_bektore(&(Mald[0]), &(_selected_argia->kokapena->bektorea[0]), &(ema[0]));
+                                        Bberria = (bekz *)malloc(sizeof(bekz));
+                                        for(i = 0; i<4; i++) Bberria->bektorea[i] = ema[i];
+                                        Bberria->next = _selected_argia->kokapena;
+                                        _selected_argia->kokapena = Bberria;
                                     break;
                                     case 'r':
                                         lortu_biratu_matrizea(&(Mald[0]), 0.0, 0.0, -1.0);
-                                        matrize_bider_bektore(&(Mald[0]), &(_selected_argia->kokapena[0]));
+                                        matrize_bider_bektore(&(Mald[0]), &(_selected_argia->kokapena->bektorea[0]), &(ema[0]));
+                                        Bberria = (bekz *)malloc(sizeof(bekz));
+                                        for(i = 0; i<4; i++) Bberria->bektorea[i] = ema[i];
+                                        Bberria->next = _selected_argia->kokapena;
+                                        _selected_argia->kokapena = Bberria;
                                     break;
                                     case 'e':
-
+                                        _selected_argia->quad_at -= 0.01;
+                                        if(_selected_argia->lin_at < 0.0) _selected_argia->lin_at += 0.01;
                                     break;
                                 }
                             break;
                             case 'f':
                                 switch(aldaketa_mota){
                                     case 'e':
-
+                                        _selected_argia->quad_at -= 0.01;
+                                        if(_selected_argia->lin_at < 0.0) _selected_argia->lin_at += 0.01;
                                     break;
                                 }
                             break;
@@ -1371,10 +1644,6 @@ void tekla_berezien_arretarako_funtzioa(int key, int x, int y){
             glEnable(GL_LIGHTING);
             argiak = 'b';
         }
-        break;
-    case GLUT_KEY_F11:
-        //MATERIALA FITXATEGI BATETIK KARGATU
-        //TODO
         break;
     case GLUT_KEY_F12:
         if(flat_smooth == 'f'){

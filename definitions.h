@@ -128,10 +128,17 @@ struct object3d{
 
 typedef struct object3d object3d;
 
+typedef struct bekz{
+    GLfloat bektorea[4];
+    struct bekz *next;
+}bekz;
+
 struct argia{
     int argi_zenb;  //zein argi den adierazten du
-    GLfloat kokapena[4];  //argia non dagoen kokatuta
-    GLfloat norabidea[4]; //argia noruntz dagoen begira
+    bekz *kokapena;  //argia non dagoen kokatuta
+    bekz *kokapena2;
+    bekz *norabidea; //argia noruntz dagoen begira
+    bekz *norabidea2;
     GLfloat angelua; 
     GLfloat intentsitatea;
     GLfloat const_at;

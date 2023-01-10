@@ -206,6 +206,7 @@ void reshape(int width, int height) {
  */
 void display(void) {
     double ESAM[16];
+    int i;
     GLint v_index, v, f;
     object3d *aux_obj = _first_object;
 
@@ -283,39 +284,59 @@ void display(void) {
         glLoadMatrixd(ESAM);
 
         //BONBILA
-        glLightfv(bonbila->argi_zenb, GL_POSITION, bonbila->kokapena);
+        glLightfv(bonbila->argi_zenb, GL_POSITION, bonbila->kokapena->bektorea);
         glLightf(bonbila->argi_zenb, GL_SPOT_CUTOFF, bonbila->angelua);
 
         //EGUZKIA
-        glLightfv(eguzkia->argi_zenb, GL_POSITION, eguzkia->norabidea);
+        glLightfv(eguzkia->argi_zenb, GL_POSITION, eguzkia->norabidea->bektorea);
 
         //FOKOA (objektua)
-        fokoa_obj->kokapena[0] = _selected_object->mzptr->matrize[12];
-        fokoa_obj->kokapena[1] = _selected_object->mzptr->matrize[13];
-        fokoa_obj->kokapena[2] = _selected_object->mzptr->matrize[14];
-        fokoa_obj->kokapena[3] = _selected_object->mzptr->matrize[15];
-        
-        fokoa_obj->norabidea[0] = _selected_object->mzptr->matrize[8];
-        fokoa_obj->norabidea[1] = _selected_object->mzptr->matrize[9];
-        fokoa_obj->norabidea[2] = _selected_object->mzptr->matrize[10];                
 
-        glLightfv(fokoa_obj->argi_zenb, GL_POSITION, fokoa->kokapena);
-        glLightfv(fokoa_obj->argi_zenb, GL_SPOT_DIRECTION, fokoa->norabidea);
+        GLfloat lag1[4];
+        GLfloat lag2[4];
+        lag1[0] = _selected_object->mzptr->matrize[12];
+        lag1[1] = _selected_object->mzptr->matrize[13];
+        lag1[2] = _selected_object->mzptr->matrize[14];
+        lag1[3] = _selected_object->mzptr->matrize[15];
+
+        lag2[0] = _selected_object->mzptr->matrize[8];
+        lag2[1] = _selected_object->mzptr->matrize[9];
+        lag2[2] = _selected_object->mzptr->matrize[10];
+
+        if(fokoa_obj->kokapena != 0) free(fokoa_obj->kokapena);
+        fokoa_obj->kokapena = (bekz *)malloc(sizeof(bekz));
+        for(i = 0; i<4; i++) fokoa_obj->kokapena->bektorea[i] = lag1[i];
+
+        if(fokoa_obj->norabidea != 0) free(fokoa_obj->norabidea);
+        fokoa_obj->norabidea = (bekz *)malloc(sizeof(bekz));
+        for(i = 0; i<4; i++) fokoa_obj->norabidea->bektorea[i] = lag2[i];               
+
+        glLightfv(fokoa_obj->argi_zenb, GL_POSITION, fokoa->kokapena->bektorea);
+        glLightfv(fokoa_obj->argi_zenb, GL_SPOT_DIRECTION, fokoa->norabidea->bektorea);
         glLightf(fokoa_obj->argi_zenb, GL_SPOT_CUTOFF, fokoa->angelua);
         glLightf(fokoa_obj->argi_zenb, GL_SPOT_EXPONENT, fokoa->intentsitatea);
 
         //FOKOA (kamera)
-        fokoa->kokapena[0] = _selected_kamera->mzptr->matrize[12];
-        fokoa->kokapena[1] = _selected_kamera->mzptr->matrize[13];
-        fokoa->kokapena[2] = _selected_kamera->mzptr->matrize[14];
-        fokoa->kokapena[3] = _selected_kamera->mzptr->matrize[15];
 
-        fokoa->norabidea[0] = -_selected_kamera->mzptr->matrize[8];
-        fokoa->norabidea[1] = -_selected_kamera->mzptr->matrize[9];
-        fokoa->norabidea[2] = -_selected_kamera->mzptr->matrize[10];        
+        lag1[0] = _selected_kamera->mzptr->matrize[12];
+        lag1[1] = _selected_kamera->mzptr->matrize[13];
+        lag1[2] = _selected_kamera->mzptr->matrize[14];
+        lag1[3] = _selected_kamera->mzptr->matrize[15];
 
-        glLightfv(fokoa->argi_zenb, GL_POSITION, fokoa->kokapena);
-        glLightfv(fokoa->argi_zenb, GL_SPOT_DIRECTION, fokoa->norabidea);
+        lag2[0] = _selected_kamera->mzptr->matrize[8];
+        lag2[1] = _selected_kamera->mzptr->matrize[9];
+        lag2[2] = _selected_kamera->mzptr->matrize[10];
+
+        if(fokoa->kokapena != 0) free(fokoa->kokapena);
+        fokoa->kokapena = (bekz *)malloc(sizeof(bekz));
+        for(i = 0; i<4; i++) fokoa->kokapena->bektorea[i] = lag1[i];
+
+        if(fokoa->norabidea != 0) free(fokoa->norabidea);
+        fokoa->norabidea = (bekz *)malloc(sizeof(bekz));
+        for(i = 0; i<4; i++) fokoa->norabidea->bektorea[i] = lag2[i];         
+
+        glLightfv(fokoa->argi_zenb, GL_POSITION, fokoa->kokapena->bektorea);
+        glLightfv(fokoa->argi_zenb, GL_SPOT_DIRECTION, fokoa->norabidea->bektorea);
         glLightf(fokoa->argi_zenb, GL_SPOT_CUTOFF, fokoa->angelua);
         glLightf(fokoa->argi_zenb, GL_SPOT_EXPONENT, fokoa->intentsitatea);
 

@@ -159,11 +159,14 @@ void initialization (){
 
     //BONBILA
 
-    bonbila = (argia *)malloc(sizeof(argia));
+    GLfloat lag[4];
+    lag[0] = 0.0; lag[1] = 10.0; lag[2] = 0.0; lag[3] = 1.0;
 
+    bonbila = (argia *)malloc(sizeof(argia));
     bonbila->argi_zenb = GL_LIGHT0;
-    bonbila->kokapena[0] = 0.0; bonbila->kokapena[1] = 10.0;
-    bonbila->kokapena[2] = 0.0; bonbila->kokapena[3] = 1.0;
+    bonbila->kokapena = (bekz *)malloc(sizeof(bekz));
+    for(i = 0; i<4; i++) bonbila->kokapena->bektorea[i] = lag[i];
+    bonbila->kokapena2 = (bekz *)malloc(sizeof(bekz));
     bonbila->angelua = 180.0;
     bonbila->argi_mota = 'b';
     bonbila->const_at = 1.0;
@@ -178,15 +181,19 @@ void initialization (){
     glLightfv(bonbila->argi_zenb, GL_DIFFUSE, horia);
     glLightfv(bonbila->argi_zenb, GL_SPECULAR, txuria);
 
-    glLightfv(bonbila->argi_zenb, GL_POSITION, bonbila->kokapena);
+    glLightfv(bonbila->argi_zenb, GL_POSITION, bonbila->kokapena->bektorea);
     glLightf(bonbila->argi_zenb, GL_SPOT_CUTOFF, bonbila->angelua);
 
     //EGUZKIA
 
+    //GLfloat lag[4];
+    lag[0] = 1.0; lag[1] = 0.0; lag[2] = 0.0; lag[3] = 0.0;
+
     eguzkia = (argia *)malloc(sizeof(argia));
     eguzkia->argi_zenb = GL_LIGHT1;
-    eguzkia->norabidea[0] = 1.0; eguzkia->norabidea[1] = 0.0;
-    eguzkia->norabidea[2] = 0.0; eguzkia->norabidea[3] = 0.0;
+    eguzkia->norabidea = (bekz *)malloc(sizeof(bekz));
+    for(i = 0; i<4; i++) eguzkia->norabidea->bektorea[i] = lag[i];
+    eguzkia->norabidea2 = (bekz *)malloc(sizeof(bekz));
     eguzkia->argi_mota = 'e';
     eguzkia->const_at = 1.0;
     eguzkia->lin_at = 0.2;
@@ -200,7 +207,7 @@ void initialization (){
     glLightfv(eguzkia->argi_zenb, GL_DIFFUSE, horia);
     glLightfv(eguzkia->argi_zenb, GL_SPECULAR, txuria);
 
-    glLightfv(eguzkia->argi_zenb, GL_POSITION, eguzkia->norabidea);
+    glLightfv(eguzkia->argi_zenb, GL_POSITION, eguzkia->norabidea->bektorea);
 
     //FOKOA (objektua)
 
@@ -226,18 +233,24 @@ void initialization (){
 
     //FOKOA (kamera)
 
+    GLfloat lag1[4];
+    GLfloat lag2[4];
+    lag1[0] = _selected_kamera->mzptr->matrize[12];
+    lag1[1] = _selected_kamera->mzptr->matrize[13];
+    lag1[2] = _selected_kamera->mzptr->matrize[14];
+    lag1[3] = _selected_kamera->mzptr->matrize[15];
+
+    lag2[0] = -_selected_kamera->mzptr->matrize[8];
+    lag2[1] = -_selected_kamera->mzptr->matrize[9];
+    lag2[2] = -_selected_kamera->mzptr->matrize[10];
+
+
     fokoa = (argia *)malloc(sizeof(argia));
     fokoa->argi_zenb = GL_LIGHT3;
-
-    fokoa->kokapena[0] = _selected_kamera->mzptr->matrize[12];
-    fokoa->kokapena[1] = _selected_kamera->mzptr->matrize[13];
-    fokoa->kokapena[2] = _selected_kamera->mzptr->matrize[14];
-    fokoa->kokapena[3] = _selected_kamera->mzptr->matrize[15];
-
-    fokoa->norabidea[0] = -_selected_kamera->mzptr->matrize[8];
-    fokoa->norabidea[1] = -_selected_kamera->mzptr->matrize[9];
-    fokoa->norabidea[2] = -_selected_kamera->mzptr->matrize[10];
-
+    fokoa->kokapena = (bekz *)malloc(sizeof(bekz));
+    for(i = 0; i<4; i++) fokoa->kokapena->bektorea[i] = lag1[i];
+    fokoa->norabidea = (bekz *)malloc(sizeof(bekz));
+    for(i = 0; i<4; i++) fokoa->norabidea->bektorea[i] = lag2[i];
     fokoa->angelua = 45.0;
     fokoa->intentsitatea = 0.7;
     fokoa->argi_mota = 'f';
@@ -253,8 +266,8 @@ void initialization (){
     glLightfv(fokoa->argi_zenb, GL_DIFFUSE, horia);
     glLightfv(fokoa->argi_zenb, GL_SPECULAR, txuria);
 
-    glLightfv(fokoa->argi_zenb, GL_POSITION, fokoa->kokapena);
-    glLightfv(fokoa->argi_zenb, GL_SPOT_DIRECTION, fokoa->norabidea);
+    glLightfv(fokoa->argi_zenb, GL_POSITION, fokoa->kokapena->bektorea);
+    glLightfv(fokoa->argi_zenb, GL_SPOT_DIRECTION, fokoa->norabidea->bektorea);
     glLightf(fokoa->argi_zenb, GL_SPOT_CUTOFF , fokoa->angelua);
     glLightf(fokoa->argi_zenb, GL_SPOT_EXPONENT, fokoa->intentsitatea);
 
