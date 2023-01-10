@@ -45,8 +45,8 @@ void initialization (){
     goikoa = 0.1;
     near = 0.1;
     far = 1000;
-    kam_mota = 'l';
     poligonoak = 'b';
+    kam_mota = 'l';
     argiak = 'b';
     argi1 = 'i';
     argi2 = 'i';

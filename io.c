@@ -24,6 +24,7 @@ extern char kam_mota;
 extern char poligonoak;
 extern char argiak, argi1, argi2, argi3, argi4, argi5, argi6, argi7, argi8;
 extern char flat_smooth;
+extern char intentsitatea;
 
 extern argia *bonbila, *eguzkia, *fokoa, *fokoa_obj, *_selected_argia;
 
@@ -459,7 +460,15 @@ void keyboard(unsigned char key, int x, int y) {
                         printf("Ez dago objekturik kargatuta\n");
                     }
                     break;
-                default:
+                case 'a':
+                    if(_selected_argia != 0){
+                        if(_selected_argia->argi_mota == 'f') {
+                            _selected_argia->angelua = _selected_argia->angelua - 5;
+                            if(_selected_argia->angelua < 0.0) _selected_argia->angelua = _selected_argia->angelua + 5;
+                        }
+                    }else{
+                        printf("Ez dago argirik aukeratuta\n");
+                    }
                     break;
             }
         
@@ -492,12 +501,18 @@ void keyboard(unsigned char key, int x, int y) {
                         printf("Ez dago objekturik kargatuta\n");
                     }
                     break;
-                default:
+                case 'a':
+                    if(_selected_argia != 0){
+                        if(_selected_argia->argi_mota == 'f') {
+                            _selected_argia->angelua = _selected_argia->angelua + 5;
+                            if(_selected_argia->angelua > 90.0) _selected_argia->angelua = _selected_argia->angelua - 5;
+                        }
+                    }else{
+                        printf("Ez dago argirik aukeratuta\n");
+                    }
                     break;
             }
-            
         break;
-
     case '?':
         print_help();
         break;
@@ -666,15 +681,19 @@ void keyboard(unsigned char key, int x, int y) {
         break;
     case 49: //1
         _selected_argia = bonbila;
+        printf("Bonbila aukeratuta\n");
         break;
     case 50: //2
         _selected_argia = eguzkia;
+        printf("Eguzkia aukeratuta\n");
         break;
     case 51: //3
         _selected_argia = fokoa_obj;
+        printf("Objektuari lotutako fokoa aukeratuta\n");
         break;
     case 52: //4
         _selected_argia = fokoa;
+        printf("Kamerari lotutako fokoa aukeratuta\n");
         break;
     default:
         /*In the default case we just print the code of the key. This is usefull to define new cases*/
@@ -756,8 +775,15 @@ void tekla_berezien_arretarako_funtzioa(int key, int x, int y){
                     if(_selected_argia != 0){
                         switch(_selected_argia->argi_mota){
                             case 'e':
-                                lortu_biratu_matrizea(&(Mald[0]), 1.0, 0.0, 0.0);
-                                matrize_bider_bektore(&(Mald[0]), &(_selected_argia->norabidea[0]));
+                                switch(aldaketa_mota){
+                                    case 'r':
+                                        lortu_biratu_matrizea(&(Mald[0]), 1.0, 0.0, 0.0);
+                                        matrize_bider_bektore(&(Mald[0]), &(_selected_argia->norabidea[0]));
+                                    break;
+                                    case 'e':
+
+                                    break;
+                                }
                             break;
                             case 'b':
                                 switch(aldaketa_mota){
@@ -768,6 +794,16 @@ void tekla_berezien_arretarako_funtzioa(int key, int x, int y){
                                     case 'r':
                                         lortu_biratu_matrizea(&(Mald[0]), 0.0, 1.0, 0.0);
                                         matrize_bider_bektore(&(Mald[0]), &(_selected_argia->kokapena[0]));
+                                    break;
+                                    case 'e':
+
+                                    break;
+                                }
+                            break;
+                            case 'f':
+                                switch(aldaketa_mota){
+                                    case 'e':
+
                                     break;
                                 }
                             break;
@@ -842,8 +878,15 @@ void tekla_berezien_arretarako_funtzioa(int key, int x, int y){
                     if(_selected_argia != 0){
                         switch(_selected_argia->argi_mota){
                             case 'e':
-                                lortu_biratu_matrizea(&(Mald[0]), -1.0, 0.0, 0.0);
-                                matrize_bider_bektore(&(Mald[0]), &(_selected_argia->norabidea[0]));
+                                switch(aldaketa_mota){
+                                    case 'r':
+                                        lortu_biratu_matrizea(&(Mald[0]), -1.0, 0.0, 0.0);
+                                        matrize_bider_bektore(&(Mald[0]), &(_selected_argia->norabidea[0]));
+                                    break;
+                                    case 'e':
+
+                                    break;
+                                }
                             break;
                             case 'b':
                                 switch(aldaketa_mota){
@@ -854,6 +897,16 @@ void tekla_berezien_arretarako_funtzioa(int key, int x, int y){
                                     case 'r':
                                         lortu_biratu_matrizea(&(Mald[0]), 0.0, -1.0, 0.0);
                                         matrize_bider_bektore(&(Mald[0]), &(_selected_argia->kokapena[0]));
+                                    break;
+                                    case 'e':
+
+                                    break;
+                                }
+                            break;
+                            case 'f':
+                                switch(aldaketa_mota){
+                                    case 'e':
+
                                     break;
                                 }
                             break;
@@ -928,8 +981,15 @@ void tekla_berezien_arretarako_funtzioa(int key, int x, int y){
                     if(_selected_argia != 0){
                         switch(_selected_argia->argi_mota){
                             case 'e':
-                                lortu_biratu_matrizea(&(Mald[0]), 0.0, 1.0, 0.0);
-                                matrize_bider_bektore(&(Mald[0]), &(_selected_argia->norabidea[0]));
+                                switch(aldaketa_mota){
+                                    case 'r':
+                                        lortu_biratu_matrizea(&(Mald[0]), 0.0, 1.0, 0.0);
+                                        matrize_bider_bektore(&(Mald[0]), &(_selected_argia->norabidea[0]));
+                                    break;
+                                    case 'e':
+
+                                    break;
+                                }
                             break;
                             case 'b':
                                 switch(aldaketa_mota){
@@ -940,6 +1000,16 @@ void tekla_berezien_arretarako_funtzioa(int key, int x, int y){
                                     case 'r':
                                         lortu_biratu_matrizea(&(Mald[0]), 1.0, 0.0, 0.0);
                                         matrize_bider_bektore(&(Mald[0]), &(_selected_argia->kokapena[0]));
+                                    break;
+                                    case 'e':
+
+                                    break;
+                                }
+                            break;
+                            case 'f':
+                                switch(aldaketa_mota){
+                                    case 'e':
+
                                     break;
                                 }
                             break;
@@ -1014,8 +1084,15 @@ void tekla_berezien_arretarako_funtzioa(int key, int x, int y){
                     if(_selected_argia != 0){
                         switch(_selected_argia->argi_mota){
                             case 'e':
-                                lortu_biratu_matrizea(&(Mald[0]), 0.0, -1.0, 0.0);
-                                matrize_bider_bektore(&(Mald[0]), &(_selected_argia->norabidea[0]));
+                                switch(aldaketa_mota){
+                                    case 'r':
+                                        lortu_biratu_matrizea(&(Mald[0]), 0.0, -1.0, 0.0);
+                                        matrize_bider_bektore(&(Mald[0]), &(_selected_argia->norabidea[0]));
+                                    break;
+                                    case 'e':
+
+                                    break;
+                                }
                             break;
                             case 'b':
                                 switch(aldaketa_mota){
@@ -1026,6 +1103,16 @@ void tekla_berezien_arretarako_funtzioa(int key, int x, int y){
                                     case 'r':
                                         lortu_biratu_matrizea(&(Mald[0]), -1.0, 0.0, 0.0);
                                         matrize_bider_bektore(&(Mald[0]), &(_selected_argia->kokapena[0]));
+                                    break;
+                                    case 'e':
+
+                                    break;
+                                }
+                            break;
+                            case 'f':
+                                switch(aldaketa_mota){
+                                    case 'e':
+
                                     break;
                                 }
                             break;
@@ -1101,8 +1188,15 @@ void tekla_berezien_arretarako_funtzioa(int key, int x, int y){
                     if(_selected_argia != 0){
                         switch(_selected_argia->argi_mota){
                             case 'e':
-                                lortu_biratu_matrizea(&(Mald[0]), 0.0, 0.0, 1.0);
-                                matrize_bider_bektore(&(Mald[0]), &(_selected_argia->norabidea[0]));
+                                switch(aldaketa_mota){
+                                    case 'r':
+                                        lortu_biratu_matrizea(&(Mald[0]), 0.0, 0.0, 1.0);
+                                        matrize_bider_bektore(&(Mald[0]), &(_selected_argia->norabidea[0]));
+                                    break;
+                                    case 'e':
+
+                                    break;
+                                }
                             break;
                             case 'b':
                                 switch(aldaketa_mota){
@@ -1113,6 +1207,16 @@ void tekla_berezien_arretarako_funtzioa(int key, int x, int y){
                                     case 'r':
                                         lortu_biratu_matrizea(&(Mald[0]), 0.0, 0.0, 1.0);
                                         matrize_bider_bektore(&(Mald[0]), &(_selected_argia->kokapena[0]));
+                                    break;
+                                    case 'e':
+
+                                    break;
+                                }
+                            break;
+                            case 'f':
+                                switch(aldaketa_mota){
+                                    case 'e':
+
                                     break;
                                 }
                             break;
@@ -1179,8 +1283,15 @@ void tekla_berezien_arretarako_funtzioa(int key, int x, int y){
                     if(_selected_argia != 0){
                         switch(_selected_argia->argi_mota){
                             case 'e':
-                                lortu_biratu_matrizea(&(Mald[0]), 0.0, 0.0, -1.0);
-                                matrize_bider_bektore(&(Mald[0]), &(_selected_argia->norabidea[0]));
+                                switch(aldaketa_mota){
+                                    case 'r':
+                                        lortu_biratu_matrizea(&(Mald[0]), 0.0, 0.0, -1.0);
+                                        matrize_bider_bektore(&(Mald[0]), &(_selected_argia->norabidea[0]));
+                                    break;
+                                    case 'e':
+
+                                    break;
+                                }
                             break;
                             case 'b':
                                 switch(aldaketa_mota){
@@ -1191,6 +1302,16 @@ void tekla_berezien_arretarako_funtzioa(int key, int x, int y){
                                     case 'r':
                                         lortu_biratu_matrizea(&(Mald[0]), 0.0, 0.0, -1.0);
                                         matrize_bider_bektore(&(Mald[0]), &(_selected_argia->kokapena[0]));
+                                    break;
+                                    case 'e':
+
+                                    break;
+                                }
+                            break;
+                            case 'f':
+                                switch(aldaketa_mota){
+                                    case 'e':
+
                                     break;
                                 }
                             break;

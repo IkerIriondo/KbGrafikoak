@@ -269,7 +269,7 @@ void display(void) {
             glShadeModel(GL_FLAT);
         }        
 
-        if(kam_mota == 'o'){
+        if(kam_mota == '0'){
             glFrustum(_selected_kamera->min.x, _selected_kamera->max.x, _selected_kamera->min.y, _selected_kamera->max.y, _selected_kamera->min.z, _selected_kamera->max.z);
             esam_matrizea_lortu(&(ESAM[0]),_selected_object->mzptr->matrize);
         }else{
