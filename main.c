@@ -167,7 +167,7 @@ void initialization (){
     bonbila->angelua = 180.0;
     bonbila->argi_mota = 'b';
     bonbila->const_at = 1.0;
-    bonbila->lin_at = 0.0;
+    bonbila->lin_at = 0.2;
     bonbila->quad_at = 0.0;
 
     glLightf(bonbila->argi_zenb, GL_CONSTANT_ATTENUATION, bonbila->const_at);
@@ -189,7 +189,7 @@ void initialization (){
     eguzkia->norabidea[2] = 0.0; eguzkia->norabidea[3] = 0.0;
     eguzkia->argi_mota = 'e';
     eguzkia->const_at = 1.0;
-    eguzkia->lin_at = 0.0;
+    eguzkia->lin_at = 0.2;
     eguzkia->quad_at = 0.0;
 
     glLightf(eguzkia->argi_zenb, GL_CONSTANT_ATTENUATION, eguzkia->const_at);
@@ -212,7 +212,7 @@ void initialization (){
     fokoa_obj->intentsitatea = 0.7;
     fokoa_obj->argi_mota = 'f';
     fokoa_obj->const_at = 1.0;
-    fokoa_obj->lin_at = 0.0;
+    fokoa_obj->lin_at = 0.2;
     fokoa_obj->quad_at = 0.0;
 
     glLightf(fokoa_obj->argi_zenb, GL_CONSTANT_ATTENUATION, fokoa_obj->const_at);
@@ -242,7 +242,7 @@ void initialization (){
     fokoa->intentsitatea = 0.7;
     fokoa->argi_mota = 'f';
     fokoa->const_at = 1.0;
-    fokoa->lin_at = 0.0;
+    fokoa->lin_at = 0.2;
     fokoa->quad_at = 0.0;
 
     glLightf(fokoa->argi_zenb, GL_CONSTANT_ATTENUATION, fokoa->const_at);

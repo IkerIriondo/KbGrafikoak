@@ -244,6 +244,15 @@ bool ahal_da_aurrera(){
 
 }
 
+void matrize_bider_bektore(double *mat, GLfloat *v){
+
+    v[0] = v[0]*mat[0] + v[1]*mat[4] + v[2]*mat[8]  + v[3]*mat[12];
+    v[1] = v[0]*mat[1] + v[1]*mat[5] + v[2]*mat[9]  + v[3]*mat[13];
+    v[2] = v[0]*mat[2] + v[1]*mat[6] + v[2]*mat[10] + v[3]*mat[14];
+    v[3] = v[0]*mat[3] + v[1]*mat[7] + v[2]*mat[11] + v[3]*mat[15];
+
+}
+
 /**
  * @brief Callback function to control the basic keys
  * @param key Key that has been pressed
@@ -744,7 +753,28 @@ void tekla_berezien_arretarako_funtzioa(int key, int x, int y){
                     }
                     break;
                 case 'a':
-
+                    if(_selected_argia != 0){
+                        switch(_selected_argia->argi_mota){
+                            case 'e':
+                                lortu_biratu_matrizea(&(Mald[0]), 1.0, 0.0, 0.0);
+                                matrize_bider_bektore(&(Mald[0]), &(_selected_argia->norabidea[0]));
+                            break;
+                            case 'b':
+                                switch(aldaketa_mota){
+                                    case 't':
+                                        lortu_traslazio_matrizea(&(Mald[0]), 0.0, 1.0, 0.0);
+                                        matrize_bider_bektore(&(Mald[0]), &(_selected_argia->kokapena[0]));
+                                    break;
+                                    case 'r':
+                                        lortu_biratu_matrizea(&(Mald[0]), 0.0, 1.0, 0.0);
+                                        matrize_bider_bektore(&(Mald[0]), &(_selected_argia->kokapena[0]));
+                                    break;
+                                }
+                            break;
+                        }
+                    }else{
+                        printf("Ez dago argirik aukeratuta\n");
+                    }
                     break;
                 default:
                     break;
@@ -809,7 +839,28 @@ void tekla_berezien_arretarako_funtzioa(int key, int x, int y){
                     }
                     break;
                 case 'a':
-
+                    if(_selected_argia != 0){
+                        switch(_selected_argia->argi_mota){
+                            case 'e':
+                                lortu_biratu_matrizea(&(Mald[0]), -1.0, 0.0, 0.0);
+                                matrize_bider_bektore(&(Mald[0]), &(_selected_argia->norabidea[0]));
+                            break;
+                            case 'b':
+                                switch(aldaketa_mota){
+                                    case 't':
+                                        lortu_traslazio_matrizea(&(Mald[0]), 0.0, -1.0, 0.0);
+                                        matrize_bider_bektore(&(Mald[0]), &(_selected_argia->kokapena[0]));
+                                    break;
+                                    case 'r':
+                                        lortu_biratu_matrizea(&(Mald[0]), 0.0, -1.0, 0.0);
+                                        matrize_bider_bektore(&(Mald[0]), &(_selected_argia->kokapena[0]));
+                                    break;
+                                }
+                            break;
+                        }
+                    }else{
+                        printf("Ez dago argirik aukeratuta\n");
+                    }
                     break;
                 default:
                     break;
@@ -874,7 +925,28 @@ void tekla_berezien_arretarako_funtzioa(int key, int x, int y){
                     }
                     break;
                 case 'a':
-
+                    if(_selected_argia != 0){
+                        switch(_selected_argia->argi_mota){
+                            case 'e':
+                                lortu_biratu_matrizea(&(Mald[0]), 0.0, 1.0, 0.0);
+                                matrize_bider_bektore(&(Mald[0]), &(_selected_argia->norabidea[0]));
+                            break;
+                            case 'b':
+                                switch(aldaketa_mota){
+                                    case 't':
+                                        lortu_traslazio_matrizea(&(Mald[0]), 1.0, 0.0, 0.0);
+                                        matrize_bider_bektore(&(Mald[0]), &(_selected_argia->kokapena[0]));
+                                    break;
+                                    case 'r':
+                                        lortu_biratu_matrizea(&(Mald[0]), 1.0, 0.0, 0.0);
+                                        matrize_bider_bektore(&(Mald[0]), &(_selected_argia->kokapena[0]));
+                                    break;
+                                }
+                            break;
+                        }
+                    }else{
+                        printf("Ez dago argirik aukeratuta\n");
+                    }
                     break;
                 default:
                     break;
@@ -939,7 +1011,28 @@ void tekla_berezien_arretarako_funtzioa(int key, int x, int y){
                     }
                     break;
                 case 'a':
-
+                    if(_selected_argia != 0){
+                        switch(_selected_argia->argi_mota){
+                            case 'e':
+                                lortu_biratu_matrizea(&(Mald[0]), 0.0, -1.0, 0.0);
+                                matrize_bider_bektore(&(Mald[0]), &(_selected_argia->norabidea[0]));
+                            break;
+                            case 'b':
+                                switch(aldaketa_mota){
+                                    case 't':
+                                        lortu_traslazio_matrizea(&(Mald[0]), -1.0, 0.0, 0.0);
+                                        matrize_bider_bektore(&(Mald[0]), &(_selected_argia->kokapena[0]));
+                                    break;
+                                    case 'r':
+                                        lortu_biratu_matrizea(&(Mald[0]), -1.0, 0.0, 0.0);
+                                        matrize_bider_bektore(&(Mald[0]), &(_selected_argia->kokapena[0]));
+                                    break;
+                                }
+                            break;
+                        }
+                    }else{
+                        printf("Ez dago argirik aukeratuta\n");
+                    }
                     break;
                 default:
                     break;
@@ -1005,7 +1098,28 @@ void tekla_berezien_arretarako_funtzioa(int key, int x, int y){
                     }
                     break;
                 case 'a':
-
+                    if(_selected_argia != 0){
+                        switch(_selected_argia->argi_mota){
+                            case 'e':
+                                lortu_biratu_matrizea(&(Mald[0]), 0.0, 0.0, 1.0);
+                                matrize_bider_bektore(&(Mald[0]), &(_selected_argia->norabidea[0]));
+                            break;
+                            case 'b':
+                                switch(aldaketa_mota){
+                                    case 't':
+                                        lortu_traslazio_matrizea(&(Mald[0]), 0.0, 0.0, 1.0);
+                                        matrize_bider_bektore(&(Mald[0]), &(_selected_argia->kokapena[0]));
+                                    break;
+                                    case 'r':
+                                        lortu_biratu_matrizea(&(Mald[0]), 0.0, 0.0, 1.0);
+                                        matrize_bider_bektore(&(Mald[0]), &(_selected_argia->kokapena[0]));
+                                    break;
+                                }
+                            break;
+                        }
+                    }else{
+                        printf("Ez dago argirik aukeratuta\n");
+                    }
                     break;
                 default:
                     break;
@@ -1062,7 +1176,28 @@ void tekla_berezien_arretarako_funtzioa(int key, int x, int y){
                     }
                     break;
                 case 'a':
-
+                    if(_selected_argia != 0){
+                        switch(_selected_argia->argi_mota){
+                            case 'e':
+                                lortu_biratu_matrizea(&(Mald[0]), 0.0, 0.0, -1.0);
+                                matrize_bider_bektore(&(Mald[0]), &(_selected_argia->norabidea[0]));
+                            break;
+                            case 'b':
+                                switch(aldaketa_mota){
+                                    case 't':
+                                        lortu_traslazio_matrizea(&(Mald[0]), 0.0, 0.0, -1.0);
+                                        matrize_bider_bektore(&(Mald[0]), &(_selected_argia->kokapena[0]));
+                                    break;
+                                    case 'r':
+                                        lortu_biratu_matrizea(&(Mald[0]), 0.0, 0.0, -1.0);
+                                        matrize_bider_bektore(&(Mald[0]), &(_selected_argia->kokapena[0]));
+                                    break;
+                                }
+                            break;
+                        }
+                    }else{
+                        printf("Ez dago argirik aukeratuta\n");
+                    }
                     break;
                 default:
                     break;
@@ -1106,6 +1241,15 @@ void tekla_berezien_arretarako_funtzioa(int key, int x, int y){
             glDisable(fokoa->argi_zenb);
             argi4 = 'i';
         }    
+        break;
+    case GLUT_KEY_F9:
+        if(argiak == 'b'){
+            glDisable(GL_LIGHTING);
+            argiak = 'e';
+        }else{
+            glEnable(GL_LIGHTING);
+            argiak = 'b';
+        }
         break;
     case GLUT_KEY_F11:
         //MATERIALA FITXATEGI BATETIK KARGATU

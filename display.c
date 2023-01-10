@@ -319,6 +319,16 @@ void display(void) {
         glLightf(fokoa->argi_zenb, GL_SPOT_CUTOFF, fokoa->angelua);
         glLightf(fokoa->argi_zenb, GL_SPOT_EXPONENT, fokoa->intentsitatea);
 
+        glDisable(GL_COLOR_MATERIAL);
+
+        GLfloat ambient [4] = {0.19125 , 0.0735 , 0.0225 , 1.0};
+        GLfloat diffuse [4] = {0.7038 , 0.27048 , 0.0828 , 1.0};
+        GLfloat specular [4] = {0.256777 , 0.137622 , 0.0806014 , 1.0};
+        glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, ambient);
+        glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, diffuse);
+        glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, specular);
+        glMaterialf (GL_FRONT_AND_BACK, GL_SHININESS, 12.8);
+
         glMultMatrixd(aux_obj->mzptr->matrize);
 
         //Erpinen bektore normalak marrazteko
