@@ -309,7 +309,7 @@ void display(void) {
 
         if(fokoa_obj->norabidea != 0) free(fokoa_obj->norabidea);
         fokoa_obj->norabidea = (bekz *)malloc(sizeof(bekz));
-        for(i = 0; i<4; i++) fokoa_obj->norabidea->bektorea[i] = lag2[i];               
+        for(i = 0; i<3; i++) fokoa_obj->norabidea->bektorea[i] = lag2[i];               
 
         glLightfv(fokoa_obj->argi_zenb, GL_POSITION, fokoa->kokapena->bektorea);
         glLightfv(fokoa_obj->argi_zenb, GL_SPOT_DIRECTION, fokoa->norabidea->bektorea);
@@ -323,9 +323,9 @@ void display(void) {
         lag1[2] = _selected_kamera->mzptr->matrize[14];
         lag1[3] = _selected_kamera->mzptr->matrize[15];
 
-        lag2[0] = _selected_kamera->mzptr->matrize[8];
-        lag2[1] = _selected_kamera->mzptr->matrize[9];
-        lag2[2] = _selected_kamera->mzptr->matrize[10];
+        lag2[0] = -_selected_kamera->mzptr->matrize[8];
+        lag2[1] = -_selected_kamera->mzptr->matrize[9];
+        lag2[2] = -_selected_kamera->mzptr->matrize[10];
 
         if(fokoa->kokapena != 0) free(fokoa->kokapena);
         fokoa->kokapena = (bekz *)malloc(sizeof(bekz));

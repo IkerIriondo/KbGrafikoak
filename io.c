@@ -147,12 +147,11 @@ void print_help_arg(){
     printf("<F>\t\t Objektua bat kargatu\n");
     printf("<TAB>\t\t Kargaturiko objektuen artean bat hautatu\n");
     printf("<DEL>\t\t Hautatutako objektua ezabatu\n");
-    printf("<->\t\t Ikuste bolumena txikitu\n");
-    printf("<+>\t\t Ikuste bolumena handitu\n");
+    printf("<->\t\t Fokoaren angelua txikitu\n");
+    printf("<+>\t\t Fokoaren angelua handitu\n");
     printf("<I>\t\t Objektuaren informazioa bistaratu\n");
     printf("<k>\t\t Hurrengo kameraren ikuspegia erakutsi\n");
     printf("<K>\t\t Objektuaren ikuspegia erakutsi\n");
-
     printf("<T>\t\t Traslazioa aktibatu\n");
     printf("<R>\t\t Biraketa aktibatu\n");
     printf("<G>\t\t Kamera analisi moduan jarri\n");
@@ -161,15 +160,21 @@ void print_help_arg(){
     printf("<C>\t\t Aldaketak kamerari\n");
     printf("<A>\t\t Aldaketak argiei\n");
     printf("<Z>\t\t Aldaketak desegin\n");
-    printf("<Z + CTRL>\t Aldaketak desegin");
     printf("<B>\t\t Aldaketak berregin\n");
-    printf("<B + CTRL>\t Aldaketak berregin");
-    printf("<GORA>\t\t -X ardatzarekiko biratu\n");
-    printf("<BEHERA>\t +X ardatzarekiko biratu\n");
-    printf("<ESKUIN>\t +Y ardatzarekiko biratu\n");
-    printf("<EZKER>\t\t -Y ardatzarekiko biratu\n");
-    printf("<AVPAG>\t\t +Z ardatzarekiko biratu | Kamera aurrera eraman\n");
-    printf("<REPAG>\t\t -Z ardatzarekiko biratu | Kamera atzera eraman\n");
+    printf("<F1>\t\t Bonbila piztu/itzali\n");
+    printf("<F2>\t\t Eguzkia piztu/itzali\n");
+    printf("<F3>\t\t Objektuari lotutako fokoa piztu/itzali\n");
+    printf("<F4>\t\t Kamerari lotutako fokoa piztu/itzali\n");
+    printf("<1>\t\t Bonbila aukeratu\n");
+    printf("<2>\t\t Eguzkia aukeratu\n");
+    printf("<3>\t\t Objektuari lotutako fokoa aukeratu\n");
+    printf("<4>\t\t Kamerari lotutako fokua aukeratu\n");
+    printf("<GORA>\t\t Bonbila mugitu +Y | Eguzkia biratu -X\n");
+    printf("<BEHERA>\t Bonbila mugitu -Y | Eguzkia biratu +X\n");
+    printf("<ESKUIN>\t Bonbila mugitu +X | Eguzkia biratu +Y\n");
+    printf("<EZKER>\t\t Bonbila mugitu -X | Eguzkia biratu -Y\n");
+    printf("<AVPAG>\t\t Bonbila mugitu +Z | Eguzkia biratu +Z\n");
+    printf("<REPAG>\t\t Bonbila mugitu -Z | Eguzkia biratu -Z\n");
     printf("\n\n");
 }
 
