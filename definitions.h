@@ -132,9 +132,11 @@ struct argia{
     int argi_zenb;  //zein argi den adierazten du
     GLfloat kokapena[4];  //argia non dagoen kokatuta
     GLfloat norabidea[4]; //argia noruntz dagoen begira
-    GLfloat norabidea2[3]; //Fokoarentzako
     GLfloat angelua; 
     GLfloat intentsitatea;
+    GLfloat const_at;
+    GLfloat lin_at;
+    GLfloat quad_at;
     char argi_mota; //f(fokua), e(eguzkia), b(bonbila)
     struct argia *next;
 };

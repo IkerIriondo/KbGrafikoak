@@ -333,11 +333,6 @@ void display(void) {
             glEnd();
         }*/
 
-        /*glLightfv(bonbila->argi_zenb, GL_POSITION , bonbila->kokapena);
-        glLightf(bonbila->argi_zenb, GL_SPOT_CUTOFF , 180.0);
-
-        glLightfv(eguzkia->argi_zenb, GL_POSITION, eguzkia->norabidea);*/
-
         for (f = 0; f < aux_obj->num_faces; f++) {
             glBegin(GL_POLYGON);
             if(poligonoak == 'b'){

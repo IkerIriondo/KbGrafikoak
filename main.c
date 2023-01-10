@@ -166,6 +166,13 @@ void initialization (){
     bonbila->kokapena[2] = 0.0; bonbila->kokapena[3] = 1.0;
     bonbila->angelua = 180.0;
     bonbila->argi_mota = 'b';
+    bonbila->const_at = 1.0;
+    bonbila->lin_at = 0.0;
+    bonbila->quad_at = 0.0;
+
+    glLightf(bonbila->argi_zenb, GL_CONSTANT_ATTENUATION, bonbila->const_at);
+    glLightf(bonbila->argi_zenb, GL_LINEAR_ATTENUATION, bonbila->lin_at);
+    glLightf(bonbila->argi_zenb, GL_QUADRATIC_ATTENUATION, bonbila->quad_at);
 
     glLightfv(bonbila->argi_zenb, GL_AMBIENT, grisa);
     glLightfv(bonbila->argi_zenb, GL_DIFFUSE, horia);
@@ -181,6 +188,13 @@ void initialization (){
     eguzkia->norabidea[0] = 1.0; eguzkia->norabidea[1] = 0.0;
     eguzkia->norabidea[2] = 0.0; eguzkia->norabidea[3] = 0.0;
     eguzkia->argi_mota = 'e';
+    eguzkia->const_at = 1.0;
+    eguzkia->lin_at = 0.0;
+    eguzkia->quad_at = 0.0;
+
+    glLightf(eguzkia->argi_zenb, GL_CONSTANT_ATTENUATION, eguzkia->const_at);
+    glLightf(eguzkia->argi_zenb, GL_LINEAR_ATTENUATION, eguzkia->lin_at);
+    glLightf(eguzkia->argi_zenb, GL_QUADRATIC_ATTENUATION, eguzkia->quad_at);
 
     glLightfv(eguzkia->argi_zenb, GL_AMBIENT, grisa);
     glLightfv(eguzkia->argi_zenb, GL_DIFFUSE, horia);
@@ -197,6 +211,13 @@ void initialization (){
     fokoa_obj->angelua = 45.0;
     fokoa_obj->intentsitatea = 0.7;
     fokoa_obj->argi_mota = 'f';
+    fokoa_obj->const_at = 1.0;
+    fokoa_obj->lin_at = 0.0;
+    fokoa_obj->quad_at = 0.0;
+
+    glLightf(fokoa_obj->argi_zenb, GL_CONSTANT_ATTENUATION, fokoa_obj->const_at);
+    glLightf(fokoa_obj->argi_zenb, GL_LINEAR_ATTENUATION, fokoa_obj->lin_at);
+    glLightf(fokoa_obj->argi_zenb, GL_QUADRATIC_ATTENUATION, fokoa_obj->quad_at);
 
     glLightfv(fokoa_obj->argi_zenb, GL_AMBIENT, grisa);
     glLightfv(fokoa_obj->argi_zenb, GL_DIFFUSE, horia);
@@ -220,13 +241,20 @@ void initialization (){
     fokoa->angelua = 45.0;
     fokoa->intentsitatea = 0.7;
     fokoa->argi_mota = 'f';
+    fokoa->const_at = 1.0;
+    fokoa->lin_at = 0.0;
+    fokoa->quad_at = 0.0;
+
+    glLightf(fokoa->argi_zenb, GL_CONSTANT_ATTENUATION, fokoa->const_at);
+    glLightf(fokoa->argi_zenb, GL_LINEAR_ATTENUATION, fokoa->lin_at);
+    glLightf(fokoa->argi_zenb, GL_QUADRATIC_ATTENUATION, fokoa->quad_at);
 
     glLightfv(fokoa->argi_zenb, GL_AMBIENT, grisa);
     glLightfv(fokoa->argi_zenb, GL_DIFFUSE, horia);
     glLightfv(fokoa->argi_zenb, GL_SPECULAR, txuria);
 
     glLightfv(fokoa->argi_zenb, GL_POSITION, fokoa->kokapena);
-    glLightfv(fokoa->argi_zenb, GL_SPOT_DIRECTION, fokoa->norabidea2);
+    glLightfv(fokoa->argi_zenb, GL_SPOT_DIRECTION, fokoa->norabidea);
     glLightf(fokoa->argi_zenb, GL_SPOT_CUTOFF , fokoa->angelua);
     glLightf(fokoa->argi_zenb, GL_SPOT_EXPONENT, fokoa->intentsitatea);
 

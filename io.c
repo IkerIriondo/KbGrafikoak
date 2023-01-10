@@ -667,18 +667,6 @@ void keyboard(unsigned char key, int x, int y) {
     case 52: //4
         _selected_argia = fokoa;
         break;
-    case 53: //5
-
-        break;
-    case 54: //6
-
-        break;
-    case 55: //7
-
-        break;
-    case 56: //8
-
-        break;
     default:
         /*In the default case we just print the code of the key. This is usefull to define new cases*/
         printf("%d %c\n", key, key);
@@ -1119,56 +1107,9 @@ void tekla_berezien_arretarako_funtzioa(int key, int x, int y){
             argi4 = 'i';
         }    
         break;
-    case GLUT_KEY_F5:
-        if(argi5 == 'i'){
-            glEnable(GL_LIGHT4);
-            argi5 = 'p';
-        }else{
-            glDisable(GL_LIGHT4);
-            argi5 = 'i';
-        }
-        break;
-    case GLUT_KEY_F6:
-        if(argi6 == 'i'){
-            glEnable(GL_LIGHT5);
-            argi6 = 'p';
-        }else{
-            glDisable(GL_LIGHT5);
-            argi6 = 'i';
-        }
-        break;
-    case GLUT_KEY_F7:
-        if(argi7 == 'i'){
-            glEnable(GL_LIGHT6);
-            argi7 = 'p';
-        }else{
-            glDisable(GL_LIGHT6);
-            argi7 = 'i';
-        }
-        break;
-    case GLUT_KEY_F8:
-        if(argi8 == 'i'){
-            glEnable(GL_LIGHT7);
-            argi8 = 'p';
-        }else{
-            glDisable(GL_LIGHT7);
-            argi8 = 'i';
-        }
-        break;
-    case GLUT_KEY_F9:
-        if(argiak == 'b'){
-            glDisable(GL_LIGHTING);
-            argiak = 'e';
-        }else{
-            glEnable(GL_LIGHTING);
-            argiak = 'b';
-        }
-        break;
-    case GLUT_KEY_F10:
-        //EZER
-        break;
     case GLUT_KEY_F11:
-
+        //MATERIALA FITXATEGI BATETIK KARGATU
+        //TODO
         break;
     case GLUT_KEY_F12:
         if(flat_smooth == 'f'){
