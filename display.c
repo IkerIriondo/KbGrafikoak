@@ -284,10 +284,20 @@ void display(void) {
         glLoadMatrixd(ESAM);
 
         //BONBILA
+
+        glLightf(bonbila->argi_zenb, GL_CONSTANT_ATTENUATION, bonbila->const_at);
+        glLightf(bonbila->argi_zenb, GL_LINEAR_ATTENUATION, bonbila->lin_at);
+        glLightf(bonbila->argi_zenb, GL_QUADRATIC_ATTENUATION, bonbila->quad_at);
+
         glLightfv(bonbila->argi_zenb, GL_POSITION, bonbila->kokapena->bektorea);
         glLightf(bonbila->argi_zenb, GL_SPOT_CUTOFF, bonbila->angelua);
 
         //EGUZKIA
+
+        glLightf(eguzkia->argi_zenb, GL_CONSTANT_ATTENUATION, eguzkia->const_at);
+        glLightf(eguzkia->argi_zenb, GL_LINEAR_ATTENUATION, eguzkia->lin_at);
+        glLightf(eguzkia->argi_zenb, GL_QUADRATIC_ATTENUATION, eguzkia->quad_at);
+
         glLightfv(eguzkia->argi_zenb, GL_POSITION, eguzkia->norabidea->bektorea);
 
         //FOKOA (objektua)
@@ -309,7 +319,11 @@ void display(void) {
 
         if(fokoa_obj->norabidea != 0) free(fokoa_obj->norabidea);
         fokoa_obj->norabidea = (bekz *)malloc(sizeof(bekz));
-        for(i = 0; i<3; i++) fokoa_obj->norabidea->bektorea[i] = lag2[i];               
+        for(i = 0; i<3; i++) fokoa_obj->norabidea->bektorea[i] = lag2[i];       
+
+        glLightf(fokoa_obj->argi_zenb, GL_CONSTANT_ATTENUATION, fokoa_obj->const_at);
+        glLightf(fokoa_obj->argi_zenb, GL_LINEAR_ATTENUATION, fokoa_obj->lin_at);
+        glLightf(fokoa_obj->argi_zenb, GL_QUADRATIC_ATTENUATION, fokoa_obj->quad_at);        
 
         glLightfv(fokoa_obj->argi_zenb, GL_POSITION, fokoa->kokapena->bektorea);
         glLightfv(fokoa_obj->argi_zenb, GL_SPOT_DIRECTION, fokoa->norabidea->bektorea);
@@ -333,7 +347,11 @@ void display(void) {
 
         if(fokoa->norabidea != 0) free(fokoa->norabidea);
         fokoa->norabidea = (bekz *)malloc(sizeof(bekz));
-        for(i = 0; i<4; i++) fokoa->norabidea->bektorea[i] = lag2[i];         
+        for(i = 0; i<4; i++) fokoa->norabidea->bektorea[i] = lag2[i];        
+
+        glLightf(fokoa->argi_zenb, GL_CONSTANT_ATTENUATION, fokoa->const_at);
+        glLightf(fokoa->argi_zenb, GL_LINEAR_ATTENUATION, fokoa->lin_at);
+        glLightf(fokoa->argi_zenb, GL_QUADRATIC_ATTENUATION, fokoa->quad_at); 
 
         glLightfv(fokoa->argi_zenb, GL_POSITION, fokoa->kokapena->bektorea);
         glLightfv(fokoa->argi_zenb, GL_SPOT_DIRECTION, fokoa->norabidea->bektorea);
